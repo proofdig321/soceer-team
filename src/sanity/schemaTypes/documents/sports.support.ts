@@ -132,6 +132,15 @@ export default defineType({
 			type: 'date',
 			group: 'resolution',
 		}),
+		defineField({
+			name: 'demoRecord',
+			title: 'Demonstration record',
+			type: 'boolean',
+			initialValue: false,
+			group: 'resolution',
+			description:
+				'Use only for clearly labelled training examples, never as a real open support request.',
+		}),
 	],
 	preview: {
 		select: { title: 'title', team: 'team.title', status: 'status' },

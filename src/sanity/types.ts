@@ -1464,6 +1464,7 @@ export type SportsSupport = {
 	targetDate?: string
 	resolution?: string
 	resolvedDate?: string
+	demoRecord?: boolean
 }
 
 export type SportsTraining = {

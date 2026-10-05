@@ -10466,6 +10466,13 @@
           "type": "string"
         },
         "optional": true
+      },
+      "demoRecord": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
       }
     }
   },

@@ -393,8 +393,13 @@ The Sanity dataset has been populated with:
 - Global brand styling and a public announcement that the team is fictional.
 - One demo team, six fictional player examples, one explicitly unscheduled fixture, one Foundation stakeholder record and one proposed customisation example.
 - Three governance starters kept as unpublished CMS drafts.
+- The home page now leads with two operating-model sections: who decides what, the actual prototype/pilot distinction, the proposed growth and sustainability path, and five readiness gates before a real team goes live.
+- Seven internal workflow examples, each explicitly marked as a demo/proposal/forecast: a discovery-stage team pilot, planned (not delivered) adult-editor onboarding, a sample routine support request, a competition concept, an unscheduled event proposal, an unvalued in-kind forecast and an exploratory sponsorship framework. They assert no real partner agreement, delivered training, open work, event, sponsor, funding or income.
+- No talent-pathway record is fabricated: consent and participation cannot be assumed for a demonstration person.
 
 Player examples and the sample fixture are not publicly listed. Contact routes, images of real young people, verified affiliation and local facts still need authorised input before public launch. The records and prose are demonstration content, not proof of operations.
+
+The repeatable seed is [scripts/seed-unami-demo.mjs](../scripts/seed-unami-demo.mjs). Run it with a Sanity write token to create the marked workflow examples and add the two homepage sections; it uses stable IDs and avoids duplicate homepage modules when rerun.
 
 ### 6.5 Important technical control gap
 
