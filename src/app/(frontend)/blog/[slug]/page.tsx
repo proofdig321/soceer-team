@@ -112,11 +112,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-	return (await sanityFetchStaticParams({
+	const posts = (await sanityFetchStaticParams({
 		query: groq`*[_type == 'blog.post' && defined(metadata.slug.current)]{
 			'slug': '/' + metadata.slug.current
 		}`,
 	})) as { slug: string }[]
+
+	return posts.length ? posts : [{ slug: '__static_params_placeholder__' }]
 }
 
 async function getPost({

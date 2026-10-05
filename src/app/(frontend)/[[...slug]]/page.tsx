@@ -118,9 +118,11 @@ export async function generateStaticParams() {
 		`,
 	})) as string[]
 
-	return slugs.map((slug) => ({
-		slug: slug === 'index' ? undefined : slug.split('/'),
-	}))
+	return slugs.length
+		? slugs.map((slug) => ({
+				slug: slug === 'index' ? undefined : slug.split('/'),
+			}))
+		: [{ slug: ['__static_params_placeholder__'] }]
 }
 
 async function getPage({
