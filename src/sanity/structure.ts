@@ -41,12 +41,42 @@ export default structureTool({
 				S.documentTypeListItem('sports.player').title('Player profiles'),
 				S.documentTypeListItem('sports.fixture').title('Fixtures and results'),
 
+				S.divider().title('Programme operations'),
+				S.documentTypeListItem('sports.pilot').title(
+					'Team pilots and readiness',
+				),
+				S.documentTypeListItem('sports.training').title(
+					'Training and capability sessions',
+				),
+				S.documentTypeListItem('sports.support').title(
+					'Platform support queue',
+				),
+
+				S.divider().title('Competition operations'),
+				S.documentTypeListItem('sports.competition').title(
+					'Tournaments and leagues',
+				),
+				S.documentTypeListItem('sports.event').title(
+					'Event delivery and readiness',
+				),
+
 				S.divider().title('Foundation stewardship'),
 				S.documentTypeListItem('sports.stakeholder').title('Stakeholders'),
 				S.documentTypeListItem('sports.customization').title(
 					'Platform customisations',
 				),
 				S.documentTypeListItem('sports.governance').title('Governance drafts'),
+
+				S.divider().title('Finance and partnerships'),
+				S.documentTypeListItem('sports.commercial').title(
+					'Commercial and sponsor agreements',
+				),
+				S.documentTypeListItem('sports.resource').title(
+					'Programme resources and budget lines',
+				),
+
+				S.divider().title('Restricted pathways'),
+				S.documentTypeListItem('sports.talent').title('Talent pathway reviews'),
 
 				S.divider().title('Drafts'),
 				S.listItem()

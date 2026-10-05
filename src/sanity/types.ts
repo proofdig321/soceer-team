@@ -1136,6 +1136,452 @@ export type SportsTeamReference = {
 	[internalGroqTypeReferenceTo]?: 'sports.team'
 }
 
+export type SportsTalent = {
+	_id: string
+	_type: 'sports.talent'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	referenceCode?: string
+	team?: SportsTeamReference
+	sport?:
+		| 'football'
+		| 'rugby'
+		| 'basketball'
+		| 'tennis'
+		| 'netball'
+		| 'cricket'
+		| 'athletics'
+		| 'other'
+	pathwayType?:
+		'development' | 'information' | 'referral' | 'showcase' | 'representation'
+	ageBand?: 'under-18' | 'adult' | 'not-recorded'
+	status?: 'idea' | 'discussion' | 'review' | 'approved' | 'closed'
+	participantOptIn?: boolean
+	guardianProcessConfirmed?: boolean
+	ageAppropriateAssentConfirmed?: boolean
+	purposeAndDataExplained?: boolean
+	safeguardingReviewComplete?: boolean
+	conflictReviewComplete?: boolean
+	formalRepresentationGate?: {
+		specialistAdviceReceived?: boolean
+		applicableRulesVerified?: boolean
+		authorisedEntityConfirmed?: boolean
+		conflictsAndFeesReviewed?: boolean
+	}
+	reviewOwnerRole?: string
+	reviewDate?: string
+	nonSensitiveNotes?: string
+	demoRecord?: boolean
+}
+
+export type SportsStakeholderReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'sports.stakeholder'
+}
+
+export type SportsCommercial = {
+	_id: string
+	_type: 'sports.commercial'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	arrangementType?:
+		| 'sponsorship'
+		| 'grant'
+		| 'donation'
+		| 'service'
+		| 'in-kind'
+		| 'vendor'
+		| 'talent'
+		| 'other'
+	stakeholder?: SportsStakeholderReference
+	team?: SportsTeamReference
+	status?:
+		| 'exploratory'
+		| 'draft'
+		| 'review'
+		| 'approved'
+		| 'active'
+		| 'completed'
+		| 'ended'
+	purpose?: string
+	deliverables?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	valueSummary?: string
+	writtenTermsReviewed?: boolean
+	conflictReviewComplete?: boolean
+	benefitAndCostApproved?: boolean
+	publicRecognitionRequested?: boolean
+	recognitionConsentRecorded?: boolean
+	approvingAuthorityRole?: string
+	startDate?: string
+	endDate?: string
+	reviewDate?: string
+	demoRecord?: boolean
+}
+
+export type SportsCompetitionReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'sports.competition'
+}
+
+export type SportsResourceReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'sports.resource'
+}
+
+export type SportsEvent = {
+	_id: string
+	_type: 'sports.event'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	competition?: SportsCompetitionReference
+	teams?: Array<
+		{
+			_key: string
+		} & SportsTeamReference
+	>
+	status?:
+		| 'proposed'
+		| 'readiness'
+		| 'approved'
+		| 'scheduled'
+		| 'delivered'
+		| 'cancelled'
+		| 'reviewed'
+	eventLeadRole?: string
+	startDateTime?: string
+	endDateTime?: string
+	publicVenueName?: string
+	venueConfirmed?: boolean
+	teamApprovalsComplete?: boolean
+	authorityChecksComplete?: boolean
+	safetyPlanApproved?: boolean
+	firstAidConfirmed?: boolean
+	transportPlanApproved?: boolean
+	budget?: SportsResourceReference
+	eventBudgetApproved?: boolean
+	cancellationPlan?: string
+	publicListing?: boolean
+	teamFeedbackSummary?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	actualCostReviewComplete?: boolean
+	demoRecord?: boolean
+}
+
+export type SportsEventReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'sports.event'
+}
+
+export type SportsResource = {
+	_id: string
+	_type: 'sports.resource'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	resourceType?:
+		| 'grant'
+		| 'donation'
+		| 'sponsorship'
+		| 'earned-income'
+		| 'event-income'
+		| 'team-contribution'
+		| 'expense'
+		| 'in-kind'
+		| 'cross-subsidy'
+	recordStatus?:
+		| 'forecast'
+		| 'proposed'
+		| 'approved'
+		| 'confirmed'
+		| 'realised'
+		| 'reconciled'
+		| 'cancelled'
+	amount?: number
+	currency?: 'ZAR'
+	isConfirmedIncome?: boolean
+	sourceStakeholder?: SportsStakeholderReference
+	team?: SportsTeamReference
+	event?: SportsEventReference
+	restrictionStatus?:
+		'unrestricted' | 'restricted' | 'pending' | 'not-applicable'
+	restrictionSummary?: string
+	restrictedPurposeApproved?: boolean
+	approvedByRole?: string
+	approvalDate?: string
+	financialOwnerRole?: string
+	actualAmount?: number
+	reconciliationDate?: string
+	reconciliationNote?: string
+	demoRecord?: boolean
+}
+
+export type SportsCompetition = {
+	_id: string
+	_type: 'sports.competition'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	sport?:
+		| 'football'
+		| 'rugby'
+		| 'basketball'
+		| 'tennis'
+		| 'netball'
+		| 'cricket'
+		| 'athletics'
+		| 'other'
+	format?: 'tournament' | 'league' | 'festival'
+	status?:
+		| 'concept'
+		| 'feasibility'
+		| 'approval'
+		| 'approved'
+		| 'active'
+		| 'completed'
+		| 'paused'
+		| 'cancelled'
+	teams?: Array<
+		{
+			_key: string
+		} & SportsTeamReference
+	>
+	rulesSummary?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	ruleVersion?: string
+	competitionOwnerRole?: string
+	teamApprovalComplete?: boolean
+	authorityChecksComplete?: boolean
+	safeguardingPlanApproved?: boolean
+	budgetApproved?: boolean
+	financialResources?: Array<
+		{
+			_key: string
+		} & SportsResourceReference
+	>
+	startDate?: string
+	endDate?: string
+	reviewDate?: string
+	publicAnnouncementApproved?: boolean
+	demoRecord?: boolean
+}
+
+export type SportsPilotReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'sports.pilot'
+}
+
+export type SportsSupport = {
+	_id: string
+	_type: 'sports.support'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	reference?: string
+	title?: string
+	team?: SportsTeamReference
+	pilot?: SportsPilotReference
+	category?:
+		| 'account'
+		| 'content'
+		| 'publishing'
+		| 'technical'
+		| 'maintenance'
+		| 'accessibility'
+		| 'training'
+	description?: string
+	requesterRole?: string
+	priority?: 'routine' | 'time-sensitive' | 'outage'
+	status?:
+		'new' | 'acknowledged' | 'in-progress' | 'waiting' | 'resolved' | 'closed'
+	foundationOwnerRole?: string
+	receivedDate?: string
+	targetDate?: string
+	resolution?: string
+	resolvedDate?: string
+}
+
+export type SportsTraining = {
+	_id: string
+	_type: 'sports.training'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	team?: SportsTeamReference
+	pilot?: SportsPilotReference
+	topic?:
+		| 'site-editing'
+		| 'fixtures'
+		| 'publishing'
+		| 'safeguarding'
+		| 'administration'
+		| 'governance-finance'
+		| 'other'
+	deliveryMode?: 'in-person' | 'remote' | 'self-guided' | 'blended'
+	sessionDate?: string
+	facilitatorRole?: string
+	participantCount?: number
+	outcomes?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	materials?: Array<string>
+	followupOwnerRole?: string
+	followupDue?: string
+	followupStatus?: 'not-required' | 'open' | 'in-progress' | 'complete'
+	demoRecord?: boolean
+}
+
+export type SportsPilot = {
+	_id: string
+	_type: 'sports.pilot'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	team?: SportsTeamReference
+	cohort?: string
+	stage?:
+		| 'invited'
+		| 'discovery'
+		| 'agreement'
+		| 'readiness'
+		| 'active'
+		| 'review'
+		| 'completed'
+		| 'paused'
+		| 'exited'
+	teamRepresentativeRole?: string
+	foundationOwnerRole?: string
+	need?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	servicesAgreed?: Array<string>
+	participationApproved?: boolean
+	supportScopeAgreed?: boolean
+	safeguardingPlanAgreed?: boolean
+	accessRolesTested?: boolean
+	primaryEditorTrained?: boolean
+	backupEditorTrained?: boolean
+	startDate?: string
+	reviewDate?: string
+	decision?: 'continue' | 'change' | 'expand' | 'pause' | 'exit'
+	reviewNotes?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	demoRecord?: boolean
+}
+
 export type SportsCustomization = {
 	_id: string
 	_type: 'sports.customization'
@@ -2263,6 +2709,19 @@ export type AllSanitySchemaTypes =
 	| BlogCategory
 	| Slug
 	| SportsTeamReference
+	| SportsTalent
+	| SportsStakeholderReference
+	| SportsCommercial
+	| SportsCompetitionReference
+	| SportsResourceReference
+	| SportsEvent
+	| SportsEventReference
+	| SportsResource
+	| SportsCompetition
+	| SportsPilotReference
+	| SportsSupport
+	| SportsTraining
+	| SportsPilot
 	| SportsCustomization
 	| SportsGovernance
 	| SportsStakeholder

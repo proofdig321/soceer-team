@@ -34,12 +34,20 @@ import quote from './documents/quote'
 import redirect from './documents/redirect'
 import site from './documents/site'
 import skill from './documents/skill'
+import sportsCommercial from './documents/sports.commercial'
+import sportsCompetition from './documents/sports.competition'
 import sportsCustomization from './documents/sports.customization'
+import sportsEvent from './documents/sports.event'
 import sportsFixture from './documents/sports.fixture'
 import sportsGovernance from './documents/sports.governance'
+import sportsPilot from './documents/sports.pilot'
 import sportsPlayer from './documents/sports.player'
+import sportsResource from './documents/sports.resource'
 import sportsStakeholder from './documents/sports.stakeholder'
+import sportsSupport from './documents/sports.support'
+import sportsTalent from './documents/sports.talent'
 import sportsTeam from './documents/sports.team'
+import sportsTraining from './documents/sports.training'
 // objects
 import cta from './objects/cta'
 import link from './objects/link'
@@ -66,6 +74,14 @@ export const schema: SchemaPluginOptions = {
 		sportsStakeholder,
 		sportsGovernance,
 		sportsCustomization,
+		sportsPilot,
+		sportsTraining,
+		sportsSupport,
+		sportsCompetition,
+		sportsEvent,
+		sportsResource,
+		sportsCommercial,
+		sportsTalent,
 		// references
 		announcement,
 		blogCategory,
