@@ -128,7 +128,7 @@ export async function generateStaticParams() {
 
 	return slugs.length
 		? slugs.map((slug) => ({
-				slug: slug === 'index' ? undefined : slug.split('/'),
+				slug: slug === 'index' ? [] : slug.split('/'),
 			}))
 		: [{ slug: ['__static_params_placeholder__'] }]
 }
@@ -141,7 +141,7 @@ async function getPage({
 	'use cache'
 	const { data } = await sanityFetch({
 		query: PAGE_QUERY,
-		params: { slug: slug ? slug.join('/') : 'index' },
+		params: { slug: slug?.length ? slug.join('/') : 'index' },
 		perspective,
 		stega,
 	})
@@ -154,7 +154,7 @@ async function getPageMetadata({
 }: { slug?: string[] } & Pick<DynamicFetchOptions, 'perspective'>) {
 	return (await sanityFetchMetadata({
 		query: PAGE_QUERY,
-		params: { slug: slug ? slug.join('/') : 'index' },
+		params: { slug: slug?.length ? slug.join('/') : 'index' },
 		perspective,
 	})) as PAGE_QUERY_RESULT
 }
