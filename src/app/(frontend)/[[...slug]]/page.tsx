@@ -37,6 +37,14 @@ export default async function Page({ params }: Props) {
 		)
 	}
 
+	return (
+		<Suspense fallback={<Loading className="section" />}>
+			<PublishedPage params={params} />
+		</Suspense>
+	)
+}
+
+async function PublishedPage({ params }: Pick<Props, 'params'>) {
 	const { slug } = await params
 	return <CachedPage slug={slug} perspective="published" stega={false} />
 }

@@ -117,6 +117,42 @@ Potential revenue or resource channels to investigate—not commitments—includ
 - In-kind contributions such as equipment, facilities, transport or connectivity, recorded transparently and never described as cash income.
 - Cross-subsidy from appropriate unrestricted or earned income to support teams that could not otherwise pay, subject to governing documents, accounting and tax advice.
 
+#### A layered commercial architecture
+
+The commercial layer should be treated as a portfolio of distinct activities with separate owners, budgets, risks and approvals—not one undifferentiated “sports business”.
+
+| Layer                                       | Example value exchange                                                                                             | Possible steward                                                                              | Reinvestment / control principle                                                                                                                                                                                                                                      |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Shared infrastructure and operating service | Foundation-funded or sponsored onboarding, hosting, maintenance and administrator training                         | Unami Foundation                                                                              | Publish a defined service scope and lifecycle cost. Donations or grants do not imply perpetual capacity; renew support only against resources and agreed outcomes.                                                                                                    |
+| Team-level capability and activity          | Voluntary membership contributions, team-approved fundraising, equipment support or optional services              | The team under its own governance                                                             | Team funds and decisions remain under team controls. Any fee must be transparent, proportionate, and include a hardship/access approach; do not tie youth selection or opportunity to ability to pay.                                                                 |
+| Tournament and event economy                | Ethical sponsorship, vendor participation, affordable entry, ticketing where appropriate, or event-specific grants | A named event committee or legally authorised organiser, with participating teams represented | Approve a written event budget and terms before commitments. Track cash and in-kind support separately; state who bears deficits, who owns purchased assets, how proceeds are allocated and how accounts are reported.                                                |
+| Competition and development league          | Recurring partner support, competition grants, event income and approved service contributions                     | A separately mandated competition structure, with teams retaining their club governance       | Establish rules, conflict controls, financial reporting, eligibility, discipline, appeals and cost-sharing. Do not let the Foundation unilaterally convert a pilot into a league or control teams’ sporting decisions.                                                |
+| Talent development and opportunity          | Funded coaching, education, showcase support or properly authorised representation services                        | A separately assigned programme lead; potentially a separately governed entity/service        | Keep development/referrals separate from agency. No sponsor, coach, selector or Foundation stakeholder receives privileged access to young people or a right to influence selection. Formal representation requires separate specialist review and opt-in agreements. |
+| Mission-aligned earned services             | Training, template adaptation or technical services for organisations able to pay                                  | Foundation or another duly authorised service entity                                          | Confirm authority, tax/accounting treatment, contracts, capacity and conflict rules. Protect the promised pilot-team service and record any approved cross-subsidy transparently.                                                                                     |
+
+These layers may have different legal, accounting, tax, safeguarding, insurance, contractual and governing-body implications. The same person should not be assumed to have authority to commit Foundation resources, team funds, tournament proceeds and an individual talent’s interests at once. Define the contracting party, bank/accounting treatment, signatories, record ownership, complaints route and termination process for each activity.
+
+#### Tournament unit economics and proceeds
+
+Before announcing a tournament, prepare a conservative event budget that separates:
+
+- **Confirmed cash income:** signed sponsorship or grant commitments, approved team contributions and other income with a clear collection owner.
+- **Potential income:** verbal interest, unapproved sponsorship, forecast ticket sales and fundraising targets. Do not spend against these as if confirmed.
+- **In-kind contributions:** donated venue time, equipment, transport or professional services, recorded at an explained basis but not presented as cash available to pay bills.
+- **Direct costs:** venue, officials, first aid, safeguarding, insurance where required, transport, equipment, communications, accessibility and payment/transaction costs.
+- **Contingency and cancellation exposure:** refund obligations, weather or safety disruption, unpaid commitments and who has authority to cancel.
+- **Surplus or deficit treatment:** pre-agreed order for paying liabilities, returning restricted funds if required, replenishing a contingency, and allocating any lawful unrestricted surplus to an approved community-sport purpose.
+
+Do not set fees or prize structures until team affordability, access, governing rules, tax treatment and safeguarding implications are understood. Any prize should be age-appropriate, transparent and designed not to create unsafe recruitment pressure or disputes. Publish a post-event financial summary proportionate to the event, protect personal financial information, and reconcile it to source records.
+
+#### Portfolio sustainability and commercial firewall
+
+The Foundation should model at least three scenarios for every recurring offer: **fully resourced**, **reduced capacity**, and **service exit/transition**. Include staff and volunteer time, hosting, domain, licences, security updates, backup/recovery, support, travel, translation, safeguarding, event operations and replacement of equipment. Record assumptions, funding restrictions and the date each estimate was reviewed.
+
+An approved cross-subsidy model may allow earned or unrestricted resources from capable partners or paid services to support teams with fewer resources. It must be explicitly authorised, accounted for, consistently applied and communicated. Restricted grants and sponsor funds may only be used according to their conditions. Do not describe gross sponsorship, donated equipment or projected event revenue as net resources available to teams.
+
+Adopt a **commercial firewall**: commercial partners may receive only the recognition and deliverables written in an approved agreement. They do not gain access to children, personal data, team selection, coaching decisions, private training, safeguarding matters or editorial control. Sponsorship cannot buy an implied endorsement or override the team’s right to decline a partner.
+
 Before any commercial offer:
 
 1. Separate the budget and reporting for charitable/community activities, shared operations, events and any earned-income activity.
@@ -133,16 +169,28 @@ The intended sustainability loop is: **community need → agreed service → tra
 
 The programme may encounter participants with sporting, coaching, officiating, creative, leadership or other talent. Unami Sports could support a talent pathway that helps people understand opportunities and make informed choices. The pathway must not assume that every participant wants exposure, representation or a commercial career.
 
+The programme ambition includes exploring whether Unami can **act as an agent for talent developed or identified through the programme**. That is a potential future service—not a current capability, authority, licence, mandate, or promise of opportunities. It should not be hidden inside the team operating-partner relationship: the team is an organisation; the individual talent is a separate person with their own interests and right to independent choice.
+
 Keep these activities distinct:
 
-| Activity                             | Possible role                                                                                                       | Boundary                                                                                                                                                                                                                 |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Skills and development support       | Connect participants to suitable coaching, learning, showcases or development opportunities where available         | Do not promise selection, scholarships, trials, contracts or career outcomes.                                                                                                                                            |
-| Opportunity information and referral | Share verified opportunities and, with permission, make an introduction                                             | Disclose any relationship or benefit; do not share participant information without an appropriate basis and permission.                                                                                                  |
-| Talent showcase or portfolio         | Help an opt-in participant present approved, accurate material                                                      | Consent, assent, image rights, safe contact routes and takedown arrangements are required; no public youth profiles by default.                                                                                          |
-| Formal representation or agency      | Only if Unami or a properly authorised separate entity is demonstrably entitled and prepared to provide the service | Requires a separate written mandate, conflict controls, transparent fees and obligations, independent review, safeguarding for minors, and confirmation of all applicable South African and sport-specific requirements. |
+| Activity                             | Possible role                                                                                                       | Boundary                                                                                                                                                                                                                                                                             |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Skills and development support       | Connect participants to suitable coaching, learning, showcases or development opportunities where available         | Do not promise selection, scholarships, trials, contracts or career outcomes.                                                                                                                                                                                                        |
+| Opportunity information and referral | Share verified opportunities and, with permission, make an introduction                                             | Disclose any relationship or benefit; do not share participant information without an appropriate basis and permission.                                                                                                                                                              |
+| Talent showcase or portfolio         | Help an opt-in participant present approved, accurate material                                                      | Consent, assent, image rights, safe contact routes and takedown arrangements are required; no public youth profiles by default.                                                                                                                                                      |
+| Formal representation or agency      | Only if Unami or a properly authorised separate entity is demonstrably entitled and prepared to provide the service | Requires a separate individual mandate, conflict controls, transparent fees and obligations, independent review, safeguarding for minors, and confirmation of all applicable South African and sport-specific requirements. A programme connection is not consent to representation. |
 
 **Product recommendation:** treat formal representation as a distinct, opt-in service line—not an assumed feature of the operating partnership. Before offering it, obtain specialist legal and sports-agent advice on applicable registration/licensing rules, rules of the relevant football bodies, contract and commission restrictions, child-protection duties and the implications of acting for both a team/programme and an individual. The rules can depend on the sport, transaction and jurisdiction; this document does not determine them.
+
+Before any agency activity, make explicit:
+
+- **Who is the agent:** Unami Foundation itself, a separately incorporated/authorised service, or a named independent professional? Confirm legal authority and applicable sport rules; do not imply one entity can act where it is not authorised.
+- **Who is the client:** identify the individual talent and, where relevant, guardian involvement. Do not treat the team, Foundation, coach, sponsor or selector as the client for an individual’s representation without a lawful, conflict-reviewed basis.
+- **What the mandate covers:** sport, geography, permitted introductions/negotiations, term, exclusivity if any, termination, fees/commission, expenses, records and complaint route, all in plain language and independently reviewed.
+- **How conflicts are controlled:** disclose and manage any simultaneous Foundation, team, sponsor, competition, coaching, selection or recruitment interest. Separate talent advice and representation decisions from team selection and programme access.
+- **How benefits are governed:** define who pays, who may receive a fee, how any income is accounted for and whether the Foundation’s governing documents permit that activity. A commercial return must not be quietly taken from a child or displaced onto a team without informed, lawful agreement.
+- **How young people are protected:** use age-appropriate assent and guardian processes, independent advice where appropriate, safe communications, a cooling-off opportunity, and no pressure, retaliation, promised selection, or exclusivity tied to development support.
+- **How access and data are limited:** do not expose a CMS roster, contact details, performance notes, school, medical or location information to scouts, sponsors or agents. Use purpose-specific, minimum information only after permission and review.
 
 For minors, use the strongest practical safeguards: no pressure or exclusivity tied to selection or access to the programme; age-appropriate assent as well as appropriate guardian involvement; plain-language terms; transparent benefits and costs; independent advice where appropriate; strict separation of coaching/selection decisions from commercial representation; a safe complaints route; and no unnecessary collection or sharing of personal, medical, school, location or performance data. Do not use a general CMS record as an agency contract, consent repository or sensitive case-management system.
 
@@ -656,12 +704,14 @@ Progress should be judged by demonstrated capability and team confidence, not by
 - Review the pilot with every participating team and decide whether there is genuine interest in a shared event.
 - Prepare a tournament concept, accountable event structure, safeguarding and transport plans, permissions checklist, budget, resourcing plan and cancellation approach.
 - Do not announce dates, teams, sponsors or a tournament until they are confirmed and authorised.
+- Separate confirmed income, potential income, restricted funds and in-kind support; agree deficit, cancellation and surplus treatment in advance.
 
 ### Phase 6 — Run and learn from a limited tournament
 
 - Deliver only after required team approvals, competent safety arrangements, venue and competition checks, officials, first aid and confirmed resources are in place.
 - Keep team selection and sporting decisions separate from fundraising, sponsorship and any talent pathway.
 - Reconcile event finances and review safety, inclusion, volunteer workload, team feedback and actual versus planned costs.
+- Publish an approved post-event summary of outputs and finances without exposing young people or private contributor information.
 
 ### Phase 7 — Decide whether a development league is viable
 
@@ -783,6 +833,8 @@ Prioritise additions based on real pilot feedback and safety review, not on feat
 - Tournament feasibility, event budget, approved sponsor inventory and transparent proceeds reporting.
 - A league-readiness view covering team approvals, authority checks, safeguarding, officials, facilities, transport and recurring costs.
 - A separately permissioned, opt-in talent opportunity/referral workflow; formal agency functions require separate governance and legal review.
+- A simple programme portfolio model separating restricted grants, unrestricted donations, earned service income, event funds, in-kind contributions, direct costs and approved cross-subsidy.
+- A commercial approval register for sponsor benefits, conflicts, approvals, recognition expiry and post-event reconciliation.
 
 ### Sport-specific possibilities
 
@@ -833,6 +885,8 @@ After schema changes, run `bun run typegen` and the project type check. A succes
 - **Talent representation / agency:** a formal representative relationship that can carry legal, regulatory, fiduciary, safeguarding or sport-governance duties; it is not synonymous with coaching, scouting, development support or an introduction.
 - **Tournament:** a time-limited competition event that requires team approval, event ownership, rules, permissions, safety planning, resourcing and financial reconciliation.
 - **Development league:** a recurring, governed competition structure; it is not simply a series of tournaments and requires rules, administration, authority checks and sustainable resourcing.
+- **Restricted funding:** funding limited by a donor or grant agreement to a specified purpose; it should not be assumed available for unrelated support or cross-subsidy.
+- **Cross-subsidy:** an explicitly approved and accounted-for use of appropriate unrestricted or earned resources to make an agreed service accessible to a team with fewer resources.
 - **Publication approval:** explicit review by the person/organisation authorised to approve a public representation; not equivalent to consent, legal compliance or access control.
 - **Least privilege:** provide each user only the system access required for their authorised role.
 
