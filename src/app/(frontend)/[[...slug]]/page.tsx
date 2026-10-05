@@ -22,6 +22,7 @@ import {
 } from '@/sanity/lib/queries'
 import type { PAGE_QUERY_RESULT } from '@/sanity/types'
 import Loading from '@/ui/loading'
+import SportsHomeFallback from '@/ui/sports/home-fallback'
 
 type Props = PageProps<'/[[...slug]]'>
 
@@ -65,7 +66,10 @@ async function CachedPage({
 }: { slug?: string[] } & DynamicFetchOptions) {
 	'use cache'
 	const page = await getPage({ slug, perspective, stega })
-	if (!page) notFound()
+	if (!page) {
+		if (!slug?.length) return <SportsHomeFallback />
+		notFound()
+	}
 
 	return <ModulesResolver page={page} perspective={perspective} stega={stega} />
 }
@@ -79,15 +83,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		getPageMetadata({ slug, perspective }),
 		getSite({ perspective, stega: false }),
 	])
+	const isHome = !slug?.length
 	const { title, description, image, noIndex } = page?.metadata ?? {}
 
 	return {
-		title,
-		description,
+		title: title ?? (isHome ? 'Unami Sports' : undefined),
+		description:
+			description ??
+			(isHome
+				? 'Unami Sports supports community-led sport with practical tools, shared learning and public information.'
+				: undefined),
 		openGraph: {
 			type: 'website',
-			title,
-			description,
+			title: title ?? (isHome ? 'Unami Sports' : undefined),
+			description:
+				description ??
+				(isHome
+					? 'Unami Sports supports community-led sport with practical tools, shared learning and public information.'
+					: undefined),
 			url: [process.env.NEXT_PUBLIC_BASE_URL, slug?.join('/')]
 				.filter(Boolean)
 				.join('/'),
