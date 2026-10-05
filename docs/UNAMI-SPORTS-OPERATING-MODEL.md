@@ -8,6 +8,10 @@ The programme is designed around a **community sports operating partnership**: a
 
 The technology is an enabling asset—not the programme, the organisation, or the source of a team’s authority. A website or CMS alone cannot create a functioning club, keep young people safe, secure funding, establish football affiliation, or make an organisation sustainable. Those outcomes depend on community leadership, accountable governance, appropriate safeguarding, practical training, reliable operations and relationships that have clear boundaries.
 
+The strategic ambition is to begin with a **small, supported cohort of community teams**, learn what each team needs, and—only when readiness, resources and community agreement allow—convene an inter-team tournament. A well-governed tournament could later inform a community-led development league. This is a proposed growth pathway, not a claim that teams, a tournament, a league or funding are already confirmed.
+
+Unami Sports may also explore a separate talent-development and representation pathway for participants who actively opt in. Coaching, showcases, introductions and referrals are not the same as acting as a player’s agent. Any formal representation or negotiation role—especially for a minor—must be separately authorised, safeguarded and reviewed against current legal and sport-governance requirements before it is offered.
+
 Unami Stars is the illustrative pilot: a **fictional** youth football team situated in the rural South African community named in the brief, Emndozо / Emndozo, KwaGucingo. It demonstrates how the model could support a community team. It is not evidence of a registered club, real roster, league affiliation, scheduled fixtures, confirmed partners, funding, or delivered programme outcomes. Its content must be verified with the community before being presented as factual.
 
 This document explains the intended service, roles, digital system, governance approach, pilot lifecycle, risks, customisation opportunities and the decisions needed before operational or public launch. It is a product and operating-model document, **not legal advice, a club constitution, a safeguarding policy, a funding commitment or proof of regulatory compliance**.
@@ -30,17 +34,19 @@ The words used to describe Unami matter. “Platform” sounds like a software p
 | Foundation role            | **Sports operating partner**                                  | A service and stewardship role performed by Unami Foundation under agreed boundaries. It does not make the Foundation the club’s governing body or replace its committee.                                                   |
 | Shared technical assets    | **Community sports digital infrastructure**                   | Reusable website, content-management, publishing, operational-record and support capabilities provided for teams.                                                                                                           |
 | Participating organisation | **Sponsored team**, **participating team**, or **pilot team** | A community-led organisation receiving agreed support. Prefer “participating team” where sponsorship might incorrectly imply a commercial or sporting relationship.                                                         |
+| Future competition layer   | **Community development competition**                         | A possible team-governed tournament or league, created only after pilot readiness, competition rules, safeguarding, authority, resourcing and sustainability have been established.                                         |
+| Future talent pathway      | **Talent development and representation**                     | An optional, separately governed programme. Development support and referrals must be distinguished from a formal agency mandate or contract negotiation.                                                                   |
 | Demonstration instance     | **Unami Stars demo**                                          | Fictional sample content used to demonstrate the model, explicitly separated from verified team facts.                                                                                                                      |
 
 ### Public-description recommendation
 
-> **Unami Sports is Unami Foundation’s community-sport enablement programme. Through a community sports operating partnership, Unami Foundation donates and supports practical digital infrastructure while grassroots teams retain responsibility for their own sporting decisions, local coordination, identity and affairs. The programme aims to build local capability, strengthen stakeholder relationships and support continuity—not dependency.**
+> **Unami Sports is Unami Foundation’s community-sport enablement programme. Through a community sports operating partnership, Unami Foundation donates and supports practical digital infrastructure while grassroots teams retain responsibility for their own sporting decisions, local coordination, identity and affairs. The programme aims to build local capability, strengthen stakeholder relationships and support continuity—not dependency. Its longer-term ambition is to help interested teams explore shared sporting opportunities, such as a properly governed tournament or development competition, if communities choose to pursue them.**
 
 Until legal status is confirmed, describe the organisation as “Unami Foundation” or “a non-profit organisation” only if that description is accurate and approved by its leadership. Say **“Unami Foundation NPC” only after verifying the registered legal name and company number**. Describe Unami Sports as a social-enterprise model or programme only where that accurately reflects approved organisational plans and actual operating arrangements.
 
 ### Terms to avoid or qualify
 
-- Avoid describing Unami Sports as a league, governing body, club owner, player agent, funder, academy, or football authority unless that role is formally established.
+- Avoid describing Unami Sports as a league, governing body, club owner, player agent, funder, academy, or football authority unless that role is formally established. If talent representation is explored, state whether Unami is acting as a development partner, introducer, or formally authorised representative; these are not interchangeable roles.
 - Avoid saying the programme “empowers” teams as an outcome claim without evidence. Prefer “is designed to support team-led management and local capability”.
 - Avoid “free forever”. A donated initial platform does not remove hosting, subscriptions, connectivity, support labour, security, maintenance or future migration costs.
 - Avoid implying that sample text, sample team records or workflow labels are approved policies or technical access controls.
@@ -82,6 +88,65 @@ The final column is an **intended contribution**, not an impact claim. The progr
 - **For Unami Foundation:** a repeatable way to steward support, coordinate stakeholders, document service commitments and learn across pilots.
 - **For stakeholders:** an understandable point of coordination and a clearer picture of agreed needs, responsibilities and approved updates.
 - **For communities:** a service intended to strengthen locally directed sport, with accessible processes and explicit care around young people’s information.
+
+### Programme evolution: from pilot teams to shared competition
+
+The growth proposition is deliberately staged. The sequence below is an ambition and decision framework, not an announced competition or guaranteed outcome.
+
+| Stage                                      | What Unami Sports could do                                                                                                                                                                                                                                                             | Gate before moving on                                                                                                                                                                                                                                        |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1. Listen and recruit a small pilot cohort | Invite a few community teams with different needs; agree participation, readiness, support scope and the team’s decision rights. A **planning assumption of 3–5 teams** may help test capacity, but must be adjusted to actual team interest, geography, staffing, safety and funding. | Each team is real and authorised to participate; written pilot boundaries and support capacity exist; safeguarding, access and minimum operational readiness are in place.                                                                                   |
+| 2. Support each team to operate            | Donate or configure the agreed digital infrastructure; train team administrators; support locally led identity, communication, coordination and governance; learn from maintenance and support needs.                                                                                  | Teams can perform essential workflows; the Foundation can sustain the support offer; participating teams agree that a shared event would be useful.                                                                                                          |
+| 3. Co-design an inter-team tournament      | Convene interested teams around rules, age bands, schedule, venue, officials, transport, costs, accessibility, communications, safeguarding and decision-making. Share a realistic budget and who is accountable for each task.                                                        | Written team approval; appropriate competition/venue permissions and governing-body checks; competent safeguarding and first-aid arrangements; safe transport plan; named event lead; sufficient confirmed resources; clear cancellation and incident plans. |
+| 4. Review the event before repeating       | Review participation, safety, team and guardian feedback, costs, volunteer burden, inclusion and operational incidents. Publish only accurate, approved reporting.                                                                                                                     | Evidence that the event is wanted, safe enough to continue with mitigations, financially understood and not undermining team independence.                                                                                                                   |
+| 5. Explore a community development league  | If teams choose, investigate a recurring competition with agreed governance, fixtures, officiating, eligibility, discipline, appeals, safeguarding, finance, records, scheduling and dispute resolution.                                                                               | A viable season plan, transparent competition rules, suitable authority/affiliation checks, accountable competition governance, sustainable resourcing and team/member approval.                                                                             |
+
+The tournament should not be treated as an automatic marketing opportunity or a way to centralise control. Participating teams should retain their club governance and sporting identity. Any shared competition needs its own agreed decision structure, budget, rules, safeguarding responsibilities and relationship to relevant football authorities. Unami Foundation may convene or support the process only within an approved mandate and available capacity.
+
+### Mission-aligned commercial and sustainability layer
+
+Commercial thinking is important because infrastructure, staff time, travel, officials, venues, safety arrangements and maintenance have real costs. A non-profit can plan for earned income or mission-aligned commercial activity where it is lawful, consistent with its governing documents and appropriately governed. Revenue generation is a means to sustain social purpose; it must not displace community benefit or be represented as already secured.
+
+Potential revenue or resource channels to investigate—not commitments—include:
+
+- Grants, donations and philanthropic support for community access and shared infrastructure.
+- Ethical sponsorship of teams, equipment, events or competition activities, with team approval and transparent terms.
+- Tournament entry contributions, ticketing or vendor arrangements only where affordable, accessible, lawful and approved; protect hardship access and do not make a young person’s selection conditional on a payment.
+- Paid services, training or customisation for organisations able to pay, where this does not reduce support promised to pilot teams.
+- Voluntary or properly contracted media, event, merchandising or licensing activity, with clear rights and consent.
+- In-kind contributions such as equipment, facilities, transport or connectivity, recorded transparently and never described as cash income.
+- Cross-subsidy from appropriate unrestricted or earned income to support teams that could not otherwise pay, subject to governing documents, accounting and tax advice.
+
+Before any commercial offer:
+
+1. Separate the budget and reporting for charitable/community activities, shared operations, events and any earned-income activity.
+2. Approve who can negotiate, sign, invoice, collect, authorise expenditure and report funds.
+3. Disclose sponsorship conditions, conflicts of interest, related-party benefits and allocation of proceeds.
+4. Agree whether teams receive event income, retain merchandise rights, share costs or owe any service fees; put terms in writing.
+5. Confirm tax, company, charity, fundraising, consumer, employment, competition and sport-governance implications with qualified South African advisers.
+6. Protect independence: sponsors and talent/commercial partners do not get selection rights, privileged access to children, editorial control or access to personal data.
+7. Publish only verified financial and impact statements, with the period, basis and limitations clear.
+
+The intended sustainability loop is: **community need → agreed service → trained local capability → useful and safe participation → evidenced learning → transparent support and earned/funded resources → maintained infrastructure → more community-led teams**. Every arrow is a hypothesis to test. If the service costs more to maintain than the programme can responsibly support, reduce scope, secure resources or plan an orderly transition rather than promise indefinite free service.
+
+### Optional talent-development and representation pathway
+
+The programme may encounter participants with sporting, coaching, officiating, creative, leadership or other talent. Unami Sports could support a talent pathway that helps people understand opportunities and make informed choices. The pathway must not assume that every participant wants exposure, representation or a commercial career.
+
+Keep these activities distinct:
+
+| Activity                             | Possible role                                                                                                       | Boundary                                                                                                                                                                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Skills and development support       | Connect participants to suitable coaching, learning, showcases or development opportunities where available         | Do not promise selection, scholarships, trials, contracts or career outcomes.                                                                                                                                            |
+| Opportunity information and referral | Share verified opportunities and, with permission, make an introduction                                             | Disclose any relationship or benefit; do not share participant information without an appropriate basis and permission.                                                                                                  |
+| Talent showcase or portfolio         | Help an opt-in participant present approved, accurate material                                                      | Consent, assent, image rights, safe contact routes and takedown arrangements are required; no public youth profiles by default.                                                                                          |
+| Formal representation or agency      | Only if Unami or a properly authorised separate entity is demonstrably entitled and prepared to provide the service | Requires a separate written mandate, conflict controls, transparent fees and obligations, independent review, safeguarding for minors, and confirmation of all applicable South African and sport-specific requirements. |
+
+**Product recommendation:** treat formal representation as a distinct, opt-in service line—not an assumed feature of the operating partnership. Before offering it, obtain specialist legal and sports-agent advice on applicable registration/licensing rules, rules of the relevant football bodies, contract and commission restrictions, child-protection duties and the implications of acting for both a team/programme and an individual. The rules can depend on the sport, transaction and jurisdiction; this document does not determine them.
+
+For minors, use the strongest practical safeguards: no pressure or exclusivity tied to selection or access to the programme; age-appropriate assent as well as appropriate guardian involvement; plain-language terms; transparent benefits and costs; independent advice where appropriate; strict separation of coaching/selection decisions from commercial representation; a safe complaints route; and no unnecessary collection or sharing of personal, medical, school, location or performance data. Do not use a general CMS record as an agency contract, consent repository or sensitive case-management system.
+
+If formal representation is not authorised or not yet ready, Unami can still explore non-representational development, opportunity literacy and consent-based referrals, provided these activities are themselves within the Foundation’s mandate, capacity and applicable rules.
 
 ---
 
@@ -586,9 +651,27 @@ Progress should be judged by demonstrated capability and team confidence, not by
 - Hold regular team-led reviews; remove content that is no longer needed.
 - Report results honestly, distinguishing outputs from outcomes.
 
-### Phase 5 — Adapt, sustain or exit
+### Phase 5 — Cohort review and tournament feasibility
 
-- Decide with the team whether to continue, change, expand or stop.
+- Review the pilot with every participating team and decide whether there is genuine interest in a shared event.
+- Prepare a tournament concept, accountable event structure, safeguarding and transport plans, permissions checklist, budget, resourcing plan and cancellation approach.
+- Do not announce dates, teams, sponsors or a tournament until they are confirmed and authorised.
+
+### Phase 6 — Run and learn from a limited tournament
+
+- Deliver only after required team approvals, competent safety arrangements, venue and competition checks, officials, first aid and confirmed resources are in place.
+- Keep team selection and sporting decisions separate from fundraising, sponsorship and any talent pathway.
+- Reconcile event finances and review safety, inclusion, volunteer workload, team feedback and actual versus planned costs.
+
+### Phase 7 — Decide whether a development league is viable
+
+- Co-design rules and governance with interested teams and relevant sport structures.
+- Confirm season operations, eligibility, officiating, safeguarding, discipline, appeals, finance, facilities, transport and sustainable administration.
+- Proceed only if participating teams approve the structure, required external checks are complete and the recurring service is resourced.
+
+### Phase 8 — Adapt, sustain or exit
+
+- Decide with each team whether to continue, change, expand or stop.
 - Fund maintenance and support explicitly; do not assume recurring services are covered.
 - Reuse proven templates across another sport only after local discovery and safety review.
 - Provide a supported transition and data export if the partnership ends.
@@ -656,6 +739,9 @@ These are deliberate decisions for Foundation and pilot-team leadership; this do
 10. **Impact learning:** Which modest, ethical indicators will teams accept and what will not be collected?
 11. **Replication:** What minimum evidence is required before adapting the model to another community or sport?
 12. **Constitutional relationship:** How does the Foundation’s own governing document authorise the programme, donations, partnerships and stewardship?
+13. **Competition pathway:** What readiness, team approvals, external permissions, safety controls, budget and event governance must be in place before convening a tournament or exploring a recurring league?
+14. **Talent pathway:** Is the Foundation’s mandate limited to development and referral, or does leadership intend to consider formal representation? Who would provide that service, under what authority, with what conflict controls, safeguarding, fees and independent advice?
+15. **Commercial stewardship:** How will earned income, sponsorship, tournament resources and any cross-subsidy be approved, accounted for, disclosed and aligned with the Foundation’s governing documents and community benefit?
 
 ---
 
@@ -694,6 +780,9 @@ Prioritise additions based on real pilot feedback and safety review, not on feat
 - Aggregated reporting that avoids unnecessary personal data.
 - Cost, in-kind contribution and sustainability planning with transparent assumptions.
 - Team onboarding, training and handover playbooks.
+- Tournament feasibility, event budget, approved sponsor inventory and transparent proceeds reporting.
+- A league-readiness view covering team approvals, authority checks, safeguarding, officials, facilities, transport and recurring costs.
+- A separately permissioned, opt-in talent opportunity/referral workflow; formal agency functions require separate governance and legal review.
 
 ### Sport-specific possibilities
 
@@ -741,6 +830,9 @@ After schema changes, run `bun run typegen` and the project type check. A succes
 - **Demonstration record:** fictional or sample CMS data clearly labelled as non-factual and excluded from unintended public presentation.
 - **Social-enterprise model:** an approach to sustaining social-purpose activity through organised operations and potentially earned or blended resources; not a legal designation by itself.
 - **NPC:** South African non-profit company legal form; use only when the organisation’s actual registration supports the claim.
+- **Talent representation / agency:** a formal representative relationship that can carry legal, regulatory, fiduciary, safeguarding or sport-governance duties; it is not synonymous with coaching, scouting, development support or an introduction.
+- **Tournament:** a time-limited competition event that requires team approval, event ownership, rules, permissions, safety planning, resourcing and financial reconciliation.
+- **Development league:** a recurring, governed competition structure; it is not simply a series of tournaments and requires rules, administration, authority checks and sustainable resourcing.
 - **Publication approval:** explicit review by the person/organisation authorised to approve a public representation; not equivalent to consent, legal compliance or access control.
 - **Least privilege:** provide each user only the system access required for their authorised role.
 
