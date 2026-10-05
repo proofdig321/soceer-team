@@ -397,44 +397,73 @@ const pilotLaunchGates = {
 }
 
 async function seed() {
+	const home = await client.fetch(
+		'*[_type == "page" && metadata.slug.current == "index"][0]{_id, _rev, "keys": modules[]._key}',
+	)
+
 	const transaction = client.transaction()
 	for (const document of documents) {
 		transaction.createIfNotExists(document)
 	}
-	const result = await transaction.commit()
 
-	const home = await client.fetch(
-		'*[_type == "page" && metadata.slug.current == "index"][0]{_id, _rev, "keys": modules[]._key}',
-	)
 	if (!home) {
-		throw new Error(
-			'Could not find a homepage document with metadata.slug.current == "index".',
-		)
+		transaction.createIfNotExists({
+			_id: 'unami.page.home',
+			_type: 'page',
+			title: 'Unami Sports — Demonstration',
+			metadata: {
+				title: 'Unami Sports demonstration',
+				description:
+					'An illustrative Unami Sports demo. Team and programme records are examples, not active services or confirmed partnerships.',
+				slug: { _type: 'slug', current: 'index' },
+				noIndex: true,
+			},
+			modules: [operatorOverview, pilotLaunchGates],
+		})
 	}
 
-	const moduleKeys = [operatorOverview._key, pilotLaunchGates._key]
-	const needsHomepageUpdate = moduleKeys.some(
-		(key) => !home.keys?.includes(key),
-	)
+	const result = await transaction.commit()
 
-	if (needsHomepageUpdate) {
+	if (home) {
+		const moduleKeys = [operatorOverview._key, pilotLaunchGates._key]
 		const missingModules = [operatorOverview, pilotLaunchGates].filter(
 			(module) => !home.keys?.includes(module._key),
 		)
-		await client
-			.patch(home._id)
-			.ifRevisionId(home._rev)
-			.insert('before', 'modules[3]', missingModules)
-			.commit()
+		const needsHomepageUpdate = missingModules.length > 0
+
+		if (needsHomepageUpdate) {
+			await client
+				.patch(home._id)
+				.ifRevisionId(home._rev)
+				.append('modules', missingModules)
+				.commit()
+		}
 	}
 
+	const homeId = home?._id ?? 'unami.page.home'
 	const verification = await client.fetch(
-		`{"home": *[_id == ${JSON.stringify(home._id)}][0]{title, "moduleCount": count(modules), "moduleTypes": modules[]._type, "newKeys": modules[_key in ["unami-demo-operator-overview", "unami-demo-pilot-launch-gates"]]._key}, "demoRecords": *[_id in ${JSON.stringify(documents.map(({ _id }) => _id))}]{_id, _type, title, demoRecord, publicProfile, stage, status, recordStatus, publicListing}}`,
+		`{"home": *[_id == ${JSON.stringify(homeId)}][0]{title, "slug": metadata.slug.current, "moduleCount": count(modules), "moduleTypes": modules[]._type, "newKeys": modules[_key in ["unami-demo-operator-overview", "unami-demo-pilot-launch-gates"]]._key}, "demoRecords": *[_id in ${JSON.stringify(documents.map(({ _id }) => _id))}]{_id, _type, title, demoRecord, publicProfile, stage, status, recordStatus, publicListing}}`,
 	)
+	const verifiedIds = new Set(verification.demoRecords?.map(({ _id }) => _id))
+	const missingIds = documents
+		.map(({ _id }) => _id)
+		.filter((id) => !verifiedIds.has(id))
+	if (
+		missingIds.length ||
+		!verification.home ||
+		!verification.home.newKeys?.includes(operatorOverview._key) ||
+		!verification.home.newKeys?.includes(pilotLaunchGates._key)
+	) {
+		throw new Error(
+			`Seed verification failed. Missing document IDs: ${missingIds.join(', ') || 'none'}; homepage demo modules: ${Boolean(verification.home?.newKeys?.includes(operatorOverview._key))}/${Boolean(verification.home?.newKeys?.includes(pilotLaunchGates._key))}.`,
+		)
+	}
+
 	console.log(
 		JSON.stringify({
 			documentCreatesAttempted: result.results?.length ?? documents.length,
-			homepageUpdated: needsHomepageUpdate,
+			homepageCreated: !home,
+			homepageUpdated: Boolean(home),
 			verification,
 		}),
 	)
