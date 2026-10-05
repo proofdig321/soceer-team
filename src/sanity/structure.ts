@@ -36,6 +36,18 @@ export default structureTool({
 				S.documentTypeListItem('person').title('People'),
 				S.documentTypeListItem('quote').title('Quotes'),
 
+				S.divider().title('Club operations'),
+				S.documentTypeListItem('sports.team').title('Teams'),
+				S.documentTypeListItem('sports.player').title('Player profiles'),
+				S.documentTypeListItem('sports.fixture').title('Fixtures and results'),
+
+				S.divider().title('Foundation stewardship'),
+				S.documentTypeListItem('sports.stakeholder').title('Stakeholders'),
+				S.documentTypeListItem('sports.customization').title(
+					'Platform customisations',
+				),
+				S.documentTypeListItem('sports.governance').title('Governance drafts'),
+
 				S.divider().title('Drafts'),
 				S.listItem()
 					.title('Drafts')

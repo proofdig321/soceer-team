@@ -34,6 +34,12 @@ import quote from './documents/quote'
 import redirect from './documents/redirect'
 import site from './documents/site'
 import skill from './documents/skill'
+import sportsCustomization from './documents/sports.customization'
+import sportsFixture from './documents/sports.fixture'
+import sportsGovernance from './documents/sports.governance'
+import sportsPlayer from './documents/sports.player'
+import sportsStakeholder from './documents/sports.stakeholder'
+import sportsTeam from './documents/sports.team'
 // objects
 import cta from './objects/cta'
 import link from './objects/link'
@@ -54,6 +60,12 @@ export const schema: SchemaPluginOptions = {
 		blogPost,
 		redirect,
 		form,
+		sportsTeam,
+		sportsPlayer,
+		sportsFixture,
+		sportsStakeholder,
+		sportsGovernance,
+		sportsCustomization,
 		// references
 		announcement,
 		blogCategory,
