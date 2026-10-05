@@ -30,6 +30,17 @@ export default async function (): Promise<MetadataRoute.Sitemap> {
 				'url': $baseUrl + '/' + $blogDir + '/' + metadata.slug.current,
 				'lastModified': coalesce(publishDate, _updatedAt),
 				'priority': 0.4
+			},
+			'sportsTeams': *[
+				_type == 'sports.team'
+				&& publicProfile == true
+				&& status == 'active'
+				&& demoRecord != true
+				&& defined(slug.current)
+			]|order(title asc){
+				'url': $baseUrl + '/teams/' + slug.current,
+				'lastModified': _updatedAt,
+				'priority': 0.4
 			}
 		}`,
 		params: {
@@ -40,7 +51,19 @@ export default async function (): Promise<MetadataRoute.Sitemap> {
 	})) as {
 		pages: MetadataRoute.Sitemap
 		posts: MetadataRoute.Sitemap
+		sportsTeams: MetadataRoute.Sitemap
 	}
 
-	return Object.values(data).flat()
+	const sportsDirectories = [
+		'sports',
+		'teams',
+		'fixtures',
+		'events',
+		'competitions',
+	].map((path) => ({
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/${path}`,
+		priority: 0.5,
+	}))
+
+	return [...Object.values(data).flat(), ...sportsDirectories]
 }

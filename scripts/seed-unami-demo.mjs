@@ -54,6 +54,41 @@ function reference(id) {
 
 const documents = [
 	{
+		_id: teamId,
+		_type: 'sports.team',
+		title: 'DEMO ONLY — Unami Stars',
+		slug: { _type: 'slug', current: 'unami-stars' },
+		sport: 'football',
+		community: 'KwaGucingo (illustrative)',
+		description: [
+			block(
+				'team-demo-description',
+				'normal',
+				'Demonstration record only. This is not evidence of an active, registered or participating team.',
+			),
+		],
+		status: 'demo',
+		demoRecord: true,
+		publicProfile: false,
+		operationalOwner: 'foundation',
+	},
+	{
+		_id: stakeholderId,
+		_type: 'sports.stakeholder',
+		organization: 'DEMO ONLY — Unami Foundation reference',
+		organizationType: 'other',
+		relationshipLead: 'foundation',
+		supportAreas: ['Illustrative demo reference'],
+		relationshipSummary: [
+			block(
+				'stakeholder-demo-summary',
+				'normal',
+				'Demonstration reference only. This record does not establish a signed partnership, public endorsement or confirmed support.',
+			),
+		],
+		publicAcknowledgement: false,
+	},
+	{
 		_id: pilotId,
 		_type: 'sports.pilot',
 		title: 'DEMO ONLY — Unami Stars proposed first team pilot',
@@ -369,10 +404,12 @@ async function seed() {
 	const result = await transaction.commit()
 
 	const home = await client.fetch(
-		'*[_id == "unami.page.home"][0]{_rev, "keys": modules[]._key}',
+		'*[_type == "page" && metadata.slug.current == "index"][0]{_id, _rev, "keys": modules[]._key}',
 	)
 	if (!home) {
-		throw new Error('Could not find the Unami Stars homepage document.')
+		throw new Error(
+			'Could not find a homepage document with metadata.slug.current == "index".',
+		)
 	}
 
 	const moduleKeys = [operatorOverview._key, pilotLaunchGates._key]
@@ -385,14 +422,14 @@ async function seed() {
 			(module) => !home.keys?.includes(module._key),
 		)
 		await client
-			.patch('unami.page.home')
+			.patch(home._id)
 			.ifRevisionId(home._rev)
 			.insert('before', 'modules[3]', missingModules)
 			.commit()
 	}
 
 	const verification = await client.fetch(
-		`{"home": *[_id == "unami.page.home"][0]{title, "moduleCount": count(modules), "moduleTypes": modules[]._type, "newKeys": modules[_key in ["unami-demo-operator-overview", "unami-demo-pilot-launch-gates"]]._key}, "demoRecords": *[_id in ${JSON.stringify(documents.map(({ _id }) => _id))}]{_id, _type, title, demoRecord, stage, status, recordStatus, publicListing}}`,
+		`{"home": *[_id == ${JSON.stringify(home._id)}][0]{title, "moduleCount": count(modules), "moduleTypes": modules[]._type, "newKeys": modules[_key in ["unami-demo-operator-overview", "unami-demo-pilot-launch-gates"]]._key}, "demoRecords": *[_id in ${JSON.stringify(documents.map(({ _id }) => _id))}]{_id, _type, title, demoRecord, publicProfile, stage, status, recordStatus, publicListing}}`,
 	)
 	console.log(
 		JSON.stringify({

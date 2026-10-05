@@ -150,6 +150,8 @@ export default defineType({
 			type: 'boolean',
 			initialValue: false,
 			group: 'review',
+			description:
+				'When enabled, the public directory may show the title, dates and approved public venue only after all readiness checks pass and an active public team is linked. Never include private addresses or participant details.',
 			validation: (Rule) =>
 				Rule.custom((value, context) => {
 					if (!value) return true

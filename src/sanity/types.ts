@@ -7867,6 +7867,134 @@ export type AGENT_DIRECTIONS_QUERY_RESULT = {
 	}>
 }
 
+// Source: src/lib/sports-public.ts
+// Variable: SPORTS_PUBLIC_TEAMS_QUERY
+// Query: *[		_type == 'sports.team'		&& publicProfile == true		&& status == 'active'		&& demoRecord != true		&& defined(slug.current)	]|order(title asc){		_id,		title,		'slug': slug.current,		sport,		community,		province,		'description': pt::text(description)	}
+export type SPORTS_PUBLIC_TEAMS_QUERY_RESULT = Array<{
+	_id: string
+	title: string | null
+	slug: string | null
+	sport:
+		| 'athletics'
+		| 'basketball'
+		| 'cricket'
+		| 'football'
+		| 'netball'
+		| 'other'
+		| 'rugby'
+		| 'tennis'
+		| null
+	community: string | null
+	province: string | null
+	description: string
+}>
+
+// Source: src/lib/sports-public.ts
+// Variable: SPORTS_PUBLIC_TEAM_QUERY
+// Query: *[		_type == 'sports.team'		&& slug.current == $slug		&& publicProfile == true		&& status == 'active'		&& demoRecord != true	][0]{		_id,		title,		'slug': slug.current,		sport,		community,		province,		'description': pt::text(description)	}
+export type SPORTS_PUBLIC_TEAM_QUERY_RESULT = {
+	_id: string
+	title: string | null
+	slug: string | null
+	sport:
+		| 'athletics'
+		| 'basketball'
+		| 'cricket'
+		| 'football'
+		| 'netball'
+		| 'other'
+		| 'rugby'
+		| 'tennis'
+		| null
+	community: string | null
+	province: string | null
+	description: string
+} | null
+
+// Source: src/lib/sports-public.ts
+// Variable: SPORTS_PUBLIC_FIXTURES_QUERY
+// Query: *[		_type == 'sports.fixture'		&& publicListing == true		&& demoRecord != true		&& status in ['scheduled', 'completed']		&& defined(kickoff)		&& team->.publicProfile == true		&& team->.status == 'active'		&& team->.demoRecord != true	]|order(kickoff asc){		title,		kickoff,		status,		opponent,		'result': select(			status == 'completed' && defined(homeScore) && defined(awayScore)			=> string(homeScore) + '–' + string(awayScore),			null		),		'team': team->{title, 'slug': slug.current}	}
+export type SPORTS_PUBLIC_FIXTURES_QUERY_RESULT = Array<{
+	title: string | null
+	kickoff: string | null
+	status: 'cancelled' | 'completed' | 'postponed' | 'scheduled' | null
+	opponent: string | null
+	result: string | null
+	team: {
+		title: string | null
+		slug: string | null
+	} | null
+}>
+
+// Source: src/lib/sports-public.ts
+// Variable: SPORTS_PUBLIC_EVENTS_QUERY
+// Query: *[		_type == 'sports.event'		&& publicListing == true		&& demoRecord != true		&& status in ['approved', 'scheduled', 'delivered']		&& teamApprovalsComplete == true		&& venueConfirmed == true		&& safetyPlanApproved == true		&& firstAidConfirmed == true		&& eventBudgetApproved == true		&& authorityChecksComplete == true		&& count(teams[@->.publicProfile == true && @->.status == 'active' && @->.demoRecord != true]) > 0	]|order(startDateTime asc){		title,		startDateTime,		endDateTime,		publicVenueName	}
+export type SPORTS_PUBLIC_EVENTS_QUERY_RESULT = Array<{
+	title: string | null
+	startDateTime: string | null
+	endDateTime: string | null
+	publicVenueName: string | null
+}>
+
+// Source: src/lib/sports-public.ts
+// Variable: SPORTS_PUBLIC_COMPETITIONS_QUERY
+// Query: *[		_type == 'sports.competition'		&& publicAnnouncementApproved == true		&& demoRecord != true		&& status in ['approved', 'active', 'completed']		&& teamApprovalComplete == true		&& authorityChecksComplete == true		&& safeguardingPlanApproved == true		&& budgetApproved == true		&& count(teams[@->.publicProfile == true && @->.status == 'active' && @->.demoRecord != true]) > 0	]|order(startDate asc){		title,		sport,		format,		startDate,		endDate	}
+export type SPORTS_PUBLIC_COMPETITIONS_QUERY_RESULT = Array<{
+	title: string | null
+	sport:
+		| 'athletics'
+		| 'basketball'
+		| 'cricket'
+		| 'football'
+		| 'netball'
+		| 'other'
+		| 'rugby'
+		| 'tennis'
+		| null
+	format: 'festival' | 'league' | 'tournament' | null
+	startDate: string | null
+	endDate: string | null
+}>
+
+// Source: src/lib/sports-public.ts
+// Variable: SPORTS_PUBLIC_TEAM_ACTIVITY_QUERY
+// Query: {		'fixtures': *[			_type == 'sports.fixture'			&& team._ref == $teamId			&& publicListing == true			&& demoRecord != true			&& status in ['scheduled', 'completed']			&& defined(kickoff)		]|order(kickoff asc){			title,			kickoff,			status,			opponent,			'result': select(				status == 'completed' && defined(homeScore) && defined(awayScore)				=> string(homeScore) + '–' + string(awayScore),				null			),			'team': team->{title, 'slug': slug.current}		},		'events': *[			_type == 'sports.event'			&& count(teams[_ref == $teamId]) > 0			&& publicListing == true			&& demoRecord != true			&& status in ['approved', 'scheduled', 'delivered']			&& teamApprovalsComplete == true			&& venueConfirmed == true			&& safetyPlanApproved == true			&& firstAidConfirmed == true			&& eventBudgetApproved == true			&& authorityChecksComplete == true		]|order(startDateTime asc){			title,			startDateTime,			endDateTime,			publicVenueName		},		'competitions': *[			_type == 'sports.competition'			&& references($teamId)			&& publicAnnouncementApproved == true			&& demoRecord != true			&& status in ['approved', 'active', 'completed']			&& teamApprovalComplete == true			&& authorityChecksComplete == true			&& safeguardingPlanApproved == true			&& budgetApproved == true		]|order(startDate asc){			title,			sport,			format,			startDate,			endDate		}	}
+export type SPORTS_PUBLIC_TEAM_ACTIVITY_QUERY_RESULT = {
+	fixtures: Array<{
+		title: string | null
+		kickoff: string | null
+		status: 'cancelled' | 'completed' | 'postponed' | 'scheduled' | null
+		opponent: string | null
+		result: string | null
+		team: {
+			title: string | null
+			slug: string | null
+		} | null
+	}>
+	events: Array<{
+		title: string | null
+		startDateTime: string | null
+		endDateTime: string | null
+		publicVenueName: string | null
+	}>
+	competitions: Array<{
+		title: string | null
+		sport:
+			| 'athletics'
+			| 'basketball'
+			| 'cricket'
+			| 'football'
+			| 'netball'
+			| 'other'
+			| 'rugby'
+			| 'tennis'
+			| null
+		format: 'festival' | 'league' | 'tournament' | null
+		startDate: string | null
+		endDate: string | null
+	}>
+}
+
 // Source: src/modules/blog-index/index.tsx
 // Variable: BLOG_INDEX_QUERY
 // Query: *[_type == 'blog.post' && !(_id in $featuredIds)]|order(publishDate desc){		...,			'readTime': length(string::split(pt::text(content), ' ')) / 200,	categories[]->{		title,		slug	},	author->{		name,		title,		enableSchema,		'description': pt::text(content),		image{			...,			asset->		}	},		'slug': $blogDir + metadata.slug.current,	}
@@ -11447,6 +11575,12 @@ declare global {
 		"{\n\t'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{\n\t\tmetadata\n\t},\n\t'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){\n\t\ttitle,\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'ctas' => {\n\t\t\t\tctas[]{\n\t\t\t\t\t...,\n\t\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tpublishDate,\n\t\tcategories[]->{ title },\n\t\tauthor->{ name },\n\t\tmetadata\n\t}\n}": BLOG_RSS_QUERY_RESULT
 		"\n\t*[_type == 'page' && metadata.slug.current == '404'][0]{\n\t\t...,\n\t\tmodules[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\tsidebar{ \n\t...,\n\tmodules[]{\n\t\t...,\n\t\t_type == 'callout' => {\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t}\n },\n\t\n\t_type == 'form-module' => {\n\t\tform->\n\t}\n,\n\t\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t}\n,\n\t\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t}\n,\n\t\n\t_type == 'image-gallery' => {\n\t\trows[]{\n\t\t\t...,\n\t\t\timages[]{\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n,\n\t\n\t_type == 'logo-list' => {\n\t\tlogos[]->\n\t}\n,\n\t\n\t_type == 'person-list' => {\n\t\tpeople[]->{\n\t\t\tname,\n\t\t\ttitle,\n\t\t\tcontent,\n\t\t\tenableSchema,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n,\n\t\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t},\n\t\t\t_type == 'ctas' => {\n\t\t\t\tctas[]{\n\t\t\t\t\t...,\n\t\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t}\n,\n\t\n\t_type == 'quote-list' => {\n\t\tquotes[]->\n\t}\n,\n\t\n\t_type == 'tabbed-content' => {\n\t\ttabs[]{\n\t\t\t...,\n\t\t\tcontent[]{\n\t\t\t\t...,\n\t\t\t\t_type == 'image' => {\n\t\t\t\t\t...,\n\t\t\t\t\tasset->{\n\t\t\t\t\t\t...,\n\t\t\t\t\t\tmetadata\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t},\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t}\n,\n }\n\t}\n": NOT_FOUND_QUERY_RESULT
 		"{\n\t'site': *[_type == 'site'][0]{\n\t\ttitle\n\t},\n\t'home': *[_type == 'page' && metadata.slug.current == 'index'][0]{\n\t\t'description': metadata.description\n\t},\n\t'pages': *[_type == 'page'\n\t\t&& defined(metadata.slug.current)\n\t\t&& metadata.noIndex != true\n\t\t&& metadata.slug.current != '404'\n\t\t&& length(markdown.code) > 0\n\t] | order(metadata.slug.current != 'index', metadata.slug.current asc) {\n\t\t'title': select(\n\t\t\tmetadata.slug.current == 'index' => coalesce(metadata.title, 'Home'),\n\t\t\tcoalesce(metadata.title, metadata.slug.current)\n\t\t),\n\t\t'slug': metadata.slug.current,\n\t\t'description': metadata.description,\n\t},\n\t'posts': *[_type == 'blog.post'\n\t\t&& defined(metadata.slug.current)\n\t\t&& metadata.noIndex != true\n\t\t&& length(markdown.code) > 0\n\t] | order(publishDate desc) {\n\t\t'title': coalesce(title, metadata.title),\n\t\t'slug': $blogDir + '/' + metadata.slug.current,\n\t\t'description': metadata.description,\n\t}\n}": AGENT_DIRECTIONS_QUERY_RESULT
+		"\n\t*[\n\t\t_type == 'sports.team'\n\t\t&& publicProfile == true\n\t\t&& status == 'active'\n\t\t&& demoRecord != true\n\t\t&& defined(slug.current)\n\t]|order(title asc){\n\t\t_id,\n\t\ttitle,\n\t\t'slug': slug.current,\n\t\tsport,\n\t\tcommunity,\n\t\tprovince,\n\t\t'description': pt::text(description)\n\t}\n": SPORTS_PUBLIC_TEAMS_QUERY_RESULT
+		"\n\t*[\n\t\t_type == 'sports.team'\n\t\t&& slug.current == $slug\n\t\t&& publicProfile == true\n\t\t&& status == 'active'\n\t\t&& demoRecord != true\n\t][0]{\n\t\t_id,\n\t\ttitle,\n\t\t'slug': slug.current,\n\t\tsport,\n\t\tcommunity,\n\t\tprovince,\n\t\t'description': pt::text(description)\n\t}\n": SPORTS_PUBLIC_TEAM_QUERY_RESULT
+		"\n\t*[\n\t\t_type == 'sports.fixture'\n\t\t&& publicListing == true\n\t\t&& demoRecord != true\n\t\t&& status in ['scheduled', 'completed']\n\t\t&& defined(kickoff)\n\t\t&& team->.publicProfile == true\n\t\t&& team->.status == 'active'\n\t\t&& team->.demoRecord != true\n\t]|order(kickoff asc){\n\t\ttitle,\n\t\tkickoff,\n\t\tstatus,\n\t\topponent,\n\t\t'result': select(\n\t\t\tstatus == 'completed' && defined(homeScore) && defined(awayScore)\n\t\t\t=> string(homeScore) + '\u2013' + string(awayScore),\n\t\t\tnull\n\t\t),\n\t\t'team': team->{title, 'slug': slug.current}\n\t}\n": SPORTS_PUBLIC_FIXTURES_QUERY_RESULT
+		"\n\t*[\n\t\t_type == 'sports.event'\n\t\t&& publicListing == true\n\t\t&& demoRecord != true\n\t\t&& status in ['approved', 'scheduled', 'delivered']\n\t\t&& teamApprovalsComplete == true\n\t\t&& venueConfirmed == true\n\t\t&& safetyPlanApproved == true\n\t\t&& firstAidConfirmed == true\n\t\t&& eventBudgetApproved == true\n\t\t&& authorityChecksComplete == true\n\t\t&& count(teams[@->.publicProfile == true && @->.status == 'active' && @->.demoRecord != true]) > 0\n\t]|order(startDateTime asc){\n\t\ttitle,\n\t\tstartDateTime,\n\t\tendDateTime,\n\t\tpublicVenueName\n\t}\n": SPORTS_PUBLIC_EVENTS_QUERY_RESULT
+		"\n\t*[\n\t\t_type == 'sports.competition'\n\t\t&& publicAnnouncementApproved == true\n\t\t&& demoRecord != true\n\t\t&& status in ['approved', 'active', 'completed']\n\t\t&& teamApprovalComplete == true\n\t\t&& authorityChecksComplete == true\n\t\t&& safeguardingPlanApproved == true\n\t\t&& budgetApproved == true\n\t\t&& count(teams[@->.publicProfile == true && @->.status == 'active' && @->.demoRecord != true]) > 0\n\t]|order(startDate asc){\n\t\ttitle,\n\t\tsport,\n\t\tformat,\n\t\tstartDate,\n\t\tendDate\n\t}\n": SPORTS_PUBLIC_COMPETITIONS_QUERY_RESULT
+		"\n\t{\n\t\t'fixtures': *[\n\t\t\t_type == 'sports.fixture'\n\t\t\t&& team._ref == $teamId\n\t\t\t&& publicListing == true\n\t\t\t&& demoRecord != true\n\t\t\t&& status in ['scheduled', 'completed']\n\t\t\t&& defined(kickoff)\n\t\t]|order(kickoff asc){\n\t\t\ttitle,\n\t\t\tkickoff,\n\t\t\tstatus,\n\t\t\topponent,\n\t\t\t'result': select(\n\t\t\t\tstatus == 'completed' && defined(homeScore) && defined(awayScore)\n\t\t\t\t=> string(homeScore) + '\u2013' + string(awayScore),\n\t\t\t\tnull\n\t\t\t),\n\t\t\t'team': team->{title, 'slug': slug.current}\n\t\t},\n\t\t'events': *[\n\t\t\t_type == 'sports.event'\n\t\t\t&& count(teams[_ref == $teamId]) > 0\n\t\t\t&& publicListing == true\n\t\t\t&& demoRecord != true\n\t\t\t&& status in ['approved', 'scheduled', 'delivered']\n\t\t\t&& teamApprovalsComplete == true\n\t\t\t&& venueConfirmed == true\n\t\t\t&& safetyPlanApproved == true\n\t\t\t&& firstAidConfirmed == true\n\t\t\t&& eventBudgetApproved == true\n\t\t\t&& authorityChecksComplete == true\n\t\t]|order(startDateTime asc){\n\t\t\ttitle,\n\t\t\tstartDateTime,\n\t\t\tendDateTime,\n\t\t\tpublicVenueName\n\t\t},\n\t\t'competitions': *[\n\t\t\t_type == 'sports.competition'\n\t\t\t&& references($teamId)\n\t\t\t&& publicAnnouncementApproved == true\n\t\t\t&& demoRecord != true\n\t\t\t&& status in ['approved', 'active', 'completed']\n\t\t\t&& teamApprovalComplete == true\n\t\t\t&& authorityChecksComplete == true\n\t\t\t&& safeguardingPlanApproved == true\n\t\t\t&& budgetApproved == true\n\t\t]|order(startDate asc){\n\t\t\ttitle,\n\t\t\tsport,\n\t\t\tformat,\n\t\t\tstartDate,\n\t\t\tendDate\n\t\t}\n\t}\n": SPORTS_PUBLIC_TEAM_ACTIVITY_QUERY_RESULT
 		"\n\t*[_type == 'blog.post' && !(_id in $featuredIds)]|order(publishDate desc){\n\t\t...,\n\t\t\n\t'readTime': length(string::split(pt::text(content), ' ')) / 200,\n\tcategories[]->{\n\t\ttitle,\n\t\tslug\n\t},\n\tauthor->{\n\t\tname,\n\t\ttitle,\n\t\tenableSchema,\n\t\t'description': pt::text(content),\n\t\timage{\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t}\n,\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_INDEX_QUERY_RESULT
 		"\n\t*[_type == 'blog.post' && _id in $featuredIds]{\n\t\t...,\n\t\t\n\t'readTime': length(string::split(pt::text(content), ' ')) / 200,\n\tcategories[]->{\n\t\ttitle,\n\t\tslug\n\t},\n\tauthor->{\n\t\tname,\n\t\ttitle,\n\t\tenableSchema,\n\t\t'description': pt::text(content),\n\t\timage{\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t}\n,\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_FEATURED_QUERY_RESULT
 		"\n\t*[_type == 'blog.post']|order(publishDate desc)[0...$limit]{\n\t\t...,\n\t\t\n\t'readTime': length(string::split(pt::text(content), ' ')) / 200,\n\tcategories[]->{\n\t\ttitle,\n\t\tslug\n\t},\n\tauthor->{\n\t\tname,\n\t\ttitle,\n\t\tenableSchema,\n\t\t'description': pt::text(content),\n\t\timage{\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t}\n,\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_POST_LIST_QUERY_RESULT

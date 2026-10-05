@@ -92,7 +92,7 @@ export default defineType({
 			initialValue: false,
 			group: 'publishing',
 			description:
-				'Team approval required; consider safeguarding and travel privacy before publishing youth fixtures.',
+				'When enabled, scheduled/completed fixtures for active public teams may appear in the public directory. Confirm team approval and travel safety first; venue and match report are not displayed publicly.',
 		}),
 		defineField({
 			name: 'demoRecord',

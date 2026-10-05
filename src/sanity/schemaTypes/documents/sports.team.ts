@@ -115,6 +115,8 @@ export default defineType({
 			type: 'boolean',
 			initialValue: false,
 			group: 'publishing',
+			description:
+				'When enabled, the public directory shows this active, non-demo team. Review all descriptive text before publication; this flag does not grant or restrict document access.',
 		}),
 	],
 	preview: {

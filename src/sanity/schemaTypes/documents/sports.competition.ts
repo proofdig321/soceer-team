@@ -161,6 +161,8 @@ export default defineType({
 			type: 'boolean',
 			initialValue: false,
 			group: 'governance',
+			description:
+				'When enabled, the public directory may list this non-demo competition only when it is approved/active/completed, all readiness checks pass, and at least one participating team has an active public profile.',
 		}),
 		defineField({
 			name: 'demoRecord',
