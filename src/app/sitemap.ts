@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { groq } from 'next-sanity'
-import { ROUTES } from '@/lib/env'
+import { ROUTES, SPORTS_ROUTES } from '@/lib/env'
 import { sanityFetchMetadata } from '@/sanity/lib/live'
 
 export default async function (): Promise<MetadataRoute.Sitemap> {
@@ -9,7 +9,7 @@ export default async function (): Promise<MetadataRoute.Sitemap> {
 			'pages': *[
 				_type == 'page'
 				&& defined(metadata.slug.current)
-				&& !(metadata.slug.current in ['404'])
+				&& !(metadata.slug.current in ['404', 'sports', 'teams', 'fixtures', 'events', 'competitions'])
 				&& metadata.noIndex != true
 			]|order(metadata.slug.current != 'index', metadata.slug.current){
 				'url': $baseUrl + select(
@@ -54,15 +54,9 @@ export default async function (): Promise<MetadataRoute.Sitemap> {
 		sportsTeams: MetadataRoute.Sitemap
 	}
 
-	const sportsDirectories = [
-		'sports',
-		'teams',
-		'fixtures',
-		'events',
-		'competitions',
-	].map((path) => ({
+	const sportsDirectories = SPORTS_ROUTES.map((path) => ({
 		url: `${process.env.NEXT_PUBLIC_BASE_URL}/${path}`,
-		priority: 0.5,
+		priority: 0.5 as const,
 	}))
 
 	return [...Object.values(data).flat(), ...sportsDirectories]

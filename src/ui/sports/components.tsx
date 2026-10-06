@@ -82,7 +82,13 @@ export function TeamHero({ team }: { team: PublicSportsTeam }) {
 
 // ─── Fixture ──────────────────────────────────────────────────────────────────
 
-export function FixtureCard({ fixture }: { fixture: PublicSportsFixture }) {
+export function FixtureCard({
+	fixture,
+	hideTeamLink = false,
+}: {
+	fixture: PublicSportsFixture
+	hideTeamLink?: boolean
+}) {
 	const badge = fixtureStatusBadge(fixture.status)
 
 	return (
@@ -94,20 +100,22 @@ export function FixtureCard({ fixture }: { fixture: PublicSportsFixture }) {
 
 			<SportsMeta
 				items={[
-					fixture.team?.slug
-						? undefined
-						: fixture.team?.title,
+					!hideTeamLink && fixture.team?.title && !fixture.team.slug
+						? fixture.team.title
+						: undefined,
 					fixture.opponent ? `vs ${fixture.opponent}` : undefined,
-					fixture.kickoff ? formatSportsDate(fixture.kickoff, 'datetime') : undefined,
+					fixture.kickoff
+						? formatSportsDate(fixture.kickoff, 'datetime')
+						: undefined,
+					fixture.competition ?? undefined,
 				]}
 			/>
 
-			{fixture.team?.slug && (
+			{!hideTeamLink && fixture.team?.slug && (
 				<p className="text-sm">
 					<Link className="link" href={`/teams/${fixture.team.slug}`}>
 						{fixture.team.title}
 					</Link>
-					{fixture.opponent && ` vs ${fixture.opponent}`}
 				</p>
 			)}
 
@@ -121,9 +129,11 @@ export function FixtureCard({ fixture }: { fixture: PublicSportsFixture }) {
 export function FixtureList({
 	fixtures,
 	emptyLabel = 'fixtures',
+	hideTeamLink = false,
 }: {
 	fixtures: PublicSportsFixture[]
 	emptyLabel?: string
+	hideTeamLink?: boolean
 }) {
 	if (!fixtures.length) return <SportsEmpty label={emptyLabel} />
 	return (
@@ -132,6 +142,7 @@ export function FixtureList({
 				<FixtureCard
 					key={`${fixture.team?.slug}-${fixture.kickoff}-${fixture.title}`}
 					fixture={fixture}
+					hideTeamLink={hideTeamLink}
 				/>
 			))}
 		</ul>
@@ -140,15 +151,29 @@ export function FixtureList({
 
 // ─── Event ────────────────────────────────────────────────────────────────────
 
+const eventStatusLabel: Record<string, { label: string; variant: 'default' | 'success' | 'warning' | 'muted' }> = {
+	approved: { label: 'Upcoming', variant: 'default' },
+	scheduled: { label: 'Upcoming', variant: 'default' },
+	delivered: { label: 'Delivered', variant: 'success' },
+}
+
 export function EventCard({ event }: { event: PublicSportsEvent }) {
+	const statusBadge = event.status ? eventStatusLabel[event.status] : undefined
+
 	return (
 		<SportsCard as="li">
-			<h3 className="h4">{event.title ?? 'Event'}</h3>
+			<div className="flex flex-wrap items-start justify-between gap-2">
+				<h3 className="h4 flex-1">{event.title ?? 'Event'}</h3>
+				{statusBadge && (
+					<SportsBadge label={statusBadge.label} variant={statusBadge.variant} />
+				)}
+			</div>
 			{event.startDateTime && (
 				<SportsMeta
 					items={[
 						formatSportsDate(event.startDateTime, 'datetime'),
-						event.endDateTime
+						event.endDateTime &&
+						event.endDateTime !== event.startDateTime
 							? `until ${formatSportsDate(event.endDateTime, 'datetime')}`
 							: undefined,
 					]}
@@ -188,6 +213,14 @@ export function CompetitionCard({
 }: {
 	competition: PublicSportsCompetition
 }) {
+	const dateRange =
+		competition.startDate && competition.endDate &&
+		competition.endDate !== competition.startDate
+			? `${formatSportsDate(competition.startDate)} – ${formatSportsDate(competition.endDate)}`
+			: competition.startDate
+				? formatSportsDate(competition.startDate)
+				: undefined
+
 	return (
 		<SportsCard as="li">
 			<h3 className="h4">{competition.title ?? 'Competition'}</h3>
@@ -195,9 +228,7 @@ export function CompetitionCard({
 				items={[
 					sportLabel(competition.sport),
 					competitionFormatLabel(competition.format),
-					competition.startDate
-						? formatSportsDate(competition.startDate)
-						: undefined,
+					dateRange,
 				]}
 			/>
 		</SportsCard>
@@ -230,10 +261,12 @@ export function TeamActivitySection({
 	fixtures,
 	events,
 	competitions,
+	hideTeamLink = false,
 }: {
 	fixtures: PublicSportsFixture[]
 	events: PublicSportsEvent[]
 	competitions: PublicSportsCompetition[]
+	hideTeamLink?: boolean
 }) {
 	const hasFixtures = fixtures.length > 0
 	const hasEvents = events.length > 0
@@ -251,7 +284,7 @@ export function TeamActivitySection({
 			{hasFixtures && (
 				<section className="grid gap-5">
 					<h2 className="h2">Fixtures and results</h2>
-					<FixtureList fixtures={fixtures} />
+					<FixtureList fixtures={fixtures} hideTeamLink={hideTeamLink} />
 				</section>
 			)}
 			{hasEvents && (

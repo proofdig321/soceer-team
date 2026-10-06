@@ -8,6 +8,18 @@ export const ROUTES = {
 	studio: 'admin',
 	blog: 'blog',
 	a11y: 'accessibility-statement',
-	// @example services: 'services',
-	// @example caseStudies: 'case-studies',
+	// Sports directory routes
+	sports: 'sports',
+	teams: 'teams',
+	fixtures: 'fixtures',
+	events: 'events',
+	competitions: 'competitions',
 } as const
+
+export const SPORTS_ROUTES = [
+	ROUTES.sports,
+	ROUTES.teams,
+	ROUTES.fixtures,
+	ROUTES.events,
+	ROUTES.competitions,
+] as const

@@ -86,6 +86,7 @@ async function TeamActivity({
 				fixtures={activity.fixtures}
 				events={activity.events}
 				competitions={activity.competitions}
+				hideTeamLink
 			/>
 		</section>
 	)
