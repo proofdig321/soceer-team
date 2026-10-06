@@ -1,18 +1,23 @@
 import type { SchemaPluginOptions } from 'sanity'
 // modules
 import accordionList from '@/modules/accordion-list/schema'
+import banner from '@/modules/banner/schema'
 import blogIndex from '@/modules/blog-index/schema'
 import blogPostContent from '@/modules/blog-post-content/schema'
 import blogPostList from '@/modules/blog-post-list/schema'
 import breadcrumbs from '@/modules/breadcrumbs/schema'
 import callout from '@/modules/callout/schema'
 import cardList from '@/modules/card-list/schema'
+import countdown from '@/modules/countdown/schema'
 import customHtml from '@/modules/custom-html/schema'
+import featureBar from '@/modules/feature.bar/schema'
 import formModule from '@/modules/form-module/schema'
 import heroCover from '@/modules/hero.cover/schema'
 import heroSplit from '@/modules/hero.split/schema'
+import heroVideo from '@/modules/hero.video/schema'
 import imageGallery from '@/modules/image-gallery/schema'
 import logoList from '@/modules/logo-list/schema'
+import mediaSplit from '@/modules/media.split/schema'
 import personList from '@/modules/person-list/schema'
 import prose from '@/modules/prose/schema'
 import quoteList from '@/modules/quote-list/schema'
@@ -20,6 +25,8 @@ import searchModule from '@/modules/search-module/schema'
 import statList from '@/modules/stat-list/schema'
 import stepList from '@/modules/step-list/schema'
 import tabbedContent from '@/modules/tabbed-content/schema'
+import testimonialFeature from '@/modules/testimonial.feature/schema'
+import videoEmbed from '@/modules/video.embed/schema'
 // documents
 import announcement from './documents/announcement'
 import blogCategory from './documents/blog.category'
@@ -102,18 +109,23 @@ export const schema: SchemaPluginOptions = {
 
 		// modules
 		accordionList,
+		banner,
 		blogIndex,
 		blogPostContent,
 		blogPostList,
 		breadcrumbs,
 		callout,
 		cardList,
+		countdown,
 		customHtml,
+		featureBar,
 		formModule,
 		heroCover,
 		heroSplit,
+		heroVideo,
 		imageGallery,
 		logoList,
+		mediaSplit,
 		personList,
 		prose,
 		quoteList,
@@ -121,6 +133,8 @@ export const schema: SchemaPluginOptions = {
 		statList,
 		stepList,
 		tabbedContent,
+		testimonialFeature,
+		videoEmbed,
 	],
 
 	templates: (templates) =>

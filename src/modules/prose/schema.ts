@@ -1,6 +1,7 @@
 import { defineArrayMember, defineField } from 'sanity'
 import { BlockContentIcon } from '@sanity/icons/BlockContent'
 import { ImageIcon } from '@sanity/icons/Image'
+import { PlayIcon } from '@sanity/icons/Play'
 import { VscInspect } from 'react-icons/vsc'
 import { count, getBlockText } from '@/lib/utils'
 import defineModule from '@/sanity/schemaTypes/fragments/define-module'
@@ -73,6 +74,21 @@ export default defineModule({
 				}),
 				{ type: 'table' },
 				{ type: 'custom-html' },
+				defineArrayMember({
+					name: 'videoEmbed',
+					title: 'Video embed',
+					type: 'object',
+					icon: PlayIcon,
+					fields: [
+						defineField({ name: 'url', title: 'YouTube or Vimeo URL', type: 'url', validation: (Rule) => Rule.required() }),
+						defineField({ name: 'title', type: 'string' }),
+						defineField({ name: 'caption', type: 'string' }),
+					],
+					preview: {
+						select: { url: 'url', title: 'title' },
+						prepare: ({ url, title }) => ({ title: title || url || 'Video', subtitle: 'Video embed' }),
+					},
+				}),
 			],
 			group: 'content',
 		}),

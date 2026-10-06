@@ -62,6 +62,71 @@ export type LinkCardImage = {
 	_type: 'image'
 }
 
+export type VideoEmbed = {
+	_type: 'video.embed'
+	attributes?: ModuleAttributes
+	eyebrow?: string
+	title?: string
+	caption?: string
+	url: string
+	poster?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	aspectRatio?: '16/9' | '4/3' | '1/1'
+}
+
+export type SanityImageCrop = {
+	_type: 'sanity.imageCrop'
+	top: number
+	bottom: number
+	left: number
+	right: number
+}
+
+export type SanityImageHotspot = {
+	_type: 'sanity.imageHotspot'
+	x: number
+	y: number
+	height: number
+	width: number
+}
+
+export type ModuleAttributes = {
+	_type: 'module-attributes'
+	uid?: string
+	hidden?: boolean
+	scopedCss?: Code
+}
+
+export type TestimonialFeature = {
+	_type: 'testimonial.feature'
+	attributes?: ModuleAttributes
+	quote: string
+	name: string
+	role?: string
+	image?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	backgroundImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+}
+
 export type TabbedContent = {
 	_type: 'tabbed-content'
 	attributes?: ModuleAttributes
@@ -368,6 +433,13 @@ export type Prose = {
 		| ({
 				_key: string
 		  } & CustomHtml)
+		| {
+				url: string
+				title?: string
+				caption?: string
+				_type: 'videoEmbed'
+				_key: string
+		  }
 	>
 	sidebar?: Sidebar
 }
@@ -406,6 +478,46 @@ export type PersonList = {
 		} & PersonReference
 	>
 	columns?: number
+}
+
+export type MediaSplit = {
+	_type: 'media.split'
+	attributes?: ModuleAttributes
+	eyebrow?: string
+	content: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	ctas?: Array<
+		{
+			_key: string
+		} & Cta
+	>
+	image?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	videoUrl?: string
+	mediaOnRight?: boolean
+	mediaAspectRatio?: '16/9' | '4/3' | '1/1' | '3/4'
 }
 
 export type LogoReference = {
@@ -486,6 +598,46 @@ export type ImageGallery = {
 	autoScroll?: boolean
 	duration?: number
 	alternateScrollDirection?: boolean
+}
+
+export type HeroVideo = {
+	_type: 'hero.video'
+	attributes?: ModuleAttributes
+	eyebrow?: string
+	content?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	ctas?: Array<
+		{
+			_key: string
+		} & Cta
+	>
+	videoUrl?: string
+	poster: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	overlayOpacity?: number
+	textAlign?: 'left' | 'center' | 'right'
 }
 
 export type HeroSplit = {
@@ -623,12 +775,43 @@ export type FormModule = {
 	form?: FormReference
 }
 
+export type FeatureBar = {
+	_type: 'feature.bar'
+	attributes?: ModuleAttributes
+	items?: Array<{
+		label: string
+		description?: string
+		icon?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+		_key: string
+	}>
+}
+
 export type CustomHtml = {
 	_type: 'custom-html'
 	attributes?: ModuleAttributes
 	html?: Code
 	css?: Code
 	className?: string
+}
+
+export type Countdown = {
+	_type: 'countdown'
+	attributes?: ModuleAttributes
+	eyebrow?: string
+	label: string
+	targetDate: string
+	ctas?: Array<
+		{
+			_key: string
+		} & Cta
+	>
 }
 
 export type CardList = {
@@ -830,6 +1013,18 @@ export type BlogIndex = {
 	postsPerPage?: number
 }
 
+export type Banner = {
+	_type: 'banner'
+	attributes?: ModuleAttributes
+	text: string
+	ctas?: Array<
+		{
+			_key: string
+		} & Cta
+	>
+	theme?: 'default' | 'action' | 'highlight' | 'subtle'
+}
+
 export type AccordionList = {
 	_type: 'accordion-list'
 	attributes?: ModuleAttributes
@@ -858,7 +1053,7 @@ export type AccordionList = {
 		} & Cta
 	>
 	accordions?: Array<{
-		summary?: string
+		summary: string
 		content?: Array<{
 			children?: Array<{
 				marks?: Array<string>
@@ -937,18 +1132,11 @@ export type Sidebar = {
 	>
 }
 
-export type ModuleAttributes = {
-	_type: 'module-attributes'
-	uid?: string
-	hidden?: boolean
-	scopedCss?: Code
-}
-
 export type Metadata = {
 	_type: 'metadata'
 	title?: string
 	description?: string
-	slug?: Slug
+	slug: Slug
 	image?: {
 		asset?: SanityImageAssetReference
 		media?: unknown
@@ -1065,22 +1253,6 @@ export type Quote = {
 	}
 }
 
-export type SanityImageCrop = {
-	_type: 'sanity.imageCrop'
-	top?: number
-	bottom?: number
-	left?: number
-	right?: number
-}
-
-export type SanityImageHotspot = {
-	_type: 'sanity.imageHotspot'
-	x?: number
-	y?: number
-	height?: number
-	width?: number
-}
-
 export type Logo = {
 	_id: string
 	_type: 'logo'
@@ -1125,7 +1297,7 @@ export type BlogCategory = {
 
 export type Slug = {
 	_type: 'slug'
-	current?: string
+	current: string
 	source?: string
 }
 
@@ -1142,7 +1314,7 @@ export type SportsTalent = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	referenceCode?: string
+	referenceCode: string
 	team?: SportsTeamReference
 	sport?:
 		| 'football'
@@ -1153,7 +1325,7 @@ export type SportsTalent = {
 		| 'cricket'
 		| 'athletics'
 		| 'other'
-	pathwayType?:
+	pathwayType:
 		'development' | 'information' | 'referral' | 'showcase' | 'representation'
 	ageBand?: 'under-18' | 'adult' | 'not-recorded'
 	status?: 'idea' | 'discussion' | 'review' | 'approved' | 'closed'
@@ -1188,8 +1360,8 @@ export type SportsCommercial = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
-	arrangementType?:
+	title: string
+	arrangementType:
 		| 'sponsorship'
 		| 'grant'
 		| 'donation'
@@ -1260,7 +1432,7 @@ export type SportsEvent = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
+	title: string
 	competition?: SportsCompetitionReference
 	teams?: Array<
 		{
@@ -1324,8 +1496,8 @@ export type SportsResource = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
-	resourceType?:
+	title: string
+	resourceType:
 		| 'grant'
 		| 'donation'
 		| 'sponsorship'
@@ -1368,7 +1540,7 @@ export type SportsCompetition = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
+	title: string
 	sport?:
 		| 'football'
 		| 'rugby'
@@ -1443,7 +1615,7 @@ export type SportsSupport = {
 	_updatedAt: string
 	_rev: string
 	reference?: string
-	title?: string
+	title: string
 	team?: SportsTeamReference
 	pilot?: SportsPilotReference
 	category?:
@@ -1454,7 +1626,7 @@ export type SportsSupport = {
 		| 'maintenance'
 		| 'accessibility'
 		| 'training'
-	description?: string
+	description: string
 	requesterRole?: string
 	priority?: 'routine' | 'time-sensitive' | 'outage'
 	status?:
@@ -1473,8 +1645,8 @@ export type SportsTraining = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
-	team?: SportsTeamReference
+	title: string
+	team: SportsTeamReference
 	pilot?: SportsPilotReference
 	topic?:
 		| 'site-editing'
@@ -1519,8 +1691,8 @@ export type SportsPilot = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
-	team?: SportsTeamReference
+	title: string
+	team: SportsTeamReference
 	cohort?: string
 	stage?:
 		| 'invited'
@@ -1589,7 +1761,7 @@ export type SportsCustomization = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
+	title: string
 	team?: SportsTeamReference
 	sport?:
 		| 'football'
@@ -1664,8 +1836,8 @@ export type SportsGovernance = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
-	documentType?:
+	title: string
+	documentType:
 		| 'constitution'
 		| 'safeguarding'
 		| 'code-of-conduct'
@@ -1706,7 +1878,7 @@ export type SportsStakeholder = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	organization?: string
+	organization: string
 	organizationType?:
 		| 'school'
 		| 'community'
@@ -1746,11 +1918,11 @@ export type SportsFixture = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
-	team?: SportsTeamReference
+	title: string
+	team: SportsTeamReference
 	season?: string
 	competition?: string
-	opponent?: string
+	opponent: string
 	kickoff?: string
 	venue?: string
 	status?: 'scheduled' | 'completed' | 'postponed' | 'cancelled'
@@ -1785,8 +1957,8 @@ export type SportsPlayer = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	displayName?: string
-	team?: SportsTeamReference
+	displayName: string
+	team: SportsTeamReference
 	squad?: string
 	shirtNumber?: number
 	position?: string
@@ -1828,9 +2000,9 @@ export type SportsTeam = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
-	slug?: Slug
-	sport?:
+	title: string
+	slug: Slug
+	sport:
 		| 'football'
 		| 'rugby'
 		| 'basketball'
@@ -1883,8 +2055,8 @@ export type Redirect = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	source?: string
-	destination?: Link
+	source: string
+	destination: Link
 }
 
 export type BlogCategoryReference = {
@@ -2166,7 +2338,7 @@ export type Page = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
+	title: string
 	modules?: Array<
 		| ({
 				_key: string
@@ -2236,10 +2408,10 @@ export type Skill = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	name?: Slug
-	title?: string
-	description?: string
-	content?: Code
+	name: Slug
+	title: string
+	description: string
+	content: Code
 }
 
 export type AnnouncementReference = {
@@ -2262,7 +2434,7 @@ export type Site = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
+	title: string
 	logo?: {
 		title?: string
 		image?: {
@@ -2333,7 +2505,7 @@ export type Navigation = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
+	title: string
 	blurb?: Array<
 		| {
 				children?: Array<{
@@ -2449,7 +2621,7 @@ export type AssistInstructionContextReference = {
 
 export type SanityAssistInstructionContext = {
 	_type: 'sanity.assist.instruction.context'
-	reference?: AssistInstructionContextReference
+	reference: AssistInstructionContextReference
 }
 
 export type AssistInstructionContext = {
@@ -2477,7 +2649,7 @@ export type AssistInstructionContext = {
 
 export type SanityAssistInstructionUserInput = {
 	_type: 'sanity.assist.instruction.userInput'
-	message?: string
+	message: string
 	description?: string
 }
 
@@ -2586,9 +2758,9 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
 	_type: 'sanity.imageDimensions'
-	height?: number
-	width?: number
-	aspectRatio?: number
+	height: number
+	width: number
+	aspectRatio: number
 }
 
 export type SanityImageMetadata = {
@@ -2614,14 +2786,14 @@ export type SanityFileAsset = {
 	title?: string
 	description?: string
 	altText?: string
-	sha1hash?: string
-	extension?: string
-	mimeType?: string
-	size?: number
-	assetId?: string
+	sha1hash: string
+	extension: string
+	mimeType: string
+	size: number
+	assetId: string
 	uploadId?: string
-	path?: string
-	url?: string
+	path: string
+	url: string
 	source?: SanityAssetSourceData
 }
 
@@ -2643,14 +2815,14 @@ export type SanityImageAsset = {
 	title?: string
 	description?: string
 	altText?: string
-	sha1hash?: string
-	extension?: string
-	mimeType?: string
-	size?: number
-	assetId?: string
+	sha1hash: string
+	extension: string
+	mimeType: string
+	size: number
+	assetId: string
 	uploadId?: string
-	path?: string
-	url?: string
+	path: string
+	url: string
 	metadata?: SanityImageMetadata
 	source?: SanityAssetSourceData
 }
@@ -2669,6 +2841,11 @@ export type AllSanitySchemaTypes =
 	| Mobile
 	| TabIcon
 	| LinkCardImage
+	| VideoEmbed
+	| SanityImageCrop
+	| SanityImageHotspot
+	| ModuleAttributes
+	| TestimonialFeature
 	| TabbedContent
 	| StepList
 	| StatList
@@ -2678,14 +2855,18 @@ export type AllSanitySchemaTypes =
 	| Prose
 	| PersonReference
 	| PersonList
+	| MediaSplit
 	| LogoReference
 	| LogoList
 	| ImageGallery
+	| HeroVideo
 	| HeroSplit
 	| HeroCover
 	| FormReference
 	| FormModule
+	| FeatureBar
 	| CustomHtml
+	| Countdown
 	| CardList
 	| Callout
 	| Breadcrumbs
@@ -2693,10 +2874,10 @@ export type AllSanitySchemaTypes =
 	| BlogPostContent
 	| BlogPostReference
 	| BlogIndex
+	| Banner
 	| AccordionList
 	| Table
 	| Sidebar
-	| ModuleAttributes
 	| Metadata
 	| Megamenu
 	| LinkList
@@ -2704,8 +2885,6 @@ export type AllSanitySchemaTypes =
 	| Link
 	| Cta
 	| Quote
-	| SanityImageCrop
-	| SanityImageHotspot
 	| Logo
 	| BlogCategory
 	| Slug
@@ -2777,7 +2956,7 @@ export type PAGE_QUERY_RESULT = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
+	title: string
 	modules: Array<
 		| {
 				_key: string
@@ -2821,7 +3000,7 @@ export type PAGE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -2831,7 +3010,7 @@ export type PAGE_QUERY_RESULT = {
 					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				accordions?: Array<{
-					summary?: string
+					summary: string
 					content?: Array<{
 						children?: Array<{
 							marks?: Array<string>
@@ -2963,7 +3142,7 @@ export type PAGE_QUERY_RESULT = {
 												type?: 'external' | 'internal'
 												internal: {
 													_type: 'page'
-													title: string | null
+													title: string
 													slug: string | '/' | null
 												} | null
 												external?: string
@@ -3032,7 +3211,7 @@ export type PAGE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -3066,7 +3245,7 @@ export type PAGE_QUERY_RESULT = {
 							type?: 'external' | 'internal'
 							internal: {
 								_type: 'page'
-								title: string | null
+								title: string
 								slug: string | '/' | null
 							} | null
 							external?: string
@@ -3139,7 +3318,7 @@ export type PAGE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -3233,7 +3412,7 @@ export type PAGE_QUERY_RESULT = {
 									type?: 'external' | 'internal'
 									internal: {
 										_type: 'page'
-										title: string | null
+										title: string
 										slug: string | '/' | null
 									} | null
 									external?: string
@@ -3263,7 +3442,7 @@ export type PAGE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -3385,7 +3564,7 @@ export type PAGE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -3463,7 +3642,7 @@ export type PAGE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -3522,14 +3701,14 @@ export type PAGE_QUERY_RESULT = {
 							title?: string
 							description?: string
 							altText?: string
-							sha1hash?: string
-							extension?: string
-							mimeType?: string
-							size?: number
-							assetId?: string
+							sha1hash: string
+							extension: string
+							mimeType: string
+							size: number
+							assetId: string
 							uploadId?: string
-							path?: string
-							url?: string
+							path: string
+							url: string
 							metadata: SanityImageMetadata | null
 							source?: SanityAssetSourceData
 						} | null
@@ -3669,14 +3848,14 @@ export type PAGE_QUERY_RESULT = {
 							title?: string
 							description?: string
 							altText?: string
-							sha1hash?: string
-							extension?: string
-							mimeType?: string
-							size?: number
-							assetId?: string
+							sha1hash: string
+							extension: string
+							mimeType: string
+							size: number
+							assetId: string
 							uploadId?: string
-							path?: string
-							url?: string
+							path: string
+							url: string
 							metadata: SanityImageMetadata | null
 							source?: SanityAssetSourceData
 						} | null
@@ -3748,7 +3927,7 @@ export type PAGE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -3780,14 +3959,14 @@ export type PAGE_QUERY_RESULT = {
 								title?: string
 								description?: string
 								altText?: string
-								sha1hash?: string
-								extension?: string
-								mimeType?: string
-								size?: number
-								assetId?: string
+								sha1hash: string
+								extension: string
+								mimeType: string
+								size: number
+								assetId: string
 								uploadId?: string
-								path?: string
-								url?: string
+								path: string
+								url: string
 								metadata: SanityImageMetadata | null
 								source?: SanityAssetSourceData
 							} | null
@@ -3854,6 +4033,13 @@ export type PAGE_QUERY_RESULT = {
 								_type: 'row'
 								_key: string
 							}>
+					  }
+					| {
+							url: string
+							title?: string
+							caption?: string
+							_type: 'videoEmbed'
+							_key: string
 					  }
 				> | null
 				sidebar: {
@@ -3923,7 +4109,7 @@ export type PAGE_QUERY_RESULT = {
 												type?: 'external' | 'internal'
 												internal: {
 													_type: 'page'
-													title: string | null
+													title: string
 													slug: string | '/' | null
 												} | null
 												external?: string
@@ -4154,7 +4340,7 @@ export type PAGE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -4268,14 +4454,14 @@ export type PAGE_QUERY_RESULT = {
 									title?: string
 									description?: string
 									altText?: string
-									sha1hash?: string
-									extension?: string
-									mimeType?: string
-									size?: number
-									assetId?: string
+									sha1hash: string
+									extension: string
+									mimeType: string
+									size: number
+									assetId: string
 									uploadId?: string
-									path?: string
-									url?: string
+									path: string
+									url: string
 									metadata: SanityImageMetadata | null
 									source?: SanityAssetSourceData
 								} | null
@@ -4305,7 +4491,7 @@ export type PAGE_QUERY_RESULT = {
 									type?: 'external' | 'internal'
 									internal: {
 										_type: 'page'
-										title: string | null
+										title: string
 										slug: string | '/' | null
 									} | null
 									external?: string
@@ -4342,6 +4528,12 @@ export type BLOG_POST_MD_QUERY_RESULT = string | null
 export type OG_QUERY_RESULT =
 	| {
 			title: null
+	  }
+	| {
+			title: string
+	  }
+	| {
+			title: string
 	  }
 	| {
 			title: string | null
@@ -4392,7 +4584,7 @@ export type BLOG_POST_QUERY_RESULT = {
 					} & Cta
 				>
 				accordions?: Array<{
-					summary?: string
+					summary: string
 					content?: Array<{
 						children?: Array<{
 							marks?: Array<string>
@@ -4466,7 +4658,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -4498,14 +4690,14 @@ export type BLOG_POST_QUERY_RESULT = {
 					title?: string
 					description?: string
 					altText?: string
-					sha1hash?: string
-					extension?: string
-					mimeType?: string
-					size?: number
-					assetId?: string
+					sha1hash: string
+					extension: string
+					mimeType: string
+					size: number
+					assetId: string
 					uploadId?: string
-					path?: string
-					url?: string
+					path: string
+					url: string
 					metadata?: SanityImageMetadata
 					source?: SanityAssetSourceData
 				} | null
@@ -4596,14 +4788,14 @@ export type BLOG_POST_QUERY_RESULT = {
 				title?: string
 				description?: string
 				altText?: string
-				sha1hash?: string
-				extension?: string
-				mimeType?: string
-				size?: number
-				assetId?: string
+				sha1hash: string
+				extension: string
+				mimeType: string
+				size: number
+				assetId: string
 				uploadId?: string
-				path?: string
-				url?: string
+				path: string
+				url: string
 				metadata?: SanityImageMetadata
 				source?: SanityAssetSourceData
 			} | null
@@ -4665,7 +4857,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -4675,7 +4867,7 @@ export type BLOG_POST_QUERY_RESULT = {
 					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				accordions?: Array<{
-					summary?: string
+					summary: string
 					content?: Array<{
 						children?: Array<{
 							marks?: Array<string>
@@ -4807,7 +4999,7 @@ export type BLOG_POST_QUERY_RESULT = {
 												type?: 'external' | 'internal'
 												internal: {
 													_type: 'page'
-													title: string | null
+													title: string
 													slug: string | '/' | null
 												} | null
 												external?: string
@@ -4876,7 +5068,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -4910,7 +5102,7 @@ export type BLOG_POST_QUERY_RESULT = {
 							type?: 'external' | 'internal'
 							internal: {
 								_type: 'page'
-								title: string | null
+								title: string
 								slug: string | '/' | null
 							} | null
 							external?: string
@@ -4983,7 +5175,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -5077,7 +5269,7 @@ export type BLOG_POST_QUERY_RESULT = {
 									type?: 'external' | 'internal'
 									internal: {
 										_type: 'page'
-										title: string | null
+										title: string
 										slug: string | '/' | null
 									} | null
 									external?: string
@@ -5107,7 +5299,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -5229,7 +5421,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -5307,7 +5499,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -5366,14 +5558,14 @@ export type BLOG_POST_QUERY_RESULT = {
 							title?: string
 							description?: string
 							altText?: string
-							sha1hash?: string
-							extension?: string
-							mimeType?: string
-							size?: number
-							assetId?: string
+							sha1hash: string
+							extension: string
+							mimeType: string
+							size: number
+							assetId: string
 							uploadId?: string
-							path?: string
-							url?: string
+							path: string
+							url: string
 							metadata: SanityImageMetadata | null
 							source?: SanityAssetSourceData
 						} | null
@@ -5513,14 +5705,14 @@ export type BLOG_POST_QUERY_RESULT = {
 							title?: string
 							description?: string
 							altText?: string
-							sha1hash?: string
-							extension?: string
-							mimeType?: string
-							size?: number
-							assetId?: string
+							sha1hash: string
+							extension: string
+							mimeType: string
+							size: number
+							assetId: string
 							uploadId?: string
-							path?: string
-							url?: string
+							path: string
+							url: string
 							metadata: SanityImageMetadata | null
 							source?: SanityAssetSourceData
 						} | null
@@ -5592,7 +5784,7 @@ export type BLOG_POST_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -5624,14 +5816,14 @@ export type BLOG_POST_QUERY_RESULT = {
 								title?: string
 								description?: string
 								altText?: string
-								sha1hash?: string
-								extension?: string
-								mimeType?: string
-								size?: number
-								assetId?: string
+								sha1hash: string
+								extension: string
+								mimeType: string
+								size: number
+								assetId: string
 								uploadId?: string
-								path?: string
-								url?: string
+								path: string
+								url: string
 								metadata: SanityImageMetadata | null
 								source?: SanityAssetSourceData
 							} | null
@@ -5698,6 +5890,13 @@ export type BLOG_POST_QUERY_RESULT = {
 								_type: 'row'
 								_key: string
 							}>
+					  }
+					| {
+							url: string
+							title?: string
+							caption?: string
+							_type: 'videoEmbed'
+							_key: string
 					  }
 				> | null
 				sidebar: {
@@ -5767,7 +5966,7 @@ export type BLOG_POST_QUERY_RESULT = {
 												type?: 'external' | 'internal'
 												internal: {
 													_type: 'page'
-													title: string | null
+													title: string
 													slug: string | '/' | null
 												} | null
 												external?: string
@@ -5998,7 +6197,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -6112,14 +6311,14 @@ export type BLOG_POST_QUERY_RESULT = {
 									title?: string
 									description?: string
 									altText?: string
-									sha1hash?: string
-									extension?: string
-									mimeType?: string
-									size?: number
-									assetId?: string
+									sha1hash: string
+									extension: string
+									mimeType: string
+									size: number
+									assetId: string
 									uploadId?: string
-									path?: string
-									url?: string
+									path: string
+									url: string
 									metadata: SanityImageMetadata | null
 									source?: SanityAssetSourceData
 								} | null
@@ -6149,7 +6348,7 @@ export type BLOG_POST_QUERY_RESULT = {
 									type?: 'external' | 'internal'
 									internal: {
 										_type: 'page'
-										title: string | null
+										title: string
 										slug: string | '/' | null
 									} | null
 									external?: string
@@ -6208,7 +6407,7 @@ export type BLOG_RSS_QUERY_RESULT = {
 						} & Cta
 					>
 					accordions?: Array<{
-						summary?: string
+						summary: string
 						content?: Array<{
 							children?: Array<{
 								marks?: Array<string>
@@ -6289,7 +6488,7 @@ export type BLOG_RSS_QUERY_RESULT = {
 									type?: 'external' | 'internal'
 									internal: {
 										_type: 'page'
-										title: string | null
+										title: string
 										slug: string | '/' | null
 									} | null
 									external?: string
@@ -6396,7 +6595,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
+	title: string
 	modules: Array<
 		| {
 				_key: string
@@ -6440,7 +6639,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -6450,7 +6649,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				accordions?: Array<{
-					summary?: string
+					summary: string
 					content?: Array<{
 						children?: Array<{
 							marks?: Array<string>
@@ -6552,7 +6751,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -6586,7 +6785,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 							type?: 'external' | 'internal'
 							internal: {
 								_type: 'page'
-								title: string | null
+								title: string
 								slug: string | '/' | null
 							} | null
 							external?: string
@@ -6659,7 +6858,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -6753,7 +6952,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 									type?: 'external' | 'internal'
 									internal: {
 										_type: 'page'
-										title: string | null
+										title: string
 										slug: string | '/' | null
 									} | null
 									external?: string
@@ -6783,7 +6982,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -6905,7 +7104,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -6983,7 +7182,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -7042,14 +7241,14 @@ export type NOT_FOUND_QUERY_RESULT = {
 							title?: string
 							description?: string
 							altText?: string
-							sha1hash?: string
-							extension?: string
-							mimeType?: string
-							size?: number
-							assetId?: string
+							sha1hash: string
+							extension: string
+							mimeType: string
+							size: number
+							assetId: string
 							uploadId?: string
-							path?: string
-							url?: string
+							path: string
+							url: string
 							metadata: SanityImageMetadata | null
 							source?: SanityAssetSourceData
 						} | null
@@ -7189,14 +7388,14 @@ export type NOT_FOUND_QUERY_RESULT = {
 							title?: string
 							description?: string
 							altText?: string
-							sha1hash?: string
-							extension?: string
-							mimeType?: string
-							size?: number
-							assetId?: string
+							sha1hash: string
+							extension: string
+							mimeType: string
+							size: number
+							assetId: string
 							uploadId?: string
-							path?: string
-							url?: string
+							path: string
+							url: string
 							metadata: SanityImageMetadata | null
 							source?: SanityAssetSourceData
 						} | null
@@ -7268,7 +7467,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -7300,14 +7499,14 @@ export type NOT_FOUND_QUERY_RESULT = {
 								title?: string
 								description?: string
 								altText?: string
-								sha1hash?: string
-								extension?: string
-								mimeType?: string
-								size?: number
-								assetId?: string
+								sha1hash: string
+								extension: string
+								mimeType: string
+								size: number
+								assetId: string
 								uploadId?: string
-								path?: string
-								url?: string
+								path: string
+								url: string
 								metadata: SanityImageMetadata | null
 								source?: SanityAssetSourceData
 							} | null
@@ -7374,6 +7573,13 @@ export type NOT_FOUND_QUERY_RESULT = {
 								_type: 'row'
 								_key: string
 							}>
+					  }
+					| {
+							url: string
+							title?: string
+							caption?: string
+							_type: 'videoEmbed'
+							_key: string
 					  }
 				> | null
 				sidebar: {
@@ -7443,7 +7649,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 												type?: 'external' | 'internal'
 												internal: {
 													_type: 'page'
-													title: string | null
+													title: string
 													slug: string | '/' | null
 												} | null
 												external?: string
@@ -7674,7 +7880,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -7788,14 +7994,14 @@ export type NOT_FOUND_QUERY_RESULT = {
 									title?: string
 									description?: string
 									altText?: string
-									sha1hash?: string
-									extension?: string
-									mimeType?: string
-									size?: number
-									assetId?: string
+									sha1hash: string
+									extension: string
+									mimeType: string
+									size: number
+									assetId: string
 									uploadId?: string
-									path?: string
-									url?: string
+									path: string
+									url: string
 									metadata: SanityImageMetadata | null
 									source?: SanityAssetSourceData
 								} | null
@@ -7825,7 +8031,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 									type?: 'external' | 'internal'
 									internal: {
 										_type: 'page'
-										title: string | null
+										title: string
 										slug: string | '/' | null
 									} | null
 									external?: string
@@ -7850,7 +8056,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 // Query: {	'site': *[_type == 'site'][0]{		title	},	'home': *[_type == 'page' && metadata.slug.current == 'index'][0]{		'description': metadata.description	},	'pages': *[_type == 'page'		&& defined(metadata.slug.current)		&& metadata.noIndex != true		&& metadata.slug.current != '404'		&& length(markdown.code) > 0	] | order(metadata.slug.current != 'index', metadata.slug.current asc) {		'title': select(			metadata.slug.current == 'index' => coalesce(metadata.title, 'Home'),			coalesce(metadata.title, metadata.slug.current)		),		'slug': metadata.slug.current,		'description': metadata.description,	},	'posts': *[_type == 'blog.post'		&& defined(metadata.slug.current)		&& metadata.noIndex != true		&& length(markdown.code) > 0	] | order(publishDate desc) {		'title': coalesce(title, metadata.title),		'slug': $blogDir + '/' + metadata.slug.current,		'description': metadata.description,	}}
 export type AGENT_DIRECTIONS_QUERY_RESULT = {
 	site: {
-		title: string | null
+		title: string
 	} | null
 	home: {
 		description: string | null
@@ -7872,8 +8078,8 @@ export type AGENT_DIRECTIONS_QUERY_RESULT = {
 // Query: *[		_type == 'sports.team'		&& publicProfile == true		&& status == 'active'		&& demoRecord != true		&& defined(slug.current)	]|order(title asc){		_id,		title,		'slug': slug.current,		sport,		community,		province,		'description': pt::text(description)	}
 export type SPORTS_PUBLIC_TEAMS_QUERY_RESULT = Array<{
 	_id: string
-	title: string | null
-	slug: string | null
+	title: string
+	slug: string
 	sport:
 		| 'athletics'
 		| 'basketball'
@@ -7883,7 +8089,6 @@ export type SPORTS_PUBLIC_TEAMS_QUERY_RESULT = Array<{
 		| 'other'
 		| 'rugby'
 		| 'tennis'
-		| null
 	community: string | null
 	province: string | null
 	description: string
@@ -7894,8 +8099,8 @@ export type SPORTS_PUBLIC_TEAMS_QUERY_RESULT = Array<{
 // Query: *[		_type == 'sports.team'		&& slug.current == $slug		&& publicProfile == true		&& status == 'active'		&& demoRecord != true	][0]{		_id,		title,		'slug': slug.current,		sport,		community,		province,		'description': pt::text(description)	}
 export type SPORTS_PUBLIC_TEAM_QUERY_RESULT = {
 	_id: string
-	title: string | null
-	slug: string | null
+	title: string
+	slug: string
 	sport:
 		| 'athletics'
 		| 'basketball'
@@ -7905,7 +8110,6 @@ export type SPORTS_PUBLIC_TEAM_QUERY_RESULT = {
 		| 'other'
 		| 'rugby'
 		| 'tennis'
-		| null
 	community: string | null
 	province: string | null
 	description: string
@@ -7915,23 +8119,23 @@ export type SPORTS_PUBLIC_TEAM_QUERY_RESULT = {
 // Variable: SPORTS_PUBLIC_FIXTURES_QUERY
 // Query: *[		_type == 'sports.fixture'		&& publicListing == true		&& demoRecord != true		&& status in ['scheduled', 'completed']		&& defined(kickoff)		&& team->.publicProfile == true		&& team->.status == 'active'		&& team->.demoRecord != true	]|order(kickoff asc){		title,		kickoff,		status,		opponent,		competition,		'result': select(			status == 'completed' && defined(homeScore) && defined(awayScore)			=> string(homeScore) + '–' + string(awayScore),			null		),		'team': team->{title, 'slug': slug.current}	}
 export type SPORTS_PUBLIC_FIXTURES_QUERY_RESULT = Array<{
-	title: string | null
+	title: string
 	kickoff: string | null
 	status: 'cancelled' | 'completed' | 'postponed' | 'scheduled' | null
-	opponent: string | null
+	opponent: string
 	competition: string | null
 	result: string | null
 	team: {
-		title: string | null
-		slug: string | null
-	} | null
+		title: string
+		slug: string
+	}
 }>
 
 // Source: src/lib/sports-public.ts
 // Variable: SPORTS_PUBLIC_EVENTS_QUERY
 // Query: *[		_type == 'sports.event'		&& publicListing == true		&& demoRecord != true		&& status in ['approved', 'scheduled', 'delivered']		&& teamApprovalsComplete == true		&& venueConfirmed == true		&& safetyPlanApproved == true		&& firstAidConfirmed == true		&& eventBudgetApproved == true		&& authorityChecksComplete == true		&& count(teams[@->.publicProfile == true && @->.status == 'active' && @->.demoRecord != true]) > 0	]|order(startDateTime asc){		title,		status,		startDateTime,		endDateTime,		publicVenueName	}
 export type SPORTS_PUBLIC_EVENTS_QUERY_RESULT = Array<{
-	title: string | null
+	title: string
 	status:
 		| 'approved'
 		| 'cancelled'
@@ -7950,7 +8154,7 @@ export type SPORTS_PUBLIC_EVENTS_QUERY_RESULT = Array<{
 // Variable: SPORTS_PUBLIC_COMPETITIONS_QUERY
 // Query: *[		_type == 'sports.competition'		&& publicAnnouncementApproved == true		&& demoRecord != true		&& status in ['approved', 'active', 'completed']		&& teamApprovalComplete == true		&& authorityChecksComplete == true		&& safeguardingPlanApproved == true		&& budgetApproved == true		&& count(teams[@->.publicProfile == true && @->.status == 'active' && @->.demoRecord != true]) > 0	]|order(startDate asc){		title,		status,		sport,		format,		startDate,		endDate	}
 export type SPORTS_PUBLIC_COMPETITIONS_QUERY_RESULT = Array<{
-	title: string | null
+	title: string
 	status:
 		| 'active'
 		| 'approval'
@@ -7981,19 +8185,19 @@ export type SPORTS_PUBLIC_COMPETITIONS_QUERY_RESULT = Array<{
 // Query: {		'fixtures': *[			_type == 'sports.fixture'			&& team._ref == $teamId			&& publicListing == true			&& demoRecord != true			&& status in ['scheduled', 'completed']			&& defined(kickoff)		]|order(kickoff asc){			title,			kickoff,			status,			opponent,			competition,			'result': select(				status == 'completed' && defined(homeScore) && defined(awayScore)				=> string(homeScore) + '–' + string(awayScore),				null			),			'team': team->{title, 'slug': slug.current}		},		'events': *[			_type == 'sports.event'			&& count(teams[_ref == $teamId]) > 0			&& publicListing == true			&& demoRecord != true			&& status in ['approved', 'scheduled', 'delivered']			&& teamApprovalsComplete == true			&& venueConfirmed == true			&& safetyPlanApproved == true			&& firstAidConfirmed == true			&& eventBudgetApproved == true			&& authorityChecksComplete == true		]|order(startDateTime asc){			title,			status,			startDateTime,			endDateTime,			publicVenueName		},		'competitions': *[			_type == 'sports.competition'			&& references($teamId)			&& publicAnnouncementApproved == true			&& demoRecord != true			&& status in ['approved', 'active', 'completed']			&& teamApprovalComplete == true			&& authorityChecksComplete == true			&& safeguardingPlanApproved == true			&& budgetApproved == true		]|order(startDate asc){			title,			status,			sport,			format,			startDate,			endDate		}	}
 export type SPORTS_PUBLIC_TEAM_ACTIVITY_QUERY_RESULT = {
 	fixtures: Array<{
-		title: string | null
+		title: string
 		kickoff: string | null
 		status: 'cancelled' | 'completed' | 'postponed' | 'scheduled' | null
-		opponent: string | null
+		opponent: string
 		competition: string | null
 		result: string | null
 		team: {
-			title: string | null
-			slug: string | null
-		} | null
+			title: string
+			slug: string
+		}
 	}>
 	events: Array<{
-		title: string | null
+		title: string
 		status:
 			| 'approved'
 			| 'cancelled'
@@ -8008,7 +8212,7 @@ export type SPORTS_PUBLIC_TEAM_ACTIVITY_QUERY_RESULT = {
 		publicVenueName: string | null
 	}>
 	competitions: Array<{
-		title: string | null
+		title: string
 		status:
 			| 'active'
 			| 'approval'
@@ -8136,14 +8340,14 @@ export type BLOG_INDEX_QUERY_RESULT = Array<{
 				title?: string
 				description?: string
 				altText?: string
-				sha1hash?: string
-				extension?: string
-				mimeType?: string
-				size?: number
-				assetId?: string
+				sha1hash: string
+				extension: string
+				mimeType: string
+				size: number
+				assetId: string
 				uploadId?: string
-				path?: string
-				url?: string
+				path: string
+				url: string
 				metadata?: SanityImageMetadata
 				source?: SanityAssetSourceData
 			} | null
@@ -8260,14 +8464,14 @@ export type BLOG_FEATURED_QUERY_RESULT = Array<{
 				title?: string
 				description?: string
 				altText?: string
-				sha1hash?: string
-				extension?: string
-				mimeType?: string
-				size?: number
-				assetId?: string
+				sha1hash: string
+				extension: string
+				mimeType: string
+				size: number
+				assetId: string
 				uploadId?: string
-				path?: string
-				url?: string
+				path: string
+				url: string
 				metadata?: SanityImageMetadata
 				source?: SanityAssetSourceData
 			} | null
@@ -8384,14 +8588,14 @@ export type BLOG_POST_LIST_QUERY_RESULT = Array<{
 				title?: string
 				description?: string
 				altText?: string
-				sha1hash?: string
-				extension?: string
-				mimeType?: string
-				size?: number
-				assetId?: string
+				sha1hash: string
+				extension: string
+				mimeType: string
+				size: number
+				assetId: string
 				uploadId?: string
-				path?: string
-				url?: string
+				path: string
+				url: string
 				metadata?: SanityImageMetadata
 				source?: SanityAssetSourceData
 			} | null
@@ -8420,7 +8624,7 @@ export type SEARCH_QUERY_RESULT = Array<
 	| {
 			_id: string
 			_type: 'page'
-			title: string | null
+			title: string
 			slug: string | '/' | null
 	  }
 >
@@ -8434,7 +8638,7 @@ export type SITE_QUERY_RESULT = {
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
+	title: string
 	logo?: {
 		title?: string
 		image?: {
@@ -8512,7 +8716,7 @@ export type SITE_QUERY_RESULT = {
 						type?: 'external' | 'internal'
 						internal: {
 							_type: 'page'
-							title: string | null
+							title: string
 							slug: string | '/' | null
 						} | null
 						external?: string
@@ -8528,7 +8732,7 @@ export type SITE_QUERY_RESULT = {
 		_createdAt: string
 		_updatedAt: string
 		_rev: string
-		title?: string
+		title: string
 		blurb?: Array<
 			| ({
 					_key: string
@@ -8584,7 +8788,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -8610,7 +8814,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -8641,7 +8845,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -8665,7 +8869,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -8689,7 +8893,7 @@ export type SITE_QUERY_RESULT = {
 					type?: 'external' | 'internal'
 					internal: {
 						_type: 'page'
-						title: string | null
+						title: string
 						slug: string | '/' | null
 					} | null
 					external?: string
@@ -8750,7 +8954,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -8808,14 +9012,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -8859,14 +9063,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -8890,7 +9094,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -8939,7 +9143,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -8965,7 +9169,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -8989,7 +9193,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9013,7 +9217,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -9039,7 +9243,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -9060,14 +9264,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -9111,14 +9315,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -9142,7 +9346,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9191,7 +9395,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9217,7 +9421,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9241,7 +9445,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9265,7 +9469,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -9293,7 +9497,7 @@ export type SITE_QUERY_RESULT = {
 					type?: 'external' | 'internal'
 					internal: {
 						_type: 'page'
-						title: string | null
+						title: string
 						slug: string | '/' | null
 					} | null
 					external?: string
@@ -9308,7 +9512,7 @@ export type SITE_QUERY_RESULT = {
 		_createdAt: string
 		_updatedAt: string
 		_rev: string
-		title?: string
+		title: string
 		blurb?: Array<
 			| ({
 					_key: string
@@ -9364,7 +9568,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -9390,7 +9594,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -9421,7 +9625,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -9445,7 +9649,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -9469,7 +9673,7 @@ export type SITE_QUERY_RESULT = {
 					type?: 'external' | 'internal'
 					internal: {
 						_type: 'page'
-						title: string | null
+						title: string
 						slug: string | '/' | null
 					} | null
 					external?: string
@@ -9530,7 +9734,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -9588,14 +9792,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -9639,14 +9843,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -9670,7 +9874,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9719,7 +9923,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9745,7 +9949,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9769,7 +9973,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9793,7 +9997,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -9819,7 +10023,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -9840,14 +10044,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -9891,14 +10095,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -9922,7 +10126,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9971,7 +10175,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -9997,7 +10201,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -10021,7 +10225,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -10045,7 +10249,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10061,7 +10265,7 @@ export type SITE_QUERY_RESULT = {
 		_createdAt: string
 		_updatedAt: string
 		_rev: string
-		title?: string
+		title: string
 		blurb?: Array<
 			| ({
 					_key: string
@@ -10117,7 +10321,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10143,7 +10347,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10174,7 +10378,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10198,7 +10402,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10222,7 +10426,7 @@ export type SITE_QUERY_RESULT = {
 					type?: 'external' | 'internal'
 					internal: {
 						_type: 'page'
-						title: string | null
+						title: string
 						slug: string | '/' | null
 					} | null
 					external?: string
@@ -10283,7 +10487,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10341,14 +10545,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -10392,14 +10596,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -10423,7 +10627,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -10472,7 +10676,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -10498,7 +10702,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -10522,7 +10726,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -10546,7 +10750,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10572,7 +10776,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10593,14 +10797,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -10644,14 +10848,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -10675,7 +10879,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -10724,7 +10928,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -10750,7 +10954,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -10774,7 +10978,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -10798,7 +11002,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10814,7 +11018,7 @@ export type SITE_QUERY_RESULT = {
 		_createdAt: string
 		_updatedAt: string
 		_rev: string
-		title?: string
+		title: string
 		blurb?: Array<
 			| ({
 					_key: string
@@ -10870,7 +11074,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10896,7 +11100,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10927,7 +11131,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10951,7 +11155,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -10975,7 +11179,7 @@ export type SITE_QUERY_RESULT = {
 					type?: 'external' | 'internal'
 					internal: {
 						_type: 'page'
-						title: string | null
+						title: string
 						slug: string | '/' | null
 					} | null
 					external?: string
@@ -11036,7 +11240,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -11094,14 +11298,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -11145,14 +11349,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -11176,7 +11380,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -11225,7 +11429,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -11251,7 +11455,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -11275,7 +11479,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -11299,7 +11503,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -11325,7 +11529,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string
@@ -11346,14 +11550,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -11397,14 +11601,14 @@ export type SITE_QUERY_RESULT = {
 										title?: string
 										description?: string
 										altText?: string
-										sha1hash?: string
-										extension?: string
-										mimeType?: string
-										size?: number
-										assetId?: string
+										sha1hash: string
+										extension: string
+										mimeType: string
+										size: number
+										assetId: string
 										uploadId?: string
-										path?: string
-										url?: string
+										path: string
+										url: string
 										metadata: SanityImageMetadata | null
 										source?: SanityAssetSourceData
 									} | null
@@ -11428,7 +11632,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -11477,7 +11681,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -11503,7 +11707,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -11527,7 +11731,7 @@ export type SITE_QUERY_RESULT = {
 											type?: 'external' | 'internal'
 											internal: {
 												_type: 'page'
-												title: string | null
+												title: string
 												slug: string | '/' | null
 											} | null
 											external?: string
@@ -11551,7 +11755,7 @@ export type SITE_QUERY_RESULT = {
 								type?: 'external' | 'internal'
 								internal: {
 									_type: 'page'
-									title: string | null
+									title: string
 									slug: string | '/' | null
 								} | null
 								external?: string

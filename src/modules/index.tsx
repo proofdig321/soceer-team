@@ -1,18 +1,23 @@
 import type { Get } from '@sanity/codegen'
 import { stegaClean } from 'next-sanity'
 import AccordionList from '@/modules/accordion-list'
+import Banner from '@/modules/banner'
 import BlogIndex from '@/modules/blog-index'
 import BlogPostContent from '@/modules/blog-post-content'
 import BlogPostList from '@/modules/blog-post-list'
 import Breadcrumbs from '@/modules/breadcrumbs'
 import Callout from '@/modules/callout'
 import CardList from '@/modules/card-list'
+import Countdown from '@/modules/countdown'
 import CustomHTML from '@/modules/custom-html'
+import FeatureBar from '@/modules/feature.bar'
 import FormModule from '@/modules/form-module'
 import HeroCover from '@/modules/hero.cover'
 import HeroSplit from '@/modules/hero.split'
+import HeroVideo from '@/modules/hero.video'
 import ImageGallery from '@/modules/image-gallery'
 import LogoList from '@/modules/logo-list'
+import MediaSplit from '@/modules/media.split'
 import PersonList from '@/modules/person-list'
 import Prose from '@/modules/prose'
 import QuoteList from '@/modules/quote-list'
@@ -20,6 +25,8 @@ import SearchModule from '@/modules/search-module'
 import StatList from '@/modules/stat-list'
 import StepList from '@/modules/step-list'
 import TabbedContent from '@/modules/tabbed-content'
+import TestimonialFeature from '@/modules/testimonial.feature'
+import VideoEmbed from '@/modules/video.embed'
 import type { DynamicFetchOptions } from '@/sanity/lib/live'
 import type {
 	BLOG_POST_QUERY_RESULT,
@@ -29,18 +36,23 @@ import type {
 
 const MODULES_MAP = {
 	'accordion-list': AccordionList,
+	banner: Banner,
 	'blog-index': BlogIndex,
 	'blog-post-content': BlogPostContent,
 	'blog-post-list': BlogPostList,
 	breadcrumbs: Breadcrumbs,
 	callout: Callout,
 	'card-list': CardList,
+	countdown: Countdown,
 	'custom-html': CustomHTML,
+	'feature.bar': FeatureBar,
 	'form-module': FormModule,
 	'hero.cover': HeroCover,
 	'hero.split': HeroSplit,
+	'hero.video': HeroVideo,
 	'image-gallery': ImageGallery,
 	'logo-list': LogoList,
+	'media.split': MediaSplit,
 	'person-list': PersonList,
 	prose: Prose,
 	'quote-list': QuoteList,
@@ -48,6 +60,8 @@ const MODULES_MAP = {
 	'stat-list': StatList,
 	'step-list': StepList,
 	'tabbed-content': TabbedContent,
+	'testimonial.feature': TestimonialFeature,
+	'video.embed': VideoEmbed,
 } as const
 
 export default function ({
