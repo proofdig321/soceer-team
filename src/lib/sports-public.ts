@@ -67,6 +67,7 @@ export const SPORTS_PUBLIC_FIXTURES_QUERY = groq`
 		kickoff,
 		status,
 		opponent,
+		competition,
 		'result': select(
 			status == 'completed' && defined(homeScore) && defined(awayScore)
 			=> string(homeScore) + '–' + string(awayScore),
@@ -91,6 +92,7 @@ export const SPORTS_PUBLIC_EVENTS_QUERY = groq`
 		&& count(teams[@->.publicProfile == true && @->.status == 'active' && @->.demoRecord != true]) > 0
 	]|order(startDateTime asc){
 		title,
+		status,
 		startDateTime,
 		endDateTime,
 		publicVenueName
@@ -131,6 +133,7 @@ export const SPORTS_PUBLIC_TEAM_ACTIVITY_QUERY = groq`
 			kickoff,
 			status,
 			opponent,
+			competition,
 			'result': select(
 				status == 'completed' && defined(homeScore) && defined(awayScore)
 				=> string(homeScore) + '–' + string(awayScore),
@@ -152,6 +155,7 @@ export const SPORTS_PUBLIC_TEAM_ACTIVITY_QUERY = groq`
 			&& authorityChecksComplete == true
 		]|order(startDateTime asc){
 			title,
+			status,
 			startDateTime,
 			endDateTime,
 			publicVenueName

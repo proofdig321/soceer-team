@@ -45,7 +45,6 @@ const IDS = {
 	navHeader: 'seed.nav.header',
 	navFooter: 'seed.nav.footer',
 	pageHome: 'seed.page.index',
-	pageSports: 'seed.page.sports',
 	page404: 'seed.page.404',
 	// Sports
 	team: 'seed.sports.team.unami-stars',
@@ -200,33 +199,6 @@ function buildSanityPressDocs() {
 				title: 'Unami Sports',
 				description: 'Unami Sports supports community-led sport with practical tools, shared learning and public information.',
 				slug: { _type: 'slug', current: 'index' },
-				noIndex: false,
-			},
-		},
-
-		// Sports overview page (CMS-backed)
-		{
-			_id: IDS.pageSports,
-			_type: 'page',
-			title: 'Community sport',
-			modules: [
-				{
-					_key: 'sp1',
-					_type: 'callout',
-					eyebrow: 'Unami Sports',
-					intro: [
-						block('sp1a', 'Browse approved public teams, fixtures, events and competitions. Public information is shown only when a record meets its publication and readiness checks.'),
-					],
-					ctas: [
-						{ _key: 'spc1', _type: 'cta', link: { _type: 'link', label: 'Browse teams', type: 'external', external: '/teams' }, theme: 'action' },
-					],
-				},
-			],
-			metadata: {
-				_type: 'metadata',
-				title: 'Community sport',
-				description: 'Browse approved public Unami Sports teams, fixtures, events and competitions.',
-				slug: { _type: 'slug', current: 'sports' },
 				noIndex: false,
 			},
 		},
