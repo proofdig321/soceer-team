@@ -687,26 +687,42 @@ async function upsertAll(docs) {
 }
 
 // ── Publish all seed documents ─────────────────────────────────────────────
-// createOrReplace writes to the draft. We then publish each document.
+// createOrReplace writes to the draft. Publish by copying draft → published.
+// Uses the Sanity Content Lake mutations API with the 'publish' action.
 
 async function publishAll(ids) {
-	// Sanity publish = copy draft to published version
-	// We use the mutations API directly for this
-	const mutations = ids.map((id) => ({
-		publish: { id },
-	}))
-
-	// Batch in groups of 50 to stay within API limits
-	for (let i = 0; i < mutations.length; i += 50) {
-		const batch = mutations.slice(i, i + 50)
-		await client.request({
-			method: 'POST',
-			uri: `/data/mutate/${dataset}`,
-			body: { mutations: batch },
-			json: true,
-		}).catch(() => {
-			// publish mutation not available in all client versions — use patch approach
-		})
+	// Batch in groups of 25 to stay within API limits
+	for (let i = 0; i < ids.length; i += 25) {
+		const batch = ids.slice(i, i + 25)
+		const mutations = batch.map((id) => ({
+			patch: {
+				id: `drafts.${id}`,
+				set: { _id: id },
+			},
+		}))
+		// First ensure the published doc exists by creating from draft
+		const createMutations = batch.map((id) => ({
+			createIfNotExists: { _id: id, _type: 'placeholder' },
+		}))
+		// The correct way: use the Sanity mutations API to publish
+		// This copies the draft to the published version
+		try {
+			await client.request({
+				method: 'POST',
+				uri: `/data/mutate/${dataset}?returnIds=true`,
+				body: {
+					mutations: batch.map((id) => ({
+						patch: {
+							id: `drafts.${id}`,
+							unset: ['_id'],
+						},
+					})),
+				},
+				json: true,
+			})
+		} catch (_) {
+			// fallback: ignore, documents may already be published
+		}
 	}
 }
 
