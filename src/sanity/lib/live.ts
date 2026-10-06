@@ -17,7 +17,6 @@ export const { sanityFetch, SanityLive } = defineLive({
 	client: client.withConfig({ apiVersion }),
 	serverToken: token,
 	browserToken: token,
-	strict: true,
 })
 
 export interface DynamicFetchOptions {
