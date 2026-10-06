@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import {
 	getPublicSportsTeam,
 	getPublicSportsTeamActivity,
+	getPublicSportsTeams,
 } from '@/lib/sports-public'
 import { SportsNav } from '@/ui/sports/primitives'
 import { TeamHero, TeamActivitySection } from '@/ui/sports/components'
@@ -20,6 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			team?.description ??
 			`Public team profile for ${team?.title ?? 'Unami Sports'}.`,
 	}
+}
+
+export async function generateStaticParams() {
+	const teams = await getPublicSportsTeams()
+	if (!teams.length) return [{ slug: '__placeholder__' }]
+	return teams.map((t) => ({ slug: t.slug }))
 }
 
 export default async function TeamPage({ params }: Props) {
