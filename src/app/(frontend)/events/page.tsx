@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getPublicSportsEvents } from '@/lib/sports-public'
-import { EventList, SportsDirectoryPage } from '@/ui/sports/directory'
+import { SportsShell } from '@/ui/sports/primitives'
+import { EventList } from '@/ui/sports/components'
 
 export const metadata: Metadata = {
 	title: 'Events',
@@ -11,11 +12,12 @@ export default async function EventsPage() {
 	const events = await getPublicSportsEvents()
 
 	return (
-		<SportsDirectoryPage
+		<SportsShell
 			title="Events"
-			intro="Listings appear only after the configured team, safety, first-aid, budget, venue and authority readiness checks are complete."
+			intro="Listings appear only after team, safety, first-aid, budget, venue and authority readiness checks are complete."
+			current="/events"
 		>
 			<EventList events={events} />
-		</SportsDirectoryPage>
+		</SportsShell>
 	)
 }

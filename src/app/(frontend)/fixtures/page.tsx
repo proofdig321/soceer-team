@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getPublicSportsFixtures } from '@/lib/sports-public'
-import { FixtureList, SportsDirectoryPage } from '@/ui/sports/directory'
+import { SportsShell } from '@/ui/sports/primitives'
+import { FixtureList } from '@/ui/sports/components'
 
 export const metadata: Metadata = {
 	title: 'Fixtures and results',
@@ -11,11 +12,12 @@ export default async function FixturesPage() {
 	const fixtures = await getPublicSportsFixtures()
 
 	return (
-		<SportsDirectoryPage
+		<SportsShell
 			title="Fixtures and results"
 			intro="Only approved listings for active public teams are shown. Private venues and match reports are not displayed."
+			current="/fixtures"
 		>
 			<FixtureList fixtures={fixtures} />
-		</SportsDirectoryPage>
+		</SportsShell>
 	)
 }

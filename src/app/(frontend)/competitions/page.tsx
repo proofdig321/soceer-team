@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getPublicSportsCompetitions } from '@/lib/sports-public'
-import { CompetitionList, SportsDirectoryPage } from '@/ui/sports/directory'
+import { SportsShell } from '@/ui/sports/primitives'
+import { CompetitionList } from '@/ui/sports/components'
 
 export const metadata: Metadata = {
 	title: 'Competitions',
@@ -11,11 +12,12 @@ export default async function CompetitionsPage() {
 	const competitions = await getPublicSportsCompetitions()
 
 	return (
-		<SportsDirectoryPage
+		<SportsShell
 			title="Competitions"
 			intro="Only announced competitions that meet the configured approval, authority, safeguarding and budget checks are listed."
+			current="/competitions"
 		>
 			<CompetitionList competitions={competitions} />
-		</SportsDirectoryPage>
+		</SportsShell>
 	)
 }

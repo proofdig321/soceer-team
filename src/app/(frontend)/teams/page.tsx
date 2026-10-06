@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getPublicSportsTeams } from '@/lib/sports-public'
-import { SportsDirectoryPage, TeamCards } from '@/ui/sports/directory'
+import { SportsShell } from '@/ui/sports/primitives'
+import { TeamGrid } from '@/ui/sports/components'
 
 export const metadata: Metadata = {
 	title: 'Teams',
@@ -11,11 +12,12 @@ export default async function TeamsPage() {
 	const teams = await getPublicSportsTeams()
 
 	return (
-		<SportsDirectoryPage
+		<SportsShell
 			title="Teams"
 			intro="Only active, explicitly published, non-demonstration team profiles appear here."
+			current="/teams"
 		>
-			<TeamCards teams={teams} />
-		</SportsDirectoryPage>
+			<TeamGrid teams={teams} />
+		</SportsShell>
 	)
 }
