@@ -14,12 +14,9 @@ type Props = { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { slug } = await params
 	const team = await getPublicSportsTeam(slug)
-
 	return {
 		title: team?.title ?? 'Team',
-		description:
-			team?.description ??
-			`Public team profile for ${team?.title ?? 'Unami Sports'}.`,
+		description: team?.description ?? `Public team profile for ${team?.title ?? 'Unami Sports'}.`,
 	}
 }
 

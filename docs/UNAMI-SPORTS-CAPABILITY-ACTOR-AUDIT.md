@@ -1,6 +1,6 @@
 # Unami Sports — Capability and Actor Audit
 
-**Audit basis:** repository at commit `cb5d3e4` (branch `main`, remote `origin`)
+**Audit last updated:** commit `0a6ebf7` (branch `main`)
 **Purpose:** map every system capability to the actors who can reach it, the authority that gates it, and the boundary between public and Studio-only surfaces. This is an implementation inventory, not a target architecture.
 
 ---
@@ -287,6 +287,6 @@ sports.resource
 | `src/sanity/schemaTypes/index.ts` | Schema registration |
 | `src/sanity/schemaTypes/documents/sports.*.ts` | All 14 sports schemas |
 | `src/modules/index.tsx` | Module resolver and MODULES_MAP |
-| `scripts/seed-unami-demo.mjs` | Canonical active-state seed |
+| `scripts/seed-sports.mjs` | Canonical full relational seed (all 14 sports schemas + SanityPress) |
 | `sanity.config.ts` | Studio configuration |
 | `next.config.ts` | Next.js config including markdown rewrites |

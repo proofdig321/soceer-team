@@ -5,16 +5,17 @@
  */
 
 import Link from 'next/link'
+import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
 
 // ─── Navigation ──────────────────────────────────────────────────────────────
 
 const navLinks = [
-	{ href: '/sports', label: 'Overview' },
-	{ href: '/teams', label: 'Teams' },
-	{ href: '/fixtures', label: 'Fixtures' },
-	{ href: '/events', label: 'Events' },
-	{ href: '/competitions', label: 'Competitions' },
+	{ href: `/${ROUTES.sports}`, label: 'Overview' },
+	{ href: `/${ROUTES.teams}`, label: 'Teams' },
+	{ href: `/${ROUTES.fixtures}`, label: 'Fixtures' },
+	{ href: `/${ROUTES.events}`, label: 'Events' },
+	{ href: `/${ROUTES.competitions}`, label: 'Competitions' },
 ]
 
 export function SportsNav({ current }: { current?: string }) {

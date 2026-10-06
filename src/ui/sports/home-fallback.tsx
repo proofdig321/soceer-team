@@ -1,23 +1,24 @@
 import Link from 'next/link'
+import { ROUTES } from '@/lib/env'
 
 const directoryLinks = [
 	{
-		href: '/teams',
+		href: `/${ROUTES.teams}`,
 		title: 'Teams',
 		description: 'Find teams that have chosen to publish a public profile.',
 	},
 	{
-		href: '/fixtures',
+		href: `/${ROUTES.fixtures}`,
 		title: 'Fixtures',
 		description: 'See approved fixtures and completed results.',
 	},
 	{
-		href: '/events',
+		href: `/${ROUTES.events}`,
 		title: 'Events',
 		description: 'Browse events cleared for public listing.',
 	},
 	{
-		href: '/competitions',
+		href: `/${ROUTES.competitions}`,
 		title: 'Competitions',
 		description: 'Explore approved competition announcements.',
 	},
@@ -42,13 +43,13 @@ export default function SportsHomeFallback() {
 						<div className="flex flex-wrap gap-3">
 							<Link
 								className="action bg-amber-300 text-emerald-950"
-								href="/sports"
+								href={`/${ROUTES.sports}`}
 							>
 								Explore community sport
 							</Link>
 							<Link
 								className="action-outline border-white/40 bg-transparent text-white hover:border-white"
-								href="/teams"
+								href={`/${ROUTES.teams}`}
 							>
 								Browse teams
 							</Link>

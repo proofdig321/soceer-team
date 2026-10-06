@@ -28,7 +28,7 @@ import {
 export function TeamCard({ team }: { team: PublicSportsTeam }) {
 	return (
 		<SportsCard as="li">
-			<h2 className="h3">
+			<h3 className="h3">
 				{team.slug ? (
 					<Link className="link" href={`/teams/${team.slug}`}>
 						{team.title}
@@ -36,7 +36,7 @@ export function TeamCard({ team }: { team: PublicSportsTeam }) {
 				) : (
 					team.title
 				)}
-			</h2>
+			</h3>
 			<SportsMeta
 				items={[sportLabel(team.sport), team.community, team.province]}
 			/>
@@ -103,7 +103,6 @@ export function FixtureCard({
 					!hideTeamLink && fixture.team?.title && !fixture.team.slug
 						? fixture.team.title
 						: undefined,
-					fixture.opponent ? `vs ${fixture.opponent}` : undefined,
 					fixture.kickoff
 						? formatSportsDate(fixture.kickoff, 'datetime')
 						: undefined,
@@ -138,14 +137,43 @@ export function FixtureList({
 	if (!fixtures.length) return <SportsEmpty label={emptyLabel} />
 	return (
 		<ul className="grid gap-4">
-			{fixtures.map((fixture) => (
+			{fixtures.map((fixture, i) => (
 				<FixtureCard
-					key={`${fixture.team?.slug}-${fixture.kickoff}-${fixture.title}`}
+					key={`${fixture.kickoff ?? i}-${fixture.title}`}
 					fixture={fixture}
 					hideTeamLink={hideTeamLink}
 				/>
 			))}
 		</ul>
+	)
+}
+
+// Split upcoming vs results — used on /fixtures page
+export function FixtureSplitList({
+	fixtures,
+}: {
+	fixtures: PublicSportsFixture[]
+}) {
+	if (!fixtures.length) return <SportsEmpty label="fixtures" />
+
+	const upcoming = fixtures.filter((f) => f.status !== 'completed')
+	const results = fixtures.filter((f) => f.status === 'completed')
+
+	return (
+		<div className="grid gap-10">
+			{upcoming.length > 0 && (
+				<section className="grid gap-5">
+					<h2 className="h2">Upcoming fixtures</h2>
+					<FixtureList fixtures={upcoming} />
+				</section>
+			)}
+			{results.length > 0 && (
+				<section className="grid gap-5">
+					<h2 className="h2">Results</h2>
+					<FixtureList fixtures={results} />
+				</section>
+			)}
+		</div>
 	)
 }
 
@@ -198,7 +226,7 @@ export function EventList({
 		<ul className="grid gap-4">
 			{events.map((event, i) => (
 				<EventCard
-					key={`${event.title}-${event.startDateTime}-${i}`}
+					key={`${event.startDateTime ?? i}-${event.title}`}
 					event={event}
 				/>
 			))}
@@ -207,6 +235,12 @@ export function EventList({
 }
 
 // ─── Competition ──────────────────────────────────────────────────────────────
+
+const competitionStatusLabel: Record<string, { label: string; variant: 'default' | 'success' | 'warning' | 'muted' }> = {
+	approved: { label: 'Upcoming', variant: 'default' },
+	active: { label: 'Active', variant: 'success' },
+	completed: { label: 'Completed', variant: 'muted' },
+}
 
 export function CompetitionCard({
 	competition,
@@ -221,9 +255,18 @@ export function CompetitionCard({
 				? formatSportsDate(competition.startDate)
 				: undefined
 
+	const statusBadge = competition.status
+		? competitionStatusLabel[competition.status]
+		: undefined
+
 	return (
 		<SportsCard as="li">
-			<h3 className="h4">{competition.title ?? 'Competition'}</h3>
+			<div className="flex flex-wrap items-start justify-between gap-2">
+				<h3 className="h4 flex-1">{competition.title ?? 'Competition'}</h3>
+				{statusBadge && (
+					<SportsBadge label={statusBadge.label} variant={statusBadge.variant} />
+				)}
+			</div>
 			<SportsMeta
 				items={[
 					sportLabel(competition.sport),
@@ -247,7 +290,7 @@ export function CompetitionList({
 		<ul className="grid gap-4 sm:grid-cols-2">
 			{competitions.map((competition, i) => (
 				<CompetitionCard
-					key={`${competition.title}-${competition.startDate}-${i}`}
+					key={`${competition.startDate ?? i}-${competition.title}`}
 					competition={competition}
 				/>
 			))}

@@ -112,6 +112,7 @@ export const SPORTS_PUBLIC_COMPETITIONS_QUERY = groq`
 		&& count(teams[@->.publicProfile == true && @->.status == 'active' && @->.demoRecord != true]) > 0
 	]|order(startDate asc){
 		title,
+		status,
 		sport,
 		format,
 		startDate,
@@ -172,6 +173,7 @@ export const SPORTS_PUBLIC_TEAM_ACTIVITY_QUERY = groq`
 			&& budgetApproved == true
 		]|order(startDate asc){
 			title,
+			status,
 			sport,
 			format,
 			startDate,

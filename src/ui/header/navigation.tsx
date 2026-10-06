@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import type { DynamicFetchOptions } from '@/sanity/lib/live'
 import { getSite } from '@/sanity/lib/queries'
@@ -16,12 +15,6 @@ export default async function ({ perspective, stega }: DynamicFetchOptions) {
 
 	return (
 		<nav className="gap-x-lh flex items-stretch [grid-area:navigation] max-md:my-4 max-md:flex-col">
-			<Link
-				className={cn(topLevelClassName, 'text-current hover:underline')}
-				href="/sports"
-			>
-				Sports
-			</Link>
 			{site?.header?.items?.map((item, i) => {
 				switch (item._type) {
 					case 'link':
