@@ -42,8 +42,10 @@ const IDS = {
 	// SanityPress
 	site: 'site',
 	announcement: 'seed.announcement.welcome',
-	navHeader: 'seed.nav.header',
-	navFooter: 'seed.nav.footer',
+	navHeader: 'unami.navigation.header',
+	navFooter: 'unami.navigation.footer',
+	navBottom: 'unami.navigation.bottom',
+	navSocial: 'unami.navigation.social',
 	pageHome: 'seed.page.index',
 	page404: 'seed.page.404',
 	// Sports
@@ -117,13 +119,15 @@ async function reset() {
 
 function buildSanityPressDocs() {
 	return [
-		// Site singleton
+		// Site singleton — wired to unami.navigation.* docs
 		{
 			_id: IDS.site,
 			_type: 'site',
 			title: 'Unami Sports',
 			header: ref(IDS.navHeader),
 			footer: ref(IDS.navFooter),
+			bottom: ref(IDS.navBottom),
+			social: ref(IDS.navSocial),
 			announcement: ref(IDS.announcement),
 		},
 
@@ -139,14 +143,14 @@ function buildSanityPressDocs() {
 		{
 			_id: IDS.navHeader,
 			_type: 'navigation',
-			title: 'Header',
+			title: 'Unami Sports — Header',
 			items: [
-				linkItem('h1', 'Home', '/'),
-				linkItem('h2', 'Sports', '/sports'),
-				linkItem('h3', 'Teams', '/teams'),
-				linkItem('h4', 'Fixtures', '/fixtures'),
-				linkItem('h5', 'Events', '/events'),
-				linkItem('h6', 'Competitions', '/competitions'),
+				linkItem('uh1', 'Home', '/'),
+				linkItem('uh2', 'Sports', '/sports'),
+				linkItem('uh3', 'Teams', '/teams'),
+				linkItem('uh4', 'Fixtures', '/fixtures'),
+				linkItem('uh5', 'Events', '/events'),
+				linkItem('uh6', 'Competitions', '/competitions'),
 			],
 		},
 
@@ -154,15 +158,33 @@ function buildSanityPressDocs() {
 		{
 			_id: IDS.navFooter,
 			_type: 'navigation',
-			title: 'Footer',
+			title: 'Unami Sports — Footer',
 			items: [
-				linkItem('f1', 'Sports', '/sports'),
-				linkItem('f2', 'Teams', '/teams'),
-				linkItem('f3', 'Fixtures', '/fixtures'),
-				linkItem('f4', 'Events', '/events'),
-				linkItem('f5', 'Competitions', '/competitions'),
-				linkItem('f6', 'Accessibility statement', '/accessibility-statement'),
+				linkItem('uf1', 'Sports', '/sports'),
+				linkItem('uf2', 'Teams', '/teams'),
+				linkItem('uf3', 'Fixtures', '/fixtures'),
+				linkItem('uf4', 'Events', '/events'),
+				linkItem('uf5', 'Competitions', '/competitions'),
+				linkItem('uf6', 'Accessibility statement', '/accessibility-statement'),
 			],
+		},
+
+		// Bottom / utility navigation
+		{
+			_id: IDS.navBottom,
+			_type: 'navigation',
+			title: 'Unami Sports — Utility links',
+			items: [
+				linkItem('ub1', 'Accessibility statement', '/accessibility-statement'),
+			],
+		},
+
+		// Social navigation (empty — no social channels yet)
+		{
+			_id: IDS.navSocial,
+			_type: 'navigation',
+			title: 'Unami Sports — Social channels',
+			items: [],
 		},
 
 		// Homepage (index)
