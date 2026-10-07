@@ -46,8 +46,8 @@ const IDS = {
 	navFooter: 'unami.navigation.footer',
 	navBottom: 'unami.navigation.bottom',
 	navSocial: 'unami.navigation.social',
-	pageHome: 'seed.page.index',
-	page404: 'seed.page.404',
+	// unami.page.* docs are authored in Studio — seed does not own them
+	// seed.page.* are intentionally absent — unami.page.home owns slug 'index'
 	// Sports
 	team: 'seed.sports.team.unami-stars',
 	stakeholder: 'seed.sports.stakeholder.kwagucingo-fa',
@@ -119,7 +119,7 @@ async function reset() {
 
 function buildSanityPressDocs() {
 	return [
-		// Site singleton — wired to unami.navigation.* docs
+		// Site singleton — Unami Stars demo site
 		{
 			_id: IDS.site,
 			_type: 'site',
@@ -139,33 +139,34 @@ function buildSanityPressDocs() {
 			ctas: [],
 		},
 
-		// Header navigation
+		// Header navigation — Unami Stars demo site
 		{
 			_id: IDS.navHeader,
 			_type: 'navigation',
 			title: 'Unami Sports — Header',
 			items: [
-				linkItem('uh1', 'Home', '/'),
-				linkItem('uh2', 'Sports', '/sports'),
-				linkItem('uh3', 'Teams', '/teams'),
-				linkItem('uh4', 'Fixtures', '/fixtures'),
-				linkItem('uh5', 'Events', '/events'),
-				linkItem('uh6', 'Competitions', '/competitions'),
+				linkItem('uh1', 'Home',         '/'),
+				linkItem('uh2', 'Unami Stars',  '/unami-stars'),
+				linkItem('uh3', 'Our model',    '/our-model'),
+				linkItem('uh4', 'Development',  '/development'),
+				linkItem('uh5', 'Fixtures',     '/fixtures'),
+				linkItem('uh6', 'Get involved', '/get-involved'),
 			],
 		},
 
-		// Footer navigation
+		// Footer navigation — Unami Stars demo site
 		{
 			_id: IDS.navFooter,
 			_type: 'navigation',
 			title: 'Unami Sports — Footer',
 			items: [
-				linkItem('uf1', 'Sports', '/sports'),
-				linkItem('uf2', 'Teams', '/teams'),
-				linkItem('uf3', 'Fixtures', '/fixtures'),
-				linkItem('uf4', 'Events', '/events'),
-				linkItem('uf5', 'Competitions', '/competitions'),
-				linkItem('uf6', 'Accessibility statement', '/accessibility-statement'),
+				linkItem('uf1', 'Unami Stars',  '/unami-stars'),
+				linkItem('uf2', 'Our model',    '/our-model'),
+				linkItem('uf3', 'Fixtures',     '/fixtures'),
+				linkItem('uf4', 'Governance',   '/governance'),
+				linkItem('uf5', 'Get involved', '/get-involved'),
+				linkItem('uf6', 'Contact',      '/contact'),
+				linkItem('uf7', 'Accessibility statement', '/accessibility-statement'),
 			],
 		},
 
@@ -176,6 +177,7 @@ function buildSanityPressDocs() {
 			title: 'Unami Sports — Utility links',
 			items: [
 				linkItem('ub1', 'Accessibility statement', '/accessibility-statement'),
+				linkItem('ub2', 'Contact', '/contact'),
 			],
 		},
 
@@ -187,69 +189,8 @@ function buildSanityPressDocs() {
 			items: [],
 		},
 
-		// Homepage (index)
-		{
-			_id: IDS.pageHome,
-			_type: 'page',
-			title: 'Home',
-			modules: [
-				{
-					_key: 'hero1',
-					_type: 'hero.cover',
-					eyebrow: 'Community sport, built together',
-					content: [
-						block('hc1', 'Stronger teams. Stronger communities.', 'h1'),
-						block('hc2', 'Unami Sports supports community-led sport with practical tools, shared learning and public information.'),
-					],
-					ctas: [
-						{ _key: 'cta1', _type: 'cta', link: { _type: 'link', label: 'Explore community sport', type: 'external', external: '/sports' }, theme: 'action' },
-						{ _key: 'cta2', _type: 'cta', link: { _type: 'link', label: 'Browse teams', type: 'external', external: '/teams' }, theme: 'action-outline' },
-					],
-				},
-				{
-					_key: 'callout1',
-					_type: 'callout',
-					eyebrow: 'Technology for Good',
-					intro: [
-						block('ci1', 'Unami Sports is reusable infrastructure for sporting teams — not a league management system. Public listings appear only when they have been deliberately published and all readiness checks pass.'),
-					],
-					ctas: [],
-				},
-			],
-			metadata: {
-				_type: 'metadata',
-				title: 'Unami Sports',
-				description: 'Unami Sports supports community-led sport with practical tools, shared learning and public information.',
-				slug: { _type: 'slug', current: 'index' },
-				noIndex: false,
-			},
-		},
-
-		// 404 page
-		{
-			_id: IDS.page404,
-			_type: 'page',
-			title: 'Page not found',
-			modules: [
-				{
-					_key: '404h',
-					_type: 'callout',
-					eyebrow: '404',
-					intro: [
-						block('404a', 'The page you are looking for does not exist or has moved.'),
-					],
-					ctas: [
-						{ _key: '404c', _type: 'cta', link: { _type: 'link', label: 'Go home', type: 'external', external: '/' }, theme: 'action' },
-					],
-				},
-			],
-			metadata: {
-				_type: 'metadata',
-				title: 'Page not found',
-				slug: { _type: 'slug', current: '404' },
-				noIndex: true,
-			},
-		},
+		// Homepage and 404 are owned by unami.page.home and unami.page.not-found
+		// authored in Studio — seed does not create or overwrite them
 	]
 }
 
