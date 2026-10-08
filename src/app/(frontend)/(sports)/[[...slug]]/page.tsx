@@ -109,6 +109,7 @@ async function getPage({
 	perspective,
 	stega,
 }: { slug?: string[] } & DynamicFetchOptions) {
+	'use cache'
 	const { data } = await sanityFetch({
 		query: PAGE_QUERY,
 		params: { slug: slug?.length ? slug.join('/') : 'index' },

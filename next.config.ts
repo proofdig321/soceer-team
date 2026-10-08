@@ -7,7 +7,8 @@ import { client } from './src/sanity/lib/client'
 const nextConfig: NextConfig = {
 	reactCompiler: true,
 
-
+	cacheComponents: true,
+	cacheLife: { default: sanity },
 
 	images: {
 		localPatterns: [{ pathname: '/api/og' }],
