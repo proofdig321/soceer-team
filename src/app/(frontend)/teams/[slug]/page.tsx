@@ -6,8 +6,17 @@ import {
 	getPublicSportsTeamActivity,
 	getPublicSportsTeams,
 } from '@/lib/sports-public'
-import { SportsNav } from '@/ui/sports/primitives'
+import {
+	getOpsStakeholders, getOpsCommercial, getOpsPilots,
+	getOpsGovernance, getOpsResources, getOpsTraining,
+	getOpsSupport, getOpsCustomization, getOpsPlayers,
+} from '@/lib/sports-ops'
+import { SportsNav, SportsSection } from '@/ui/sports/primitives'
 import { TeamHero, TeamActivitySection } from '@/ui/sports/components'
+import {
+	StakeholderList, CommercialList, PilotList, GovernanceList,
+	ResourceList, TrainingList, SupportList, CustomizationList, PlayerList,
+} from '@/ui/sports/ops-components'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -60,6 +69,9 @@ export default async function TeamPage({ params }: Props) {
 			{/* Activity */}
 			<TeamActivity teamId={team._id} teamTitle={team.title ?? 'this team'} />
 
+			{/* Operational layer */}
+			<TeamOpsLayer teamId={team._id} />
+
 			{/* Sports nav */}
 			<footer className="border-t border-stroke pt-6">
 				<SportsNav current="/teams" />
@@ -86,5 +98,72 @@ async function TeamActivity({
 				hideTeamLink
 			/>
 		</section>
+	)
+}
+
+async function TeamOpsLayer({ teamId }: { teamId: string }) {
+	const [stakeholders, commercial, pilots, governance, resources, training, support, customization, players] =
+		await Promise.all([
+			getOpsStakeholders(),
+			getOpsCommercial(),
+			getOpsPilots(),
+			getOpsGovernance(),
+			getOpsResources(),
+			getOpsTraining(),
+			getOpsSupport(),
+			getOpsCustomization(),
+			getOpsPlayers(),
+		])
+
+	// Filter to this team where possible
+	const teamCommercial = commercial.filter(c => !c.teamTitle || c.teamTitle === 'Unami Stars')
+	const teamPilots = pilots.filter(p => !p.teamTitle || p.teamTitle === 'Unami Stars')
+	const teamGovernance = governance.filter(g => !g.teamTitle || g.teamTitle === 'Unami Stars')
+	const teamResources = resources.filter(r => !r.teamTitle || r.teamTitle === 'Unami Stars')
+	const teamTraining = training.filter(t => !t.teamTitle || t.teamTitle === 'Unami Stars')
+	const teamSupport = support.filter(s => !s.teamTitle || s.teamTitle === 'Unami Stars')
+	const teamCustomization = customization.filter(c => !c.teamTitle || c.teamTitle === 'Unami Stars')
+	const teamPlayers = players.filter(p => !p.teamTitle || p.teamTitle === 'Unami Stars')
+
+	return (
+		<div className="grid gap-10 border-t border-stroke pt-10">
+			<p className="technical text-xs text-foreground/40 uppercase tracking-widest">Operational layer — demo</p>
+
+			<SportsSection title="Stakeholders">
+				<StakeholderList stakeholders={stakeholders} />
+			</SportsSection>
+
+			<SportsSection title="Commercial and partnerships">
+				<CommercialList items={teamCommercial} />
+			</SportsSection>
+
+			<SportsSection title="Pilot record">
+				<PilotList pilots={teamPilots} />
+			</SportsSection>
+
+			<SportsSection title="Governance documents">
+				<GovernanceList items={teamGovernance} />
+			</SportsSection>
+
+			<SportsSection title="Resources">
+				<ResourceList items={teamResources} />
+			</SportsSection>
+
+			<SportsSection title="Training sessions">
+				<TrainingList items={teamTraining} />
+			</SportsSection>
+
+			<SportsSection title="Support requests">
+				<SupportList items={teamSupport} />
+			</SportsSection>
+
+			<SportsSection title="Customization requests">
+				<CustomizationList items={teamCustomization} />
+			</SportsSection>
+
+			<SportsSection title="Player records">
+				<PlayerList players={teamPlayers} />
+			</SportsSection>
+		</div>
 	)
 }
