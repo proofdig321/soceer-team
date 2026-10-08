@@ -123,6 +123,7 @@ export async function generateStaticParams() {
 				_type == 'page'
 				&& defined(metadata.slug.current)
 				&& !(metadata.slug.current in ['404'])
+				&& !(metadata.slug.current match 'stars*')
 			].metadata.slug.current
 		`,
 	})) as string[]
