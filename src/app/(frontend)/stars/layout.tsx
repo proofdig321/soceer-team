@@ -37,7 +37,7 @@ export default async function StarsLayout({ children }: { children: React.ReactN
 					</Link>
 					<nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
 						{header?.items?.map((item: any, i: number) => (
-							<Link key={i} href={item.internal ?? item.external ?? '#'} className="hover:underline">
+							<Link key={i} href={item.internal?.slug ?? item.external ?? '#'} className="hover:underline">
 								{item.label}
 							</Link>
 						))}
@@ -45,7 +45,9 @@ export default async function StarsLayout({ children }: { children: React.ReactN
 				</div>
 			</header>
 
-			{children}
+			<main id="main-content" tabIndex={-1}>
+				{children}
+			</main>
 
 			<footer>
 				<div className="section flex flex-wrap items-center justify-between gap-4 py-8 text-sm">
@@ -54,7 +56,7 @@ export default async function StarsLayout({ children }: { children: React.ReactN
 					</Link>
 					<nav className="flex flex-wrap gap-x-6 gap-y-2">
 						{footer?.items?.map((item: any, i: number) => (
-							<Link key={i} href={item.internal ?? item.external ?? '#'} className="hover:underline">
+							<Link key={i} href={item.internal?.slug ?? item.external ?? '#'} className="hover:underline">
 								{item.label}
 							</Link>
 						))}
