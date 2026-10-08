@@ -533,6 +533,16 @@ async function run() {
   docs.forEach(doc => tx.createOrReplace(doc))
   const result = await tx.commit()
   console.log(`Done — ${result.results.length} docs written`)
+
+  // Bust the Next.js cache on Vercel so pages reflect new data immediately
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+  if (baseUrl) {
+    const res = await fetch(`${baseUrl}/api/revalidate`, {
+      method: 'POST',
+      headers: { authorization: `Bearer ${process.env.SANITY_API_READ_TOKEN}` },
+    }).catch(() => null)
+    console.log(res?.ok ? 'Cache revalidated' : 'Cache revalidation skipped (not deployed yet)')
+  }
 }
 
 run().catch(e => { console.error(e.message); process.exit(1) })
