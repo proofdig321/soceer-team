@@ -63,6 +63,7 @@ async function CachedPage({
 	perspective,
 	stega,
 }: { slug?: string[] } & DynamicFetchOptions) {
+	'use cache'
 	const page = await getPage({ slug, perspective, stega })
 	if (!page) notFound()
 
@@ -139,6 +140,7 @@ async function getPage({
 	perspective,
 	stega,
 }: { slug?: string[] } & DynamicFetchOptions) {
+	'use cache'
 	const { data } = await sanityFetch({
 		query: PAGE_QUERY,
 		params: { slug: slug?.length ? slug.join('/') : 'index' },
@@ -160,6 +162,7 @@ async function getPageMetadata({
 }
 
 const PAGE_QUERY = groq`
+	// v2
 	*[_type == 'page' && metadata.slug.current == $slug][0]{
 		...,
 		'modules': (

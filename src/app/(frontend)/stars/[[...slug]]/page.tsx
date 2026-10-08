@@ -148,6 +148,7 @@ async function getPageMetadata({
 }
 
 const PAGE_QUERY = groq`
+	// v2
 	*[_type == 'page' && metadata.slug.current == $slug][0]{
 		...,
 		'modules': (
