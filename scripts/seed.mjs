@@ -138,6 +138,8 @@ const docs = [
       image: { default: img(SPORTS_LOGO), light: img(SPORTS_LOGO), dark: img(SPORTS_LOGO) },
     },
     ogimage: img(OG_IMAGE),
+    header: ref('navigation.sports.header'),
+    footer: ref('navigation.sports.footer'),
   },
 
   // ── NAVIGATION ────────────────────────────────────────────────────────────
