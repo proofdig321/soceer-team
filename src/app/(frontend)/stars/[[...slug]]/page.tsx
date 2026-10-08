@@ -62,7 +62,6 @@ async function CachedPage({
 	perspective,
 	stega,
 }: { slug?: string[] } & DynamicFetchOptions) {
-	'use cache'
 	const page = await getPage({ slug, perspective, stega })
 	if (!page) notFound()
 	return <ModulesResolver page={page} perspective={perspective} stega={stega} />
@@ -126,7 +125,6 @@ async function getPage({
 	perspective,
 	stega,
 }: { slug?: string[] } & DynamicFetchOptions) {
-	'use cache'
 	const fullSlug = slug?.length ? `stars/${slug.join('/')}` : 'stars'
 	const { data } = await sanityFetch({
 		query: PAGE_QUERY,
