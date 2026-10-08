@@ -8,5 +8,6 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 	}
 	revalidateTag('sanity:page', 'default')
+	revalidateTag('sanity:site', 'default')
 	return NextResponse.json({ revalidated: true })
 }
