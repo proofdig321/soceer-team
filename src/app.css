@@ -13,10 +13,10 @@
 	--color-forest-light:#1a4a35;
 
 	/* Semantic */
-	--color-background: #fff;
-	--color-foreground: var(--color-forest);
-	--color-stroke:     color-mix(in oklab, var(--color-forest) 15%, transparent);
-	--color-primary:    var(--color-forest-mid);
+	--color-background: #0e1f17;
+	--color-foreground: #f0ede6;
+	--color-stroke:     rgba(243,185,66,0.12);
+	--color-primary:    var(--color-gold);
 
 	--spacing-lh: 1lh;
 	--spacing-ch: 1ch;
