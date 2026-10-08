@@ -1,6 +1,5 @@
 import pkg from '@@/package.json'
 import type { Metadata } from 'next'
-import { groq } from 'next-sanity'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
@@ -11,7 +10,6 @@ import {
 	getDynamicFetchOptions,
 	sanityFetch,
 	sanityFetchMetadata,
-	sanityFetchStaticParams,
 	type DynamicFetchOptions,
 } from '@/sanity/lib/live'
 import {
@@ -22,6 +20,8 @@ import {
 } from '@/sanity/lib/queries'
 import type { PAGE_QUERY_RESULT } from '@/sanity/types'
 import Loading from '@/ui/loading'
+import { groq } from 'next-sanity'
+
 
 type Props = PageProps<'/[[...slug]]'>
 
@@ -91,9 +91,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 				}),
 			],
 		},
-		robots: {
-			index: noIndex ? false : undefined,
-		},
+		robots: { index: noIndex ? false : undefined },
 		alternates: {
 			types: {
 				'application/rss+xml': `/${ROUTES.blog}/rss.xml`,
@@ -106,25 +104,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	}
 }
 
-export async function generateStaticParams() {
-	const slugs = (await sanityFetchStaticParams({
-		query: groq`
-			*[
-				_type == 'page'
-				&& defined(metadata.slug.current)
-				&& !(metadata.slug.current in ['404'])
-				&& !(metadata.slug.current match 'stars*')
-			].metadata.slug.current
-		`,
-	})) as string[]
-
-	return slugs.length
-		? slugs.map((slug) => ({
-				slug: slug === 'index' ? [] : slug.split('/'),
-			}))
-		: [{ slug: ['__static_params_placeholder__'] }]
-}
-
 async function getPage({
 	slug,
 	perspective,
@@ -133,7 +112,7 @@ async function getPage({
 	'use cache'
 	const { data } = await sanityFetch({
 		query: PAGE_QUERY,
-		params: { slug: slug?.length ? slug.join('/') : 'index', _bust: 3 },
+		params: { slug: slug?.length ? slug.join('/') : 'index' },
 		perspective,
 		stega,
 	})
@@ -146,7 +125,7 @@ async function getPageMetadata({
 }: { slug?: string[] } & Pick<DynamicFetchOptions, 'perspective'>) {
 	return (await sanityFetchMetadata({
 		query: PAGE_QUERY,
-		params: { slug: slug?.length ? slug.join('/') : 'index', _bust: 3 },
+		params: { slug: slug?.length ? slug.join('/') : 'index' },
 		perspective,
 	})) as PAGE_QUERY_RESULT
 }
