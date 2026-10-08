@@ -11,7 +11,8 @@
 		"typegen": "sanity schema extract --path=./src/sanity --force && sanity typegen generate",
 		"format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
 		"seed:sports": "node --env-file=.env.local scripts/seed-sports.mjs",
-		"seed:sports:reset": "node --env-file=.env.local scripts/seed-sports.mjs --reset"
+		"seed:sports:reset": "node --env-file=.env.local scripts/seed-sports.mjs --reset",
+		"seed:pages": "node --env-file=.env.local scripts/seed-pages.mjs"
 	},
 	"dependencies": {
 		"@portabletext/to-html": "^6.0.0",
