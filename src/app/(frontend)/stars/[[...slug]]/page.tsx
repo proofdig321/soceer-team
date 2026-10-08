@@ -20,7 +20,6 @@ import {
 } from '@/sanity/lib/queries'
 import type { PAGE_QUERY_RESULT } from '@/sanity/types'
 import Loading from '@/ui/loading'
-import { cacheTag } from 'next/cache'
 import { groq } from 'next-sanity'
 
 
@@ -104,8 +103,6 @@ async function getPage({
 	perspective,
 	stega,
 }: { slug?: string[] } & DynamicFetchOptions) {
-	'use cache'
-	cacheTag('sanity:page')
 	const fullSlug = slug?.length ? `stars/${slug.join('/')}` : 'stars'
 	const { data } = await sanityFetch({
 		query: PAGE_QUERY,

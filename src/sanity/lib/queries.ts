@@ -9,7 +9,6 @@ import { PROSE_QUERY } from '@/modules/prose/query'
 import { QUOTE_LIST_QUERY } from '@/modules/quote-list/query'
 import { TABBED_CONTENT_QUERY } from '@/modules/tabbed-content/query'
 import type { SITE_QUERY_RESULT } from '@/sanity/types'
-import { cacheTag } from 'next/cache'
 import { LINK_QUERY } from './fragments'
 import { sanityFetch, type DynamicFetchOptions } from './live'
 
@@ -134,8 +133,6 @@ export const MODULES_QUERY = groq`
 /* queries */
 
 export async function getSite({ perspective, stega }: DynamicFetchOptions) {
-	'use cache'
-	cacheTag('sanity:site')
 	const { data } = await sanityFetch({
 		query: SITE_QUERY,
 		perspective,
