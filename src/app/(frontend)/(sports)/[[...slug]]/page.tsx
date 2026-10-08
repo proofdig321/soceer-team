@@ -46,7 +46,9 @@ export default async function Page({ params }: Props) {
 
 async function PublishedPage({ params }: Pick<Props, 'params'>) {
 	const { slug } = await params
-	return <CachedPage slug={slug} perspective="published" stega={false} />
+	const page = await getPage({ slug, perspective: 'published', stega: false })
+	if (!page) notFound()
+	return <ModulesResolver page={page} perspective="published" stega={false} />
 }
 
 async function DynamicPage({ params }: Pick<Props, 'params'>) {
@@ -54,19 +56,8 @@ async function DynamicPage({ params }: Pick<Props, 'params'>) {
 		params,
 		getDynamicFetchOptions(),
 	])
-
-	return <CachedPage slug={slug} perspective={perspective} stega={stega} />
-}
-
-async function CachedPage({
-	slug,
-	perspective,
-	stega,
-}: { slug?: string[] } & DynamicFetchOptions) {
-	'use cache'
 	const page = await getPage({ slug, perspective, stega })
 	if (!page) notFound()
-
 	return <ModulesResolver page={page} perspective={perspective} stega={stega} />
 }
 
@@ -106,7 +97,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		alternates: {
 			types: {
 				'application/rss+xml': `/${ROUTES.blog}/rss.xml`,
-				// Only advertise the .md route when a curated markdown copy exists
 				...(page?.markdown?.code && {
 					'text/markdown': `/${slug?.length ? slug.join('/') : 'index'}.md`,
 				}),
@@ -143,7 +133,7 @@ async function getPage({
 	'use cache'
 	const { data } = await sanityFetch({
 		query: PAGE_QUERY,
-		params: { slug: slug?.length ? slug.join('/') : 'index' },
+		params: { slug: slug?.length ? slug.join('/') : 'index', _bust: 3 },
 		perspective,
 		stega,
 	})
@@ -156,25 +146,19 @@ async function getPageMetadata({
 }: { slug?: string[] } & Pick<DynamicFetchOptions, 'perspective'>) {
 	return (await sanityFetchMetadata({
 		query: PAGE_QUERY,
-		params: { slug: slug?.length ? slug.join('/') : 'index' },
+		params: { slug: slug?.length ? slug.join('/') : 'index', _bust: 3 },
 		perspective,
 	})) as PAGE_QUERY_RESULT
 }
 
 const PAGE_QUERY = groq`
-	// v2
 	*[_type == 'page' && metadata.slug.current == $slug][0]{
 		...,
 		'modules': (
-			// global moddules (before)
 			*[_type == 'global-module' && path == '*' && ${GLOBAL_MODULE_EXCLUDE_QUERY}].before[]{ ${MODULES_QUERY} }
-			// path modules (before)
 			+ *[_type == 'global-module' && path != '*' && ${GLOBAL_MODULE_PATH_QUERY}].before[]{ ${MODULES_QUERY} }
-			// page modules
 			+ modules[]{ ${MODULES_QUERY} }
-			// path modules (after)
 			+ *[_type == 'global-module' && path != '*' && ${GLOBAL_MODULE_PATH_QUERY}].after[]{ ${MODULES_QUERY} }
-			// global moddules (after)
 			+ *[_type == 'global-module' && path == '*' && ${GLOBAL_MODULE_EXCLUDE_QUERY}].after[]{ ${MODULES_QUERY} }
 		)
 	}
