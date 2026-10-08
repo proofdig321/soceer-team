@@ -29,14 +29,14 @@ async function CachedHeader({ perspective, stega }: DynamicFetchOptions) {
 	const blurb = site?.header?.blurb
 
 	return (
-		<Wrapper className="layout-header bg-background/80 max-md:header-open:bg-background max-md:header-open:shadow-xl md:has-[nav>details:open]:bg-background sticky top-0 z-10 backdrop-blur-[2px] transition-colors">
+		<Wrapper className="layout-header bg-forest/95 max-md:header-open:bg-forest sticky top-0 z-10 backdrop-blur-md border-b border-white/10 transition-colors">
 			<div
 				className={cn(
 					css.root,
 					'section grid items-center gap-x-4 py-0 max-md:max-h-svh max-md:overflow-y-auto',
 				)}
 			>
-				<div className="max-md:header-open:bg-background sticky top-0 z-1 flex items-center justify-between gap-4 py-4 [grid-area:top]">
+				<div className="max-md:header-open:bg-forest sticky top-0 z-1 flex items-center justify-between gap-4 py-3 [grid-area:top]">
 					<Logo
 						className="max-w-max grow has-[img]:-my-2 has-[img]:h-[2lh]"
 						perspective={perspective}
@@ -54,7 +54,7 @@ async function CachedHeader({ perspective, stega }: DynamicFetchOptions) {
 
 						<div className="flex items-center gap-[.5em_1em] [grid-area:ctas] max-md:flex-col">
 							{blurb && (
-								<div className="prose">
+								<div className="prose text-white/80 text-sm">
 									<PortableText
 										value={blurb}
 										components={{

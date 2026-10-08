@@ -8,6 +8,7 @@ import Megamenu from './megamenu'
 
 const topLevelClassName = cn(
 	'grid md:place-content-center md:text-center md:text-balance leading-tight py-[.5ch] md:py-ch',
+	'text-white/80 hover:text-white transition-colors text-sm font-medium',
 )
 
 export default async function ({ perspective, stega }: DynamicFetchOptions) {
@@ -21,10 +22,7 @@ export default async function ({ perspective, stega }: DynamicFetchOptions) {
 						return (
 							<SanityLink
 								link={item as SanityLinkType}
-								className={cn(
-									topLevelClassName,
-									'text-current hover:underline',
-								)}
+								className={topLevelClassName}
 								key={`${item._key}-${i}`}
 							/>
 						)

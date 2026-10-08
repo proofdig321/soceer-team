@@ -10,7 +10,12 @@ export default function ({
 
 	return (
 		<p
-			className={cn('technical eyebrow text-sm text-current/60', className)}
+			className={cn(
+				'technical inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase',
+				'before:block before:h-px before:w-6 before:bg-current before:opacity-60',
+				'text-current/70',
+				className,
+			)}
 			{...props}
 		>
 			{stegaClean(value)}

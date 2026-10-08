@@ -19,11 +19,12 @@ export default function ({
 	const textAlign = stegaClean(ta)
 	const verticalAlign = stegaClean(va)
 	const opacity = Number(stegaClean(image?.opacity)) ?? 1
+	const hasImage = !!image?.asset
 
 	return (
 		<Module
 			className={cn(
-				'relative grid min-h-[60svh]',
+				'relative grid min-h-[90svh]',
 				{
 					'items-start': verticalAlign === 'top',
 					'items-center': verticalAlign === 'center',
@@ -34,10 +35,11 @@ export default function ({
 					'justify-center text-center': textAlign === 'center',
 					'justify-end text-right': textAlign === 'right',
 				},
+				!hasImage && 'bg-forest text-white',
 			)}
 			{...props}
 		>
-			{image?.asset && (
+			{hasImage && (
 				<picture className="contents">
 					<Source image={image.mobile} width={1000} />
 					<Img
@@ -51,17 +53,42 @@ export default function ({
 				</picture>
 			)}
 
+			{/* gradient overlay for readability */}
+			{hasImage && (
+				<div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/40 to-transparent" />
+			)}
+
 			<div
 				className={cn(
-					'section relative',
-					image?.asset && opacity > 0.5 && 'text-background',
+					'section relative z-1',
+					hasImage || 'text-white',
+					hasImage && opacity > 0.3 && 'text-white',
 				)}
 			>
-				<header className="prose max-w-xl">
-					<Eyebrow value={eyebrow} />
+				<header
+					className={cn(
+						'prose max-w-2xl',
+						textAlign === 'center' && 'mx-auto',
+						textAlign === 'right' && 'ml-auto',
+					)}
+				>
+					{eyebrow && (
+						<Eyebrow
+							value={eyebrow}
+							className="text-gold mb-4"
+						/>
+					)}
 					<PortableText
 						value={content}
 						components={{
+							block: {
+								h1: ({ children }) => (
+									<h1 className="h0 mb-4 text-balance">{children}</h1>
+								),
+								normal: ({ children }) => (
+									<p className="text-lg leading-relaxed opacity-85">{children}</p>
+								),
+							},
 							types: {
 								image: ({ value }) => (
 									<figure>
@@ -83,7 +110,7 @@ export default function ({
 					/>
 					<CTAList
 						ctas={ctas}
-						className={cn('max-sm:*:w-full', {
+						className={cn('mt-8 max-sm:*:w-full', {
 							'justify-start': textAlign === 'left',
 							'justify-center': textAlign === 'center',
 							'justify-end': textAlign === 'right',

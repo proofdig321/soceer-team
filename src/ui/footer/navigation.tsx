@@ -9,7 +9,7 @@ export default async function ({ perspective, stega }: DynamicFetchOptions) {
 
 	return (
 		<nav>
-			<ul className="gap-y-lh flex items-start justify-center gap-x-[2lh] max-md:flex-col">
+			<ul className="flex flex-wrap items-start justify-center gap-x-12 gap-y-2 max-md:flex-col max-md:text-center">
 				{site?.footer?.items?.map((item, i) => {
 					switch (item._type) {
 						case 'link':
@@ -17,7 +17,7 @@ export default async function ({ perspective, stega }: DynamicFetchOptions) {
 								<li key={`${item._key}-${i}`}>
 									<SanityLink
 										link={item as SanityLinkType}
-										className="text-current hover:underline"
+										className="text-sm text-white/60 hover:text-white transition-colors"
 									/>
 								</li>
 							)
