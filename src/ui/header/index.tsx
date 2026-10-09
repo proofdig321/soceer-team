@@ -24,7 +24,6 @@ export default async function Header(props: DynamicFetchOptions) {
 }
 
 async function CachedHeader({ perspective, stega }: DynamicFetchOptions) {
-	'use cache'
 	const site = await getSite({ perspective, stega })
 	const blurb = site?.header?.blurb
 

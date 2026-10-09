@@ -35,7 +35,6 @@ async function DynamicNotFound() {
 }
 
 async function CachedNotFound({ perspective, stega }: DynamicFetchOptions) {
-	'use cache'
 	const page = await getPage({ perspective, stega })
 	return <ModulesResolver page={page} perspective={perspective} stega={stega} />
 }
@@ -59,7 +58,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function getPage({ perspective, stega }: DynamicFetchOptions) {
-	'use cache'
 	const { data } = await sanityFetch({
 		query: NOT_FOUND_QUERY,
 		perspective,

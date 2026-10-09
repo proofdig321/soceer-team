@@ -55,7 +55,6 @@ async function CachedPost({
 	perspective,
 	stega,
 }: { slug: string } & DynamicFetchOptions) {
-	'use cache'
 	const post = await getPost({ slug, perspective, stega })
 	if (!post) notFound()
 
@@ -126,7 +125,6 @@ async function getPost({
 	perspective,
 	stega,
 }: { slug: string } & DynamicFetchOptions) {
-	'use cache'
 	const { data } = await sanityFetch({
 		query: BLOG_POST_QUERY,
 		params: { slug, blogDir: `${ROUTES.blog}/` },

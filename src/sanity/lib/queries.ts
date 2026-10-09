@@ -133,7 +133,6 @@ export const MODULES_QUERY = groq`
 /* queries */
 
 export async function getSite({ perspective, stega }: DynamicFetchOptions) {
-	'use cache'
 	const { data } = await sanityFetch({
 		query: SITE_QUERY,
 		perspective,

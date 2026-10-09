@@ -53,7 +53,6 @@ async function getPosts({
 	perspective,
 	stega,
 }: { limit: number } & DynamicFetchOptions) {
-	'use cache'
 	const { data } = await sanityFetch({
 		query: BLOG_POST_LIST_QUERY,
 		params: { limit, blogDir: `/${ROUTES.blog}/` },

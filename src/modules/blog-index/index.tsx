@@ -88,7 +88,6 @@ async function getPosts({
 	blogDir: string
 	featuredIds: string[]
 } & DynamicFetchOptions) {
-	'use cache'
 	const { data } = await sanityFetch({
 		query: BLOG_INDEX_QUERY,
 		params: { blogDir, featuredIds },
@@ -107,7 +106,6 @@ async function getFeaturedPosts({
 	blogDir: string
 	featuredIds: string[]
 } & DynamicFetchOptions) {
-	'use cache'
 	const { data } = await sanityFetch({
 		query: BLOG_FEATURED_QUERY,
 		params: { blogDir, featuredIds },

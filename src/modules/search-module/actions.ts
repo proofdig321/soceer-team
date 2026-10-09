@@ -33,7 +33,6 @@ async function cachedSearch({
 	scope: SearchModule['scope']
 	query: string
 } & DynamicFetchOptions): Promise<SEARCH_QUERY_RESULT> {
-	'use cache'
 	const scopeValue = SCOPE_MAP[scope as keyof typeof SCOPE_MAP]
 
 	const { data } = await sanityFetch({
