@@ -19,6 +19,7 @@ export default async function Announcement(props: DynamicFetchOptions) {
 }
 
 async function CachedAnnouncement({ perspective, stega }: DynamicFetchOptions) {
+	'use cache'
 	const site = await getSite({ perspective, stega })
 	const announcement = site?.announcement
 

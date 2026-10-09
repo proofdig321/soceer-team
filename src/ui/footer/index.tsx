@@ -20,6 +20,7 @@ export default async function Footer(props: DynamicFetchOptions) {
 }
 
 async function CachedFooter({ perspective, stega }: DynamicFetchOptions) {
+	'use cache'
 	const site = await getSite({ perspective, stega })
 	const blurb = site?.footer?.blurb
 

@@ -12,6 +12,7 @@ const STARS_LOGO_REF = 'image-4b032d9ebd368d50b7d0a808aaa020dd0438dd61-640x154-w
 const NAV_QUERY = groq`*[_id == $id][0]{ items[]{ ${LINK_QUERY} } }`
 
 async function getStarsNav(id: string) {
+	'use cache'
 	return client
 		.withConfig({ token, useCdn: true, perspective: 'published' })
 		.fetch(NAV_QUERY, { id })

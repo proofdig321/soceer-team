@@ -4,6 +4,7 @@ import { CATEGORIES_QUERY_RESULT } from '@/sanity/types'
 import Filter from './filter'
 
 export default async function ({ perspective, stega }: DynamicFetchOptions) {
+	'use cache'
 	const { data } = await sanityFetch({
 		query: CATEGORIES_QUERY,
 		perspective,

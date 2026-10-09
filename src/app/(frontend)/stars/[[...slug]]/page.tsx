@@ -46,7 +46,7 @@ export default async function Page({ params }: Props) {
 
 async function PublishedPage({ params }: Pick<Props, 'params'>) {
 	const { slug } = await params
-	const page = await getPage({ slug, perspective: 'published', stega: false, deploymentId: process.env.VERCEL_DEPLOYMENT_ID })
+	const page = await getPage({ slug, perspective: 'published', stega: false })
 	if (!page) notFound()
 	return <ModulesResolver page={page} perspective="published" stega={false} />
 }
@@ -56,7 +56,7 @@ async function DynamicPage({ params }: Pick<Props, 'params'>) {
 		params,
 		getDynamicFetchOptions(),
 	])
-	const page = await getPage({ slug, perspective, stega, deploymentId: process.env.VERCEL_DEPLOYMENT_ID })
+	const page = await getPage({ slug, perspective, stega })
 	if (!page) notFound()
 	return <ModulesResolver page={page} perspective={perspective} stega={stega} />
 }
@@ -102,8 +102,8 @@ async function getPage({
 	slug,
 	perspective,
 	stega,
-	deploymentId: _deploymentId,
-}: { slug?: string[]; deploymentId?: string } & DynamicFetchOptions) {
+}: { slug?: string[] } & DynamicFetchOptions) {
+	'use cache'
 	const fullSlug = slug?.length ? `stars/${slug.join('/')}` : 'stars'
 	const { data } = await sanityFetch({
 		query: PAGE_QUERY,

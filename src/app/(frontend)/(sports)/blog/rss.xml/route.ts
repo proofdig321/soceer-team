@@ -160,6 +160,7 @@ function Item({ post }: { post: BLOG_RSS_QUERY_RESULT['posts'][number] }) {
 async function getRssData({
 	perspective,
 }: Pick<DynamicFetchOptions, 'perspective'>) {
+	'use cache'
 	const { data } = await sanityFetch({
 		query: BLOG_RSS_QUERY,
 		params: { blogDir: ROUTES.blog },

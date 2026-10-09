@@ -9,6 +9,8 @@ import { PROSE_QUERY } from '@/modules/prose/query'
 import { QUOTE_LIST_QUERY } from '@/modules/quote-list/query'
 import { TABBED_CONTENT_QUERY } from '@/modules/tabbed-content/query'
 import type { SITE_QUERY_RESULT } from '@/sanity/types'
+import { client } from './client'
+import { token } from './token'
 import { LINK_QUERY } from './fragments'
 import { sanityFetch, type DynamicFetchOptions } from './live'
 
@@ -133,10 +135,11 @@ export const MODULES_QUERY = groq`
 /* queries */
 
 export async function getSite({ perspective, stega }: DynamicFetchOptions) {
-	const { data } = await sanityFetch({
-		query: SITE_QUERY,
-		perspective,
-		stega,
-	})
+	'use cache'
+	// Navigation documents require auth even on a public dataset.
+	// Use the client directly with the read token always set.
+	const data = await client
+		.withConfig({ token, useCdn: perspective !== 'drafts', perspective })
+		.fetch(SITE_QUERY, {}, { filterResponse: true })
 	return data as SITE_QUERY_RESULT
 }

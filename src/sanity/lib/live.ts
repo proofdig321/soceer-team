@@ -44,6 +44,7 @@ export async function getDynamicFetchOptions({
 export async function sanityFetchStaticParams<
 	const QueryString extends string,
 >({ query, params = {} }: { query: QueryString; params?: QueryParams }) {
+	'use cache'
 	const { data } = await sanityFetch({
 		query,
 		params,
@@ -64,6 +65,7 @@ export async function sanityFetchMetadata<const QueryString extends string>({
 	params?: QueryParams
 	perspective: LivePerspective
 }) {
+	'use cache'
 	const { data } = await sanityFetch({
 		query,
 		params,

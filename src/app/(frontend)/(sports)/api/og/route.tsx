@@ -85,6 +85,7 @@ async function getPage({
 	type: string
 	slug: string
 } & Pick<DynamicFetchOptions, 'perspective'>) {
+	'use cache'
 	const { data } = await sanityFetch({
 		query: OG_QUERY,
 		params: { type, slug },
