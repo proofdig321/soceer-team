@@ -20,6 +20,8 @@ import {
 } from '@/sanity/lib/queries'
 import type { PAGE_QUERY_RESULT } from '@/sanity/types'
 import Loading from '@/ui/loading'
+import { client } from '@/sanity/lib/client'
+import { token } from '@/sanity/lib/token'
 import { groq } from 'next-sanity'
 
 
@@ -110,12 +112,9 @@ async function getPage({
 	stega,
 }: { slug?: string[] } & DynamicFetchOptions) {
 	'use cache'
-	const { data } = await sanityFetch({
-		query: PAGE_QUERY,
-		params: { slug: slug?.length ? slug.join('/') : 'index' },
-		perspective,
-		stega,
-	})
+	const data = await client
+		.withConfig({ token, useCdn: perspective !== 'drafts', perspective, stega })
+		.fetch(PAGE_QUERY, { slug: slug?.length ? slug.join('/') : 'index' }, { filterResponse: true })
 	return data as PAGE_QUERY_RESULT
 }
 
