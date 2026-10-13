@@ -36,34 +36,68 @@ export default function FixtureCard({
 }: FixtureCardProps) {
 	const ko = formatKickoff(kickoff)
 	const isCompleted = status === 'completed'
+	const isLive = status === 'live'
 
 	return (
-		<article className={cn('flex flex-col gap-3 rounded-lg border border-white/10 bg-white/5 p-5 hover:bg-white/8 transition-colors', className)}>
-			<div className="flex items-start justify-between gap-3">
-				<div className="flex flex-col gap-1">
-					{competition && (
-						<span className="technical text-[10px] text-white/40">{competition}</span>
+		<article className={cn(
+			'group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-forest transition-all hover:border-gold/20 hover:shadow-[0_0_30px_rgba(243,185,66,0.06)]',
+			className,
+		)}>
+			{/* Pitch centre-line accent */}
+			<div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
+
+			{/* Competition banner */}
+			{competition && (
+				<div className="border-b border-white/5 bg-white/[0.03] px-4 py-2">
+					<span className="technical text-[10px] text-white/40">{competition}</span>
+				</div>
+			)}
+
+			{/* VS block */}
+			<div className="relative flex items-center gap-3 px-4 py-5">
+				{/* Left team */}
+				<div className="flex flex-1 flex-col gap-1 min-w-0">
+					<span className="technical text-[9px] text-gold/60">HOME</span>
+					<p className="text-sm font-bold text-white leading-tight truncate">{title}</p>
+				</div>
+
+				{/* Score / VS */}
+				<div className="flex shrink-0 flex-col items-center gap-1">
+					{isCompleted || isLive ? (
+						<ScoreBadge home={homeScore} away={awayScore} />
+					) : (
+						<span className="text-lg font-black text-white/20 tracking-widest">VS</span>
 					)}
-					<p className="text-sm font-semibold text-white leading-tight">{title}</p>
+					{isLive && (
+						<span className="flex items-center gap-1 text-[10px] font-bold text-emerald-400">
+							<span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+							LIVE
+						</span>
+					)}
+				</div>
+
+				{/* Right team */}
+				<div className="flex flex-1 flex-col items-end gap-1 min-w-0">
+					<span className="technical text-[9px] text-white/40">AWAY</span>
+					<p className="text-sm font-bold text-white/80 leading-tight truncate text-right">{opponent}</p>
+				</div>
+			</div>
+
+			{/* Footer */}
+			<div className="mt-auto flex items-center justify-between gap-3 border-t border-white/5 bg-white/[0.02] px-4 py-2.5">
+				<div className="flex items-center gap-2 text-xs text-white/40 min-w-0">
+					{ko ? (
+						<>
+							<span>{ko.date}</span>
+							<span className="text-white/20">·</span>
+							<span>{ko.time}</span>
+						</>
+					) : venue ? (
+						<span className="truncate">{venue}</span>
+					) : null}
 				</div>
 				<StatusPill status={status} className="shrink-0" />
 			</div>
-
-			{isCompleted ? (
-				<ScoreBadge home={homeScore} away={awayScore} />
-			) : (
-				ko && (
-					<div className="flex items-center gap-3 text-sm text-white/60">
-						<span>{ko.date}</span>
-						<span className="text-white/30">·</span>
-						<span>{ko.time}</span>
-					</div>
-				)
-			)}
-
-			{venue && (
-				<p className="text-xs text-white/40 truncate">{venue}</p>
-			)}
 		</article>
 	)
 }

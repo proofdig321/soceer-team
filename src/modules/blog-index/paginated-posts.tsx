@@ -7,6 +7,7 @@ import type {
 	BLOG_INDEX_QUERY_RESULT,
 	BlogPost,
 } from '@/sanity/types'
+import { Pagination } from '@/ui/pagination'
 import PostPreview from '@/ui/blog/post-preview'
 import PostPreviewLarge from '@/ui/blog/post-preview-large'
 
@@ -57,7 +58,7 @@ export default function ({
 			]
 		: (processedPosts ?? [])
 
-	const { paginatedItems, Pagination, currentPage } = usePagination({
+	const { paginatedItems, currentPage, totalPages, onPrev, onNext, atStart, atEnd } = usePagination({
 		items: gridItems,
 		itemsPerPage: postsPerPage,
 	})
@@ -86,8 +87,12 @@ export default function ({
 			</ul>
 
 			<Pagination
-				className="gap-ch flex items-center justify-center tabular-nums"
-				buttonClassName="cursor-pointer not-disabled:hover:underline disabled:opacity-50"
+				currentPage={currentPage}
+				totalPages={totalPages}
+				onPrev={onPrev}
+				onNext={onNext}
+				atStart={atStart}
+				atEnd={atEnd}
 			/>
 		</>
 	)

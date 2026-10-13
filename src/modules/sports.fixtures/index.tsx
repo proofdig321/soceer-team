@@ -3,6 +3,7 @@ import { client } from '@/sanity/lib/client'
 import { token } from '@/sanity/lib/token'
 import { Module } from '@/modules'
 import Eyebrow from '@/ui/eyebrow'
+import { PaginatedList } from '@/ui/pagination'
 import { FixtureCard } from '@/ui/sports'
 
 const QUERY = groq`*[_type == 'sports.fixture' && team._ref == $teamId && publicListing == true] | order(kickoff asc){
@@ -32,8 +33,11 @@ export default async function SportsFixtures({ teamId, eyebrow, ...props }: {
 			{!fixtures?.length ? (
 				<p className="text-white/50 text-sm">No fixtures available.</p>
 			) : (
-				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					{fixtures.map((f: any) => (
+				<PaginatedList
+					items={fixtures}
+					itemsPerPage={9}
+					gridClassName="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+					renderItem={(f: any) => (
 						<FixtureCard
 							key={f._id}
 							title={f.title}
@@ -45,8 +49,8 @@ export default async function SportsFixtures({ teamId, eyebrow, ...props }: {
 							awayScore={f.awayScore}
 							competition={f.competition}
 						/>
-					))}
-				</div>
+					)}
+				/>
 			)}
 		</Module>
 	)

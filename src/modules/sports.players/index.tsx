@@ -3,6 +3,7 @@ import { client } from '@/sanity/lib/client'
 import { token } from '@/sanity/lib/token'
 import { Module } from '@/modules'
 import Eyebrow from '@/ui/eyebrow'
+import { PaginatedList } from '@/ui/pagination'
 import { PlayerCard } from '@/ui/sports'
 
 const QUERY = groq`*[_type == 'sports.player' && team._ref == $teamId && publicProfile == true] | order(shirtNumber asc){
@@ -32,8 +33,11 @@ export default async function SportsPlayers({ teamId, eyebrow, ...props }: {
 			{!players?.length ? (
 				<p className="text-white/50 text-sm">No players available.</p>
 			) : (
-				<div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-					{players.map((p: any) => (
+				<PaginatedList
+					items={players}
+					itemsPerPage={12}
+					gridClassName="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+					renderItem={(p: any) => (
 						<PlayerCard
 							key={p._id}
 							displayName={p.displayName}
@@ -41,8 +45,8 @@ export default async function SportsPlayers({ teamId, eyebrow, ...props }: {
 							position={p.position}
 							squad={p.squad}
 						/>
-					))}
-				</div>
+					)}
+				/>
 			)}
 		</Module>
 	)
