@@ -11,6 +11,12 @@ import {
 	PhaseBadge,
 	AudiencePill,
 	AUDIENCE_COLOURS,
+	IdentityDiagram,
+	RealVsDemoBar,
+	TheoryOfChange,
+	SafeguardingShield,
+	FirewallDiagram,
+	PlatformStack,
 } from './visuals'
 
 export const metadata: Metadata = {
@@ -24,7 +30,7 @@ const STARS_LOGO  = 'image-4b032d9ebd368d50b7d0a808aaa020dd0438dd61-640x154-webp
 const logoImg = (ref: string) => ({ _type: 'image' as const, asset: { _type: 'reference' as const, _ref: ref } })
 
 function Section({
-	id, eyebrow, title, audiences, scriptKey, accent, children,
+	id, eyebrow, title, audiences, scriptKey, accent, graphic, children,
 }: {
 	id: string
 	eyebrow: string
@@ -32,6 +38,7 @@ function Section({
 	audiences: string[]
 	scriptKey: keyof typeof SCRIPTS
 	accent?: string
+	graphic?: React.ReactNode
 	children: React.ReactNode
 }) {
 	return (
@@ -43,6 +50,7 @@ function Section({
 					<h2 id={`${id}-heading`} className="h3 text-white text-balance leading-tight">{title}</h2>
 					<div className="flex flex-wrap gap-2">{audiences.map(a => <AudiencePill key={a} label={a} />)}</div>
 					<div className="mt-2"><Narrator script={SCRIPTS[scriptKey]} label="Listen" /></div>
+					{graphic && <div className="mt-4 rounded-xl border border-white/8 bg-white/[0.02] p-4">{graphic}</div>}
 				</div>
 				<div className="prose text-white/80 text-[0.95rem] leading-relaxed">{children}</div>
 			</div>
@@ -80,8 +88,12 @@ export default function PresentationPage() {
 				<GoldBeam className="pointer-events-none absolute inset-0" />
 				<div aria-hidden className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-forest to-transparent" />
 
-				{/* pitch graphic — right side */}
-				<div aria-hidden className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 w-[520px] opacity-40 max-lg:hidden">
+				{/* pitch graphic — right side, much larger and more visible */}
+				<div aria-hidden className="pointer-events-none absolute -right-16 top-1/2 -translate-y-1/2 w-[680px] max-lg:hidden">
+					<PitchGraphic className="w-full drop-shadow-[0_0_80px_rgba(243,185,66,0.15)]" />
+				</div>
+				{/* mobile pitch — bottom */}
+				<div aria-hidden className="pointer-events-none absolute bottom-0 left-0 right-0 opacity-20 lg:hidden">
 					<PitchGraphic className="w-full" />
 				</div>
 
@@ -157,6 +169,7 @@ export default function PresentationPage() {
 				audiences={['All']}
 				scriptKey="whatWeAre"
 				accent="radial-gradient(ellipse at right, rgba(243,185,66,0.08), transparent 70%)"
+				graphic={<IdentityDiagram />}
 			>
 				<p>Unami Sports is a <strong className="text-white">community sport enablement programme</strong> run by Unami Foundation. We are not a football club, a governing body, a league, or a commercial sports business.</p>
 				<p>We are a <strong className="text-white">non-profit-led operating partner</strong> — we donate and maintain digital infrastructure, train community administrators, coordinate stakeholder relationships where agreed, and support teams to manage their own sporting affairs.</p>
@@ -178,6 +191,7 @@ export default function PresentationPage() {
 				title="What we are not — and what does not yet exist"
 				audiences={['All', 'Funders', 'Governance']}
 				scriptKey="whatWeAreNot"
+				graphic={<RealVsDemoBar />}
 			>
 				<p>Clarity about what does not yet exist is as important as describing what does. The following are <strong className="text-white">not current realities</strong>:</p>
 				<ul>
@@ -236,6 +250,7 @@ export default function PresentationPage() {
 				audiences={['Funders']}
 				scriptKey="forFunders"
 				accent="radial-gradient(ellipse at right, rgba(59,130,246,0.06), transparent 70%)"
+				graphic={<TheoryOfChange />}
 			>
 				<p>We are at the <strong className="text-white">pilot stage</strong>. One illustrative team — Unami Stars — has been built to demonstrate the model. We have not yet onboarded a real community team.</p>
 				<p>The theory of change: donated digital infrastructure, combined with training and ongoing support, helps community teams spend less time on fragmented administration and more time on the sport and community activity they value. We believe this is worth testing. We are not claiming it has been proven.</p>
@@ -257,6 +272,7 @@ export default function PresentationPage() {
 				audiences={['Governance']}
 				scriptKey="forGovernance"
 				accent="radial-gradient(ellipse at right, rgba(249,115,22,0.06), transparent 70%)"
+				graphic={<SafeguardingShield />}
 			>
 				<p>Youth safeguarding is built into the operating model as a <strong className="text-white">gate, not an afterthought</strong>.</p>
 				<div className="not-prose mt-4 grid gap-3 sm:grid-cols-2">
@@ -279,6 +295,7 @@ export default function PresentationPage() {
 				audiences={['Commercial']}
 				scriptKey="forCommercial"
 				accent="radial-gradient(ellipse at right, rgba(168,85,247,0.06), transparent 70%)"
+				graphic={<FirewallDiagram />}
 			>
 				<p>Commercial partners receive <strong className="text-white">only what is written in an approved agreement</strong>. That agreement will specify recognition, deliverables, duration, and reporting.</p>
 				<div className="not-prose mt-6 rounded-xl border border-white/8 bg-white/[0.03] p-6">
@@ -406,6 +423,7 @@ export default function PresentationPage() {
 				title="What is live today — and what it demonstrates"
 				audiences={['All']}
 				scriptKey="liveDemo"
+				graphic={<PlatformStack />}
 			>
 				<p>The Unami Sports platform is live at <a href="https://unamisports.unamifoundation.org" className="text-gold underline underline-offset-2 hover:text-gold-light" target="_blank" rel="noopener noreferrer">unamisports.unamifoundation.org</a>. Everything you see is demonstration content.</p>
 				<div className="not-prose mt-6 grid gap-3 sm:grid-cols-2">
