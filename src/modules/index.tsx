@@ -27,6 +27,9 @@ import StepList from '@/modules/step-list'
 import TabbedContent from '@/modules/tabbed-content'
 import TestimonialFeature from '@/modules/testimonial.feature'
 import VideoEmbed from '@/modules/video.embed'
+import SportsFixtures from '@/modules/sports.fixtures'
+import SportsPlayers from '@/modules/sports.players'
+import SportsEvents from '@/modules/sports.events'
 import type { DynamicFetchOptions } from '@/sanity/lib/live'
 import type {
 	BLOG_POST_QUERY_RESULT,
@@ -62,6 +65,9 @@ const MODULES_MAP = {
 	'tabbed-content': TabbedContent,
 	'testimonial.feature': TestimonialFeature,
 	'video.embed': VideoEmbed,
+	'sports.fixtures': SportsFixtures,
+	'sports.players': SportsPlayers,
+	'sports.events': SportsEvents,
 } as const
 
 export default function ({

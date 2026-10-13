@@ -9,7 +9,7 @@ export default async function ({ perspective, stega }: DynamicFetchOptions) {
 
 	return (
 		<nav>
-			<ul className="flex flex-wrap items-start justify-center gap-x-12 gap-y-2 max-md:flex-col max-md:text-center">
+			<ul className="flex flex-wrap items-start justify-start gap-x-12 gap-y-2 max-md:flex-col">
 				{site?.footer?.items?.map((item, i) => {
 					switch (item._type) {
 						case 'link':

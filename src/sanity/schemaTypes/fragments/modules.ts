@@ -24,6 +24,9 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 			{ type: 'stat-list' },
 			{ type: 'step-list' },
 			{ type: 'tabbed-content' },
+			{ type: 'sports.fixtures' },
+			{ type: 'sports.players' },
+			{ type: 'sports.events' },
 			...of,
 		],
 		options: {
@@ -59,6 +62,10 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 					{
 						name: 'utility',
 						of: ['breadcrumbs', 'custom-html', 'form-module', 'search-module'],
+					},
+					{
+						name: 'sports',
+						of: ['sports.fixtures', 'sports.players', 'sports.events'],
 					},
 					{
 						name: 'blog',

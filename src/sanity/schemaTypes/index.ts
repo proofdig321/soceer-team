@@ -27,6 +27,9 @@ import stepList from '@/modules/step-list/schema'
 import tabbedContent from '@/modules/tabbed-content/schema'
 import testimonialFeature from '@/modules/testimonial.feature/schema'
 import videoEmbed from '@/modules/video.embed/schema'
+import sportsFixturesModule from '@/modules/sports.fixtures/schema'
+import sportsPlayersModule from '@/modules/sports.players/schema'
+import sportsEventsModule from '@/modules/sports.events/schema'
 // documents
 import announcement from './documents/announcement'
 import blogCategory from './documents/blog.category'
@@ -135,6 +138,9 @@ export const schema: SchemaPluginOptions = {
 		tabbedContent,
 		testimonialFeature,
 		videoEmbed,
+		sportsFixturesModule,
+		sportsPlayersModule,
+		sportsEventsModule,
 	],
 
 	templates: (templates) =>

@@ -7,7 +7,7 @@ export default function ({ items, ...props }: FeatureBar) {
 
 	return (
 		<Module className="border-y border-white/10 bg-forest/95" {...props}>
-			<ul className="section-sm py-0 section flex flex-wrap items-start justify-center gap-x-10 gap-y-6 py-8 md:gap-x-16">
+			<ul className="section flex flex-wrap items-start justify-center gap-x-10 gap-y-6 py-8 md:gap-x-16">
 				{items.map((item, i) => (
 					<li
 						key={`${item._key ?? i}`}
