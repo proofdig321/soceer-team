@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import { SCRIPTS } from './scripts'
-
-const Narrator = dynamic(() => import('@/ui/narrator'), { ssr: false })
+import Narrator from '@/ui/narrator'
 
 export const metadata: Metadata = {
 	title: 'Programme Presentation — Unami Sports',
