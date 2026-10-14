@@ -27,7 +27,7 @@ async function CachedFooter({ perspective, stega }: DynamicFetchOptions) {
 	return (
 		<footer className="bg-forest border-t border-white/10">
 			<div className="section">
-				<div className="flex justify-between gap-12 max-md:flex-col md:items-start">
+				<div className="flex gap-12 max-md:flex-col md:items-start">
 					<div className="flex flex-col gap-5 max-md:items-center max-md:text-center md:items-start md:max-w-xs">
 						<Logo
 							className="[&_img]:h-[2lh]"

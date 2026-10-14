@@ -4,16 +4,8 @@ import Narrator from '@/ui/narrator'
 import { SCRIPTS } from './scripts'
 import {
 	PitchGraphic,
-	HexPattern,
 	PhaseBadge,
 	AudiencePill,
-	AUDIENCE_COLOURS,
-	IdentityDiagram,
-	RealVsDemoBar,
-	TheoryOfChange,
-	SafeguardingShield,
-	FirewallDiagram,
-	PlatformStack,
 } from './visuals'
 
 export const metadata: Metadata = {
@@ -31,55 +23,37 @@ const logoImg = (ref: string) => ({ _type: 'image' as const, asset: { _type: 're
 // Sections scroll-mt-14 to clear the 56px sticky nav.
 
 function Section({
-	id, eyebrow, title, audiences, scriptKey, graphic, children,
+	id, eyebrow, title, audiences, scriptKey, children,
 }: {
 	id: string
 	eyebrow: string
 	title: string
 	audiences: string[]
 	scriptKey: keyof typeof SCRIPTS
-	graphic?: React.ReactNode
 	children: React.ReactNode
 }) {
 	return (
 		<section
 			id={id}
-			className="border-b border-white/8 py-16 scroll-mt-14"
+			className="border-b border-white/8 py-14 scroll-mt-14"
 			aria-labelledby={`${id}-heading`}
 		>
-			<div className="section py-0 grid gap-12 lg:grid-cols-[280px_1fr]">
-				{/* left meta column — fixed width keeps all sections aligned */}
-				<div className="flex flex-col gap-3">
-					<p className="technical text-[11px] text-gold/60">{eyebrow}</p>
-					<h2 id={`${id}-heading`} className="text-xl font-bold text-white leading-snug">{title}</h2>
-					<div className="flex flex-wrap gap-1.5">
+			<div className="section py-0 grid gap-10 lg:grid-cols-[240px_1fr]">
+				<div className="flex flex-col gap-2.5">
+					<p className="technical text-[11px] text-gold/50">{eyebrow}</p>
+					<h2 id={`${id}-heading`} className="text-lg font-bold text-white leading-snug">{title}</h2>
+					<div className="flex flex-wrap gap-1.5 mt-0.5">
 						{audiences.map(a => <AudiencePill key={a} label={a} />)}
 					</div>
-					<div className="mt-1">
+					<div className="mt-2">
 						<Narrator script={SCRIPTS[scriptKey]} label="Listen" />
 					</div>
-					{graphic && (
-						<div className="mt-4 rounded-lg border border-white/8 bg-white/[0.02] p-3">
-							{graphic}
-						</div>
-					)}
 				</div>
-				{/* right content column */}
-				<div className="prose text-white/75 text-sm leading-relaxed max-w-2xl">
+				<div className="prose text-white/70 text-sm leading-relaxed max-w-2xl">
 					{children}
 				</div>
 			</div>
 		</section>
-	)
-}
-
-function Divider({ label }: { label: string }) {
-	return (
-		<div className="section py-6 flex items-center gap-4">
-			<div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-			<span className="technical text-[10px] text-white/25">{label}</span>
-			<div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-		</div>
 	)
 }
 
@@ -98,53 +72,27 @@ export default function PresentationPage() {
 
 			{/* ── HERO ──────────────────────────────────────────────────────── */}
 			<header className="relative overflow-hidden border-b border-white/8">
-				<HexPattern className="pointer-events-none absolute inset-0" />
-				<div aria-hidden className="pointer-events-none absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-forest to-transparent" />
+				<div aria-hidden className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-forest to-transparent" />
 
-				{/* Two-column hero grid — same max-w as sections */}
-				<div className="section relative z-10 grid gap-8 py-16 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-0">
-
-					{/* Left: identity + headline + subtitle + narrator */}
-					<div className="max-w-xl">
-						<div className="mb-6 flex flex-wrap items-center gap-4">
+				<div className="section relative z-10 grid gap-8 py-16 lg:grid-cols-[1fr_auto] lg:items-center">
+					<div className="max-w-lg">
+						<div className="mb-5 flex flex-wrap items-center gap-4">
 							<Img image={logoImg(SPORTS_LOGO)} width={140} className="h-8 w-auto object-contain" alt="Unami Sports" />
 							<div className="h-5 w-px bg-white/15" aria-hidden />
-							<Img image={logoImg(STARS_LOGO)} width={120} className="h-7 w-auto object-contain opacity-60" alt="Unami Stars" />
+							<Img image={logoImg(STARS_LOGO)} width={120} className="h-7 w-auto object-contain opacity-50" alt="Unami Stars" />
 						</div>
-
-						<p className="technical text-[11px] text-gold/60 mb-3">Programme Presentation</p>
-
-						<h1 className="text-3xl font-bold text-white leading-tight mb-4 md:text-4xl">
+						<p className="technical text-[11px] text-gold/50 mb-3">Programme Presentation</p>
+						<h1 className="text-3xl font-bold text-white leading-tight mb-4">
 							Building community sport infrastructure that lasts.
 						</h1>
-
-						<p className="text-sm text-white/55 leading-relaxed mb-6 max-w-lg">
-							For community FAs, funders, governance reviewers, commercial partners, and programme leadership. Every section has a voice narrator. Every claim is honest about what exists today, what is proposed, and what still needs to be decided.
+						<p className="text-sm text-white/50 leading-relaxed mb-6 max-w-md">
+							For community FAs, funders, governance reviewers, commercial partners, and programme leadership. Every claim is honest about what exists today, what is proposed, and what still needs to be decided.
 						</p>
-
-						<div className="flex flex-wrap items-center gap-4 mb-8">
-							<Narrator script={SCRIPTS.opening} label="Listen to introduction" />
-							<a href="#what-we-are" className="text-xs text-white/35 hover:text-white transition-colors">
-								Skip to content ↓
-							</a>
-						</div>
-
-						{/* Audience key — compact */}
-						<div className="flex flex-wrap gap-1.5 items-center">
-							<span className="text-[11px] text-white/25 mr-1">Sections for:</span>
-							{Object.keys(AUDIENCE_COLOURS).map(a => <AudiencePill key={a} label={a} />)}
-						</div>
+						<Narrator script={SCRIPTS.opening} label="Listen to introduction" />
 					</div>
-
-					{/* Right: pitch illustration — constrained, never overlaps text */}
-					<div aria-hidden className="pointer-events-none hidden lg:block w-[420px] shrink-0 opacity-80">
-						<PitchGraphic className="w-full drop-shadow-[0_0_60px_rgba(243,185,66,0.12)]" />
+					<div aria-hidden className="pointer-events-none hidden lg:block w-[400px] shrink-0 opacity-75">
+						<PitchGraphic className="w-full" />
 					</div>
-				</div>
-
-				{/* Mobile pitch — subtle, below content */}
-				<div aria-hidden className="pointer-events-none lg:hidden opacity-15 -mt-4">
-					<PitchGraphic className="w-full" />
 				</div>
 			</header>
 
@@ -182,7 +130,6 @@ export default function PresentationPage() {
 				title="What Unami Sports is"
 				audiences={['All']}
 				scriptKey="whatWeAre"
-				graphic={<IdentityDiagram />}
 			>
 				<p>Unami Sports is a <strong className="text-white">community sport enablement programme</strong> run by Unami Foundation. We are not a football club, a governing body, a league, or a commercial sports business.</p>
 				<p>We are a <strong className="text-white">non-profit-led operating partner</strong> — we donate and maintain digital infrastructure, train community administrators, coordinate stakeholder relationships where agreed, and support teams to manage their own sporting affairs.</p>
@@ -204,7 +151,6 @@ export default function PresentationPage() {
 				title="What we are not — and what does not yet exist"
 				audiences={['All', 'Funders', 'Governance']}
 				scriptKey="whatWeAreNot"
-				graphic={<RealVsDemoBar />}
 			>
 				<p>Clarity about what does not yet exist is as important as describing what does. The following are <strong className="text-white">not current realities</strong>:</p>
 				<ul>
@@ -221,7 +167,6 @@ export default function PresentationPage() {
 				</div>
 			</Section>
 
-			<Divider label="Stakeholder sections" />
 
 			{/* ── 03 COMMUNITY FAs ──────────────────────────────────────────── */}
 			<Section
@@ -261,7 +206,6 @@ export default function PresentationPage() {
 				title="For funders, grant bodies, and philanthropic supporters"
 				audiences={['Funders']}
 				scriptKey="forFunders"
-				graphic={<TheoryOfChange />}
 			>
 				<p>We are at the <strong className="text-white">pilot stage</strong>. One illustrative team — Unami Stars — has been built to demonstrate the model. We have not yet onboarded a real community team.</p>
 				<p>The theory of change: donated digital infrastructure, combined with training and ongoing support, helps community teams spend less time on fragmented administration and more time on the sport and community activity they value. We believe this is worth testing. We are not claiming it has been proven.</p>
@@ -282,7 +226,6 @@ export default function PresentationPage() {
 				title="For governance, safeguarding, and compliance reviewers"
 				audiences={['Governance']}
 				scriptKey="forGovernance"
-				graphic={<SafeguardingShield />}
 			>
 				<p>Youth safeguarding is built into the operating model as a <strong className="text-white">gate, not an afterthought</strong>.</p>
 				<div className="not-prose mt-5 grid gap-3 sm:grid-cols-2">
@@ -304,7 +247,6 @@ export default function PresentationPage() {
 				title="For potential commercial partners and sponsors"
 				audiences={['Commercial']}
 				scriptKey="forCommercial"
-				graphic={<FirewallDiagram />}
 			>
 				<p>Commercial partners receive <strong className="text-white">only what is written in an approved agreement</strong>. That agreement will specify recognition, deliverables, duration, and reporting.</p>
 				<div className="not-prose mt-5 rounded-lg border border-white/8 bg-white/[0.03] p-5">
@@ -330,7 +272,6 @@ export default function PresentationPage() {
 				<p className="mt-5">If you want to support community sport in South Africa in a way that is transparent, proportionate, and governed — we want to hear from you. If you want something else, this is not the right programme.</p>
 			</Section>
 
-			<Divider label="Programme direction" />
 
 			{/* ── 07 LEADERSHIP ─────────────────────────────────────────────── */}
 			<Section
@@ -373,23 +314,15 @@ export default function PresentationPage() {
 			</Section>
 
 			{/* ── 08 ROADMAP ────────────────────────────────────────────────── */}
-			<section id="roadmap" className="border-b border-white/8 py-16 scroll-mt-14" aria-labelledby="roadmap-heading">
-				<div className="section py-0 grid gap-12 lg:grid-cols-[280px_1fr]">
+			<section id="roadmap" className="border-b border-white/8 py-14 scroll-mt-14" aria-labelledby="roadmap-heading">
+				<div className="section py-0 grid gap-10 lg:grid-cols-[240px_1fr]">
 					<div className="flex flex-col gap-3">
 						<p className="technical text-[11px] text-gold/60">08 — Roadmap</p>
 						<h2 id="roadmap-heading" className="text-xl font-bold text-white leading-snug">The growth pathway — staged, gated, community-led</h2>
 						<div className="flex flex-wrap gap-1.5">
 							{['All', 'Funders', 'Leadership'].map(a => <AudiencePill key={a} label={a} />)}
 						</div>
-						<div className="mt-1"><Narrator script={SCRIPTS.roadmap} label="Listen" /></div>
-						<div className="mt-4 hidden lg:flex flex-col gap-2">
-							{[0,1,2,3,4,5,6,7].map(n => (
-								<div key={n} className="flex items-center gap-3">
-									<PhaseBadge phase={n} active={n === 0} />
-									<div className={`h-px flex-1 ${n === 0 ? 'bg-gold/35' : 'bg-white/8'}`} />
-								</div>
-							))}
-						</div>
+						<div className="mt-2"><Narrator script={SCRIPTS.roadmap} label="Listen" /></div>
 					</div>
 					<div className="space-y-0">
 						{[
@@ -427,7 +360,6 @@ export default function PresentationPage() {
 				title="What is live today — and what it demonstrates"
 				audiences={['All']}
 				scriptKey="liveDemo"
-				graphic={<PlatformStack />}
 			>
 				<p>The Unami Sports platform is live at <a href="https://unamisports.unamifoundation.org" className="text-gold underline underline-offset-2 hover:opacity-80" target="_blank" rel="noopener noreferrer">unamisports.unamifoundation.org</a>. Everything you see is demonstration content.</p>
 				<div className="not-prose mt-5 grid gap-3 sm:grid-cols-2">
@@ -435,14 +367,14 @@ export default function PresentationPage() {
 						['Infrastructure', 'Real', 'Next.js App Router, Sanity CMS, Vercel deployment, custom domain, live content API.'],
 						['Sports components', 'Real', 'Fixture cards, player cards, event cards, score badges, status indicators, position badges — all built and working.'],
 						['Content management', 'Real', 'Full CMS with sports-specific schemas for teams, players, fixtures, events, competitions, stakeholders, governance, commercial, and talent pathways.'],
-						['Safeguarding gates', 'Real', 'Guardian consent validation, public listing gates, safety check requirements — all enforced in the CMS workflow.'],
+						['Safeguarding gates', 'Workflow', 'Guardian consent fields, public listing gates, and safety check prompts are built into the CMS editorial workflow. These are not technical access controls — Studio roles and public query testing still need to be configured before any real team data is stored.'],
 						['Unami Stars team', 'Demo', 'Fictional. Player profiles, fixtures, and results are illustrative. Not a registered club or real roster.'],
 						['Partners and sponsors', 'Demo', 'No signed commercial partners. Stakeholder records are workflow examples, not confirmed relationships.'],
 					].map(([label, status, body]) => (
-						<div key={label as string} className={`rounded-lg border p-4 ${status === 'Real' ? 'border-emerald-500/15 bg-emerald-500/5' : 'border-orange-500/15 bg-orange-500/5'}`}>
+						<div key={label as string} className={`rounded-lg border p-4 ${status === 'Real' ? 'border-emerald-500/15 bg-emerald-500/5' : status === 'Workflow' ? 'border-blue-500/15 bg-blue-500/5' : 'border-orange-500/15 bg-orange-500/5'}`}>
 							<div className="flex items-center justify-between mb-1.5">
 								<p className="text-xs font-semibold text-white">{label as string}</p>
-								<span className={`technical text-[9px] rounded px-1.5 py-0.5 ${status === 'Real' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-orange-500/20 text-orange-300'}`}>{status as string}</span>
+								<span className={`technical text-[9px] rounded px-1.5 py-0.5 ${status === 'Real' ? 'bg-emerald-500/20 text-emerald-300' : status === 'Workflow' ? 'bg-blue-500/20 text-blue-300' : 'bg-orange-500/20 text-orange-300'}`}>{status as string}</span>
 							</div>
 							<p className="text-xs text-white/50 leading-relaxed">{body as string}</p>
 						</div>
@@ -454,27 +386,17 @@ export default function PresentationPage() {
 				</div>
 			</Section>
 
-			<Divider label="Summary" />
 
 			{/* ── 10 NEXT STEPS ─────────────────────────────────────────────── */}
-			<section id="decisions" className="border-b border-white/8 py-16 scroll-mt-14" aria-labelledby="decisions-heading">
-				<div className="section py-0 grid gap-12 lg:grid-cols-[280px_1fr]">
+			<section id="decisions" className="border-b border-white/8 py-14 scroll-mt-14" aria-labelledby="decisions-heading">
+				<div className="section py-0 grid gap-10 lg:grid-cols-[240px_1fr]">
 					<div className="flex flex-col gap-3">
 						<p className="technical text-[11px] text-gold/60">10 — What happens next</p>
-						<h2 id="decisions-heading" className="text-xl font-bold text-white leading-snug">The programme is ready. The decisions belong to leadership.</h2>
+						<h2 id="decisions-heading" className="text-xl font-bold text-white leading-snug">Infrastructure built. Live pilot still requires approval.</h2>
 						<div className="flex flex-wrap gap-1.5">
 							{['Leadership', 'All'].map(a => <AudiencePill key={a} label={a} />)}
 						</div>
-						<div className="mt-1"><Narrator script={SCRIPTS.closing} label="Listen" /></div>
-						<div className="mt-4 hidden lg:block">
-							<svg viewBox="0 0 100 100" className="w-24 h-24" aria-hidden>
-								<circle cx="50" cy="50" r="42" fill="none" stroke="white" strokeOpacity="0.06" strokeWidth="7" />
-								<circle cx="50" cy="50" r="42" fill="none" stroke="#f3b942" strokeOpacity="0.45" strokeWidth="7"
-									strokeDasharray="88 176" strokeDashoffset="44" strokeLinecap="round" />
-								<text x="50" y="46" textAnchor="middle" fill="white" fontSize="16" fontWeight="900" fontFamily="monospace">50%</text>
-								<text x="50" y="58" textAnchor="middle" fill="white" fillOpacity="0.35" fontSize="7" fontFamily="sans-serif">READY</text>
-							</svg>
-						</div>
+						<div className="mt-2"><Narrator script={SCRIPTS.closing} label="Listen" /></div>
 					</div>
 					<div className="space-y-6">
 						<div className="prose text-white/75 text-sm leading-relaxed">
@@ -501,10 +423,13 @@ export default function PresentationPage() {
 						</div>
 						<div className="rounded-lg border border-gold/20 bg-gold/8 p-5">
 							<p className="text-sm font-semibold text-gold mb-1.5">Get in touch</p>
-							<p className="text-sm text-white/60 leading-relaxed">
-								Community FA, funder, governance reviewer, or potential partner — we want to hear from you.{' '}
-								<a href="mailto:hello@unamifoundation.org" className="text-gold underline underline-offset-2">hello@unamifoundation.org</a>
+							<p className="text-sm text-white/60 leading-relaxed mb-3">
+								Community FA, funder, governance reviewer, or potential partner — we want to hear from you.
 							</p>
+							<div className="flex flex-col gap-1.5 text-sm">
+								<a href="mailto:info@unamifoundation.org" className="text-gold underline underline-offset-2 hover:opacity-80">info@unamifoundation.org</a>
+								<a href="tel:+27727002502" className="text-white/50 hover:text-white transition-colors">072 700 2502</a>
+							</div>
 						</div>
 					</div>
 				</div>
