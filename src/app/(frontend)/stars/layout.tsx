@@ -32,7 +32,7 @@ export default async function StarsLayout({ children }: { children: React.ReactN
 	return (
 		<>
 			<header className="layout-header bg-forest-mid/95 sticky top-0 z-10 backdrop-blur-md border-b border-white/10">
-				<div className="section flex items-center justify-between gap-4 py-3">
+				<div className="section py-3 flex items-center justify-between gap-4">
 					<Link href="/stars" className="logo inline-block -my-2 h-[2lh]">
 						<Img image={logoImg} width={160} className="h-full w-auto object-contain" alt="Unami Stars" />
 					</Link>
@@ -55,7 +55,7 @@ export default async function StarsLayout({ children }: { children: React.ReactN
 			</main>
 
 			<footer className="bg-forest border-t border-white/10">
-				<div className="section flex items-center gap-8">
+				<div className="section py-8 flex items-center gap-8">
 					<Link href="/stars" className="logo inline-block h-[2lh] shrink-0">
 						<Img image={logoImg} width={120} className="h-full w-auto object-contain" alt="Unami Stars" />
 					</Link>
