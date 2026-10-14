@@ -5,6 +5,7 @@ import { groq } from 'next-sanity'
 import Link from 'next/link'
 import Img from '@/ui/img'
 import Year from '@/ui/year'
+import ElementHeight from '@/ui/element-height'
 
 const STARS_LOGO_REF = 'image-4b032d9ebd368d50b7d0a808aaa020dd0438dd61-640x154-webp'
 
@@ -31,12 +32,17 @@ export default async function StarsLayout({ children }: { children: React.ReactN
 
 	return (
 		<>
-			<header className="layout-header bg-forest-mid/95 sticky top-0 z-10 backdrop-blur-md border-b border-white/10">
+			<ElementHeight
+				as="header"
+				cssVar="--header-height"
+				role="banner"
+				className="layout-header bg-forest-mid/95 sticky top-0 z-10 backdrop-blur-md border-b border-white/10"
+			>
 				<div className="section py-3 flex items-center justify-between gap-4">
 					<Link href="/stars" className="logo inline-block -my-2 h-[2lh]">
 						<Img image={logoImg} width={160} className="h-full w-auto object-contain" alt="Unami Stars" />
 					</Link>
-					<nav className="flex flex-wrap gap-x-6 gap-y-2">
+					<nav className="flex items-center gap-x-6 gap-y-2">
 						{header?.items?.map((item: any, i: number) => (
 							<Link
 								key={i}
@@ -48,7 +54,7 @@ export default async function StarsLayout({ children }: { children: React.ReactN
 						))}
 					</nav>
 				</div>
-			</header>
+			</ElementHeight>
 
 			<main id="main-content" tabIndex={-1}>
 				{children}
@@ -62,7 +68,7 @@ export default async function StarsLayout({ children }: { children: React.ReactN
 								<Img image={logoImg} width={120} className="h-full w-auto object-contain" alt="Unami Stars" />
 							</Link>
 						</div>
-						<nav>
+						<nav className="grow">
 							<ul className="flex flex-wrap items-start justify-start gap-x-12 gap-y-2 max-md:flex-col">
 								{footer?.items?.map((item: any, i: number) => (
 									<li key={i}>

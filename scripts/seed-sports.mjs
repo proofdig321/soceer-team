@@ -42,10 +42,10 @@ const IDS = {
 	// SanityPress
 	site: 'site',
 	announcement: 'seed.announcement.welcome',
-	navHeader: 'unami.navigation.header',
-	navFooter: 'unami.navigation.footer',
-	navBottom: 'unami.navigation.bottom',
-	navSocial: 'unami.navigation.social',
+	navHeader: 'navigation.sports.header',
+	navFooter: 'navigation.sports.footer',
+	navBottom: 'navigation.sports.bottom',
+	navSocial: 'navigation.sports.social',
 	// unami.page.* docs are authored in Studio — seed does not own them
 	// seed.page.* are intentionally absent — unami.page.home owns slug 'index'
 	// Sports
