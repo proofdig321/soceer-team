@@ -55,24 +55,34 @@ export default async function StarsLayout({ children }: { children: React.ReactN
 			</main>
 
 			<footer className="bg-forest border-t border-white/10">
-				<div className="section py-8 flex items-center gap-8">
-					<Link href="/stars" className="logo inline-block h-[2lh] shrink-0">
-						<Img image={logoImg} width={120} className="h-full w-auto object-contain" alt="Unami Stars" />
-					</Link>
-					<nav className="flex flex-wrap gap-x-8 gap-y-2">
-						{footer?.items?.map((item: any, i: number) => (
-							<Link
-								key={i}
-								href={item.internal?.slug ?? item.external ?? '#'}
-								className="text-sm text-white/60 hover:text-white transition-colors"
-							>
-								{item.label}
+				<div className="section py-10">
+					<div className="flex gap-12 max-md:flex-col md:items-start">
+						<div className="flex flex-col gap-5 md:items-start md:max-w-xs">
+							<Link href="/stars" className="logo inline-block h-[2lh]">
+								<Img image={logoImg} width={120} className="h-full w-auto object-contain" alt="Unami Stars" />
 							</Link>
-						))}
-					</nav>
-					<p className="text-xs text-white/30 ml-auto shrink-0">
-						© <Year /> Unami Stars
-					</p>
+						</div>
+						<nav>
+							<ul className="flex flex-wrap items-start justify-start gap-x-12 gap-y-2 max-md:flex-col">
+								{footer?.items?.map((item: any, i: number) => (
+									<li key={i}>
+										<Link
+											href={item.internal?.slug ?? item.external ?? '#'}
+											className="text-sm text-white/60 hover:text-white transition-colors"
+										>
+											{item.label}
+										</Link>
+									</li>
+								))}
+								<li>
+									<Link href="/" className="text-sm text-white/60 hover:text-white transition-colors">Unami Sports ↗</Link>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<div className="mt-12 flex items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/40">
+						<p>© <Year /> Unami Stars</p>
+					</div>
 				</div>
 			</footer>
 		</>

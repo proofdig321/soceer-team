@@ -58,28 +58,30 @@ async function CachedFooter({ perspective, stega }: DynamicFetchOptions) {
 					<Navigation perspective={perspective} stega={stega} />
 				</div>
 
-				{(site?.copyright || site?.bottom?.items) && (
-					<div className="mt-12 flex items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/40 not-has-[.bottom-navigation]:justify-center max-md:flex-col max-md:text-center">
-						{site?.bottom?.items && (
-							<ul className="bottom-navigation flex flex-wrap gap-x-6">
-								{site?.bottom?.items?.map((item, i) => (
-									<li key={`${item._key}-${i}`}>
-										<SanityLink
-											link={item as SanityLinkType}
-											className="hover:text-white/70 transition-colors"
-										/>
-									</li>
-								))}
-							</ul>
-						)}
-
-						{site?.copyright && (
-							<div className="[&_a]:link copyright md:order-first">
-								<PortableText value={site.copyright} />
-							</div>
-						)}
-					</div>
-				)}
+				<div className="mt-12 flex items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/40 max-md:flex-col max-md:text-center">
+					{(site?.copyright || site?.bottom?.items) && (
+						<>
+							{site?.bottom?.items && (
+								<ul className="bottom-navigation flex flex-wrap gap-x-6">
+									{site?.bottom?.items?.map((item, i) => (
+										<li key={`${item._key}-${i}`}>
+											<SanityLink
+												link={item as SanityLinkType}
+												className="hover:text-white/70 transition-colors"
+											/>
+										</li>
+									))}
+								</ul>
+							)}
+							{site?.copyright && (
+								<div className="[&_a]:link copyright md:order-first">
+									<PortableText value={site.copyright} />
+								</div>
+							)}
+						</>
+					)}
+					<a href="/presentation" className="hover:text-white/70 transition-colors ml-auto">Programme Presentation ↗</a>
+				</div>
 			</div>
 		</footer>
 	)
