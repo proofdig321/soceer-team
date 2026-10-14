@@ -3,8 +3,9 @@
 	"version": "0.0.139",
 	"private": true,
 	"scripts": {
+		"deploy:team": "node scripts/deploy-team.mjs",
 		"dev": "next dev",
-		"build": "node scripts/seed.mjs && next build",
+		"build": "next build",
 		"build:local": "next build",
 		"start": "next start",
 		"lint": "next lint",

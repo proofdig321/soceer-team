@@ -1,145 +1,249 @@
-# SanityPress (with TypeGen)
+# Civic Sports Platform
 
-> Zero setup stress. 100% type-safe.
+[![Deploy with Sanity](https://www.sanity.io/static/images/deploy-with-sanity.svg)](https://www.sanity.io/get-started?template=proofdig321/soceer-team)
 
-An improved successor to the acclaimed Next.js + Sanity.io starter template—now with auto-generated TypeScript types from your Sanity schema and GROQ queries.
+A community sports platform for grassroots teams. Each team gets their own website, content management system, fixtures, players, events, and competitions — fully controlled by the team, no coding required.
 
-[Get started](https://www.sanity.io/get-started?template=sanitypress) | [Read more about TypeGen](https://sanitypress.dev/blog/introducing-sanitypress-with-typegen) | [View on Sanity.io](https://www.sanity.io/templates/sanitypress)
+---
 
-![](https://cdn.sanity.io/images/cyu7k2r0/production/e2d0ef9f4d1d7330056981d86d6c3157de94cca9-2062x1032.png)
+## For Teams — Deploy Your Own Platform
 
-## Key Features
+This is a **one-click deployment**. You will get:
 
-- Next.js 16 (App Router, Server Components, TypeScript) with Tailwind 4
-- Improved successor to the acclaimed [SanityPress](https://sanitypress.dev) starter template (over 400 stars)
-- GROQ TypeGen for your Sanity Schema types
-- [Perfect PageSpeed Insight scores](https://pagespeed.web.dev/analysis/https-typed-sanitypress-dev/78sjwe1x39?form_factor=desktop)
-- Live Content API with Visual Editing
-- Optimized images with Next Image component and Sanity CDN
-- Auto-generated sitemap.xml and blog RSS feed
+- Your own website (e.g. `unamistars.vercel.app` or your own domain)
+- Your own Studio at `/admin` — where you manage all your content
+- Your own Sanity project — your data belongs to you
+- Fixtures, players, events, competitions — all built in
 
-## File Structure
+### Step 1 — Click Deploy
+
+**[→ Deploy your team platform](https://www.sanity.io/get-started?template=proofdig321/soceer-team)**
+
+This opens a setup wizard. You will need:
+- A free [Sanity account](https://www.sanity.io/login) — for your content database
+- A free [Vercel account](https://vercel.com/signup) — for your website hosting
+- A [GitHub account](https://github.com/signup) — to connect the two
+
+The wizard handles everything else automatically.
+
+---
+
+### Step 2 — Open Your Studio
+
+Once deployed, go to:
 
 ```
-SanityPress
-├─ src/
-│ ├─ app/              # Next.js App Router
-│ │ ├─ (frontend)/     # Public-facing site
-│ │ │ ├─ layout.tsx    # Frontend root layout
-│ │ │ ├─ not-found.tsx # 404 page
-│ │ │ ├─ [[...slug]]/  # Catch-all for all standard pages
-│ │ │ ├─ blog/[slug]/  # Individual blog post pages
-│ │ │ ├─ blog/rss.xml/ # RSS feed endpoint
-│ │ │ └─ api/          # API route handlers
-│ │ │ │ ├─ draft-mode/ # Enable/disable Sanity draft mode
-│ │ │ │ └─ og/         # Open Graph image generation
-│ │ ├─ (studio)/admin/ # Sanity Studio (CMS editor UI)
-│ │ └─ sitemap.ts      # Auto-generated sitemap
-│ ├─ modules/          # Colocated modules (one folder per Sanity module `_type`)
-│ │ └─ <module-name>/
-│ │   ├─ index.tsx     # Frontend component
-│ │   ├─ schema.ts     # Sanity schema
-│ │   └─ query.ts      # GROQ projection (only if needed)
-│ ├─ ui/               # React components
-│ │ ├─ modules/        # ModulesResolver + <Module> wrapper
-│ │ ├─ blog/           # Shared blog UI helpers (filters, previews, etc.)
-│ │ ├─ header/         # Header, navigation, megamenu
-│ │ ├─ footer/         # Footer and link list
-│ │ └─ ...             # Shared components (CTA, Img, Logo, etc.)
-│ ├─ sanity/           # Sanity CMS configuration
-│ │ ├─ schemaTypes/
-│ │ │ ├─ documents/    # Top-level content types (page, blog.post, site, navigation…)
-│ │ │ ├─ objects/      # Reusable field groups (cta, link, metadata…)
-│ │ │ └─ fragments/    # Shared helpers (define-module, modules field)
-│ │ ├─ lib/            # Queries, GROQ fragments, fetch helpers, image builder
-│ │ ├─ ui/             # Custom Studio UI components
-│ │ └─ ...             # Sanity files
-│ ├─ lib/              # Shared app utilities and env helpers
-│ ├─ hooks/            # Custom React hooks
-│ └─ types/            # Global TypeScript declarations
-├─ public/
-│ ├─ module-thumbnails/ # Studio insert-menu previews (`<module-name>.webp`)
-│ └─ ...               # Favicon and other static assets
-├─ .env.*              # Environment variable template
-├─ next.config.ts      # Next.js configuration
-├─ sanity.config.ts    # Sanity Studio configuration
-├─ sanity.cli.ts       # Sanity CLI configuration
-└─ package.json
+https://your-site.vercel.app/admin
 ```
 
-## Getting Started
+This is your Studio — your private content management system. Only people you invite can access it.
 
-### 1. Initialize the project
+---
 
-Click the [Sanity template link](https://www.sanity.io/get-started?template=sanitypress) -- OR -- install with the Sanity CLI:
+### Step 3 — Create Your Site Document
 
-```sh
-npm create sanity@latest -- --template=nuotsu/sanitypress
-```
+In the Studio left sidebar, click **Site**.
 
-### 2. Set environment variables
+Fill in:
 
-If initialized via the Sanity template link, the `.env.local` file should be created automatically.
+| Field | Example (Unami Stars) | Your value |
+|---|---|---|
+| Title | `Unami Stars` | Your team name |
+| Logo | Upload your badge/crest | Your logo file |
+| Header navigation | Select your header nav | Create one first (see Step 5) |
+| Footer navigation | Select your footer nav | Create one first (see Step 5) |
 
-If initialized via the CLI, duplicate the `.env.example` file as `.env.local` and assign the variables to your project:
+Click **Publish**.
 
-```sh
-# .env.local
-NEXT_PUBLIC_BASE_URL="https://example.com" # your website's domain
+> The Site document controls your logo, navigation, and global settings. Nothing will show on your website until this is published.
 
-NEXT_PUBLIC_SANITY_PROJECT_ID="abcd1234" # Sanity project id
-NEXT_PUBLIC_SANITY_DATASET="production" # Sanity dataset name
+---
 
-SANITY_API_READ_TOKEN="..." # API token with "Viewer" permissions
-```
+### Step 4 — Create Your Homepage
 
-⚠️ **Required**: Set `NEXT_PUBLIC_BASE_URL` to your production domain.
+In the Studio sidebar, click **Pages** → **New Page**.
 
-### 3. Install and start local server
+| Field | Example (Unami Stars) | Your value |
+|---|---|---|
+| Title | `Home` | `Home` |
+| Slug | `index` | `index` (must be exactly this) |
 
-Install required packages and dependencies with your desired package manager (e.g. npm, pnpm, deno, bun, etc.).
+Then add modules to build your page. Unami Stars uses:
 
-```sh
-npm install
-```
+- **Hero (Cover)** — big banner with team name and call-to-action buttons
+- **Stat List** — season stats (players, fixtures, wins)
+- **Feature Bar** — highlights (fixtures, players, competitions, events)
 
-Once installed, run the development script:
+Click **Publish**.
 
-```sh
-npm run dev
-```
+> The slug `index` is your homepage. Any other slug becomes a page at that URL — e.g. slug `fixtures` becomes `yoursite.com/fixtures`.
 
-Then open:
+---
 
-- Next.js frontend: http://localhost:3000
-- Sanity Studio: http://localhost:3000/admin
+### Step 5 — Create Your Navigation
 
-### 4. Add content in your Sanity Studio
+In the Studio sidebar, click **Navigation** → **New Navigation**.
 
-Publish the **required** documents: `site` and `page` (with the slug "index"). Otherwise, you’ll just see a blank page on the Next.js frontend.
+**Header navigation** (Unami Stars example):
 
-What you'll need:
+| Label | Link |
+|---|---|
+| Home | Page: Home |
+| Fixtures | Page: Fixtures |
+| Players | Page: Players |
+| Events | Page: Events |
+| Competitions | Page: Competitions |
 
-| Document        | Slug or Path | Usage              | Required? | Notes                                |
-| --------------- | ------------ | ------------------ | :-------: | ------------------------------------ |
-| `site`          |              | Global settings    |    Yes    |                                      |
-| `page`          | `index`      | Homepage route     |    Yes    |                                      |
-| `page`          | `404`        | Not found route    |           |                                      |
-| `page`          | `blog`       | Blog listing route |           | Add the **Blog index** module        |
-| `global-module` | `blog/`      | Blog post template |           | Add the **Blog post content** module |
+**Footer navigation** (Unami Stars example):
 
-Alternatively, you can run the following command to import a demo dataset with the required documents:
+| Label | Link |
+|---|---|
+| Fixtures | Page: Fixtures |
+| Players | Page: Players |
+| Events | Page: Events |
+| Competitions | Page: Competitions |
+| Contact | Page: Contact |
 
-```sh
-sanity dataset import demo.tar.gz
-```
+Create both, publish them, then go back to your **Site** document and select them in the Header and Footer fields.
 
-> 📸 See what the Sanity Studio backend looks like on the [Screenshots page](https://sanitypress.dev/docs/sanity-studio-screenshots).
+---
 
-### 5. Set up deployments
+### Step 6 — Add Your Sports Data
 
-Add a [Vercel](https://www.sanity.io/plugins/vercel-dashboard-widget) (default) or [Netlify widget](https://www.sanity.io/plugins/sanity-plugin-dashboard-widget-netlify) to enable deployments from the Studio.
+In the Studio sidebar you will find:
 
-### 6. Customize
+**Teams**
+Create your team record. This is the data record that links to your players, fixtures, and competitions.
 
-Adjust frontend styles to your liking, edit or add new schema and modules, etc.
+| Field | Example (Unami Stars) |
+|---|---|
+| Name | `Unami Stars FC` |
+| Sport | `Football` |
+| Age group | `U19` |
+| Season | `2026` |
+| Community | `Kwagucingo, KwaZulu-Natal` |
+| Public profile | On |
+
+**Players**
+Add each registered player. Set **Guardian consent** to `Approved` and **Public profile** to On before a player appears on your website.
+
+| Field | Example |
+|---|---|
+| Display name | `Sipho D.` (abbreviated for safeguarding) |
+| Position | `Goalkeeper` |
+| Shirt number | `1` |
+| Team | Select your team |
+| Guardian consent | `Approved` |
+| Public profile | On |
+
+> Player surnames should be abbreviated or initials only. These are minors. Only publish what guardian consent covers.
+
+**Fixtures**
+Add each match — past and upcoming.
+
+| Field | Example |
+|---|---|
+| Title | `Unami Stars vs Riverside FC` |
+| Team | Select your team |
+| Opponent | `Riverside FC` |
+| Kickoff | `15 Oct 2026 14:00` |
+| Venue | `Kwagucingo Ground` |
+| Status | `Completed` |
+| Score | `2 – 1` |
+| Public listing | On |
+
+**Events**
+Add community events, training days, match days.
+
+| Field | Example |
+|---|---|
+| Title | `Community Day 2026` |
+| Start | `20 Dec 2026 10:00` |
+| End | `20 Dec 2026 17:00` |
+| Venue | `Kwagucingo Ground` |
+| Public listing | On |
+
+**Competitions**
+Add leagues or cups your team is registered in.
+
+| Field | Example |
+|---|---|
+| Title | `Kwagucingo Community League` |
+| Season | `2026` |
+| Format | `League` |
+| Status | `Active` |
+| Public announcement approved | On |
+
+---
+
+### Step 7 — Create Your Content Pages
+
+Create a page for each section of your site. Use the slug that matches your navigation links.
+
+| Page title | Slug | Suggested modules |
+|---|---|---|
+| Fixtures | `fixtures` | Hero, Sports Fixtures |
+| Players | `players` | Hero, Sports Players |
+| Events | `events` | Hero, Sports Events |
+| Competitions | `competitions` | Hero, Sports Fixtures |
+| Contact | `contact` | Hero, Card List |
+| 404 | `404` | Callout |
+
+---
+
+### Step 8 — Set Your Domain (Optional)
+
+By default your site is at `your-project.vercel.app`.
+
+To use your own domain (e.g. `unamistars.co.za`):
+
+1. Go to [vercel.com/dashboard](https://vercel.com/dashboard)
+2. Open your project → **Settings** → **Domains**
+3. Add your domain and follow the DNS instructions
+
+Then update the `NEXT_PUBLIC_BASE_URL` environment variable in Vercel to match your new domain.
+
+---
+
+### Step 9 — Invite Your Team Editor
+
+To let someone else manage content without giving them your login:
+
+1. Go to [sanity.io/manage](https://sanity.io/manage)
+2. Open your project → **Members** → **Invite**
+3. Set their role to **Editor**
+
+They will get an email invite and can log into the Studio directly.
+
+---
+
+## What Each Page Looks Like
+
+**Unami Stars** is a live example of this platform:
+
+| Section | URL |
+|---|---|
+| Homepage | `/stars` |
+| Fixtures | `/stars/fixtures` |
+| Players | `/stars/players` |
+| Events | `/stars/events` |
+| Competitions | `/stars/competitions` |
+
+---
+
+## Safeguarding Notes
+
+This platform is used by youth teams. Follow these rules:
+
+- **Never publish a player's full name** without explicit guardian consent
+- Use abbreviated surnames or initials (e.g. `Sipho D.` not `Sipho Dlamini`)
+- Set **Guardian consent** to `Approved` before enabling **Public profile**
+- Do not publish dates of birth, addresses, or school names
+- If in doubt, leave **Public profile** off
+
+---
+
+## Support
+
+For platform issues, raise an issue at:
+[github.com/proofdig321/soceer-team/issues](https://github.com/proofdig321/soceer-team/issues)
