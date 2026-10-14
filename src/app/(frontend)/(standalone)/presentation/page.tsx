@@ -367,7 +367,7 @@ export default function PresentationPage() {
 						['Infrastructure', 'Real', 'Next.js App Router, Sanity CMS, Vercel deployment, custom domain, live content API.'],
 						['Sports components', 'Real', 'Fixture cards, player cards, event cards, score badges, status indicators, position badges — all built and working.'],
 						['Content management', 'Real', 'Full CMS with sports-specific schemas for teams, players, fixtures, events, competitions, stakeholders, governance, commercial, and talent pathways.'],
-						['Safeguarding gates', 'Workflow', 'Guardian consent fields, public listing gates, and safety check prompts are built into the CMS editorial workflow. These are not technical access controls — Studio roles and public query testing still need to be configured before any real team data is stored.'],
+						['Safeguarding gates', 'Workflow', 'Guardian consent fields, public listing gates, and safety check prompts are built into the CMS editorial workflow. These are editorial guides — not technical access controls. Studio roles and public query testing still need to be configured before any real team data is stored.'],
 						['Unami Stars team', 'Demo', 'Fictional. Player profiles, fixtures, and results are illustrative. Not a registered club or real roster.'],
 						['Partners and sponsors', 'Demo', 'No signed commercial partners. Stakeholder records are workflow examples, not confirmed relationships.'],
 					].map(([label, status, body]) => (
