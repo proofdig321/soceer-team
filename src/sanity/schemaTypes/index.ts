@@ -31,6 +31,10 @@ import sportsFixturesModule from '@/modules/sports.fixtures/schema'
 import sportsPlayersModule from '@/modules/sports.players/schema'
 import sportsEventsModule from '@/modules/sports.events/schema'
 import sportsSponsorsModule from '@/modules/sports.sponsors/schema'
+import sportsCompetitionsModule from '@/modules/sports.competitions/schema'
+import sportsStandingsModule from '@/modules/sports.standings/schema'
+import sportsNextFixtureModule from '@/modules/sports.next-fixture/schema'
+import sportsSeasonStatsModule from '@/modules/sports.season-stats/schema'
 // documents
 import announcement from './documents/announcement'
 import blogCategory from './documents/blog.category'
@@ -56,6 +60,7 @@ import sportsPilot from './documents/sports.pilot'
 import sportsPlayer from './documents/sports.player'
 import sportsResource from './documents/sports.resource'
 import sportsStakeholder from './documents/sports.stakeholder'
+import sportsStanding from './documents/sports.standing'
 import sportsSupport from './documents/sports.support'
 import sportsTalent from './documents/sports.talent'
 import sportsTeam from './documents/sports.team'
@@ -90,6 +95,7 @@ export const schema: SchemaPluginOptions = {
 		sportsTraining,
 		sportsSupport,
 		sportsCompetition,
+		sportsStanding,
 		sportsEvent,
 		sportsResource,
 		sportsCommercial,
@@ -145,6 +151,10 @@ export const schema: SchemaPluginOptions = {
 		sportsPlayersModule,
 		sportsEventsModule,
 		sportsSponsorsModule,
+		sportsCompetitionsModule,
+		sportsStandingsModule,
+		sportsNextFixtureModule,
+		sportsSeasonStatsModule,
 	],
 
 	templates: (templates) =>

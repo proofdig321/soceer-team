@@ -31,6 +31,10 @@ import SportsFixtures from '@/modules/sports.fixtures'
 import SportsPlayers from '@/modules/sports.players'
 import SportsEvents from '@/modules/sports.events'
 import SportsSponsors from '@/modules/sports.sponsors'
+import SportsCompetitions from '@/modules/sports.competitions'
+import SportsStandings from '@/modules/sports.standings'
+import SportsNextFixture from '@/modules/sports.next-fixture'
+import SportsSeasonStats from '@/modules/sports.season-stats'
 import type { DynamicFetchOptions } from '@/sanity/lib/live'
 import type {
 	BLOG_POST_QUERY_RESULT,
@@ -70,6 +74,10 @@ const MODULES_MAP = {
 	'sports.players': SportsPlayers,
 	'sports.events': SportsEvents,
 	'sports.sponsors': SportsSponsors,
+	'sports.competitions': SportsCompetitions,
+	'sports.standings': SportsStandings,
+	'sports.next-fixture': SportsNextFixture,
+	'sports.season-stats': SportsSeasonStats,
 } as const
 
 export default function ({

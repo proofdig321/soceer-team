@@ -28,6 +28,10 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 			{ type: 'sports.players' },
 			{ type: 'sports.events' },
 			{ type: 'sports.sponsors' },
+			{ type: 'sports.competitions' },
+			{ type: 'sports.standings' },
+			{ type: 'sports.next-fixture' },
+			{ type: 'sports.season-stats' },
 			...of,
 		],
 		options: {
@@ -66,7 +70,16 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 					},
 					{
 						name: 'sports',
-						of: ['sports.fixtures', 'sports.players', 'sports.events', 'sports.sponsors'],
+						of: [
+							'sports.next-fixture',
+							'sports.fixtures',
+							'sports.players',
+							'sports.events',
+							'sports.competitions',
+							'sports.standings',
+							'sports.season-stats',
+							'sports.sponsors',
+						],
 					},
 					{
 						name: 'blog',

@@ -1,0 +1,27 @@
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
+import { defineField, defineType } from 'sanity'
+import { StarIcon } from '@sanity/icons/Star'
+
+export default defineModule(
+	defineType({
+		name: 'sports.competitions',
+		title: 'Competitions list',
+		type: 'object',
+		icon: StarIcon,
+		fields: [
+			defineField({ name: 'eyebrow', type: 'string' }),
+			defineField({ name: 'heading', type: 'string' }),
+			defineField({
+				name: 'teamId',
+				title: 'Team',
+				type: 'reference',
+				to: [{ type: 'sports.team' }],
+				description: 'Competitions are fetched live for this team.',
+			}),
+		],
+		preview: {
+			select: { team: 'teamId.title' },
+			prepare: ({ team }) => ({ title: 'Competitions list', subtitle: team }),
+		},
+	}),
+)
