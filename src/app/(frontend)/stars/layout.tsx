@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Img from '@/ui/img'
 import Year from '@/ui/year'
 import ElementHeight from '@/ui/element-height'
+import TeamTheme from '@/ui/team-theme'
 
 const STARS_LOGO_REF = 'image-4b032d9ebd368d50b7d0a808aaa020dd0438dd61-640x154-webp'
 
@@ -32,6 +33,8 @@ export default async function StarsLayout({ children }: { children: React.ReactN
 
 	return (
 		<>
+			<TeamTheme slug="unami-stars" />
+
 			<ElementHeight
 				as="header"
 				cssVar="--header-height"

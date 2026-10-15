@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { UsersIcon } from '@sanity/icons/Users'
+import BrandColourInput from '@/sanity/components/brand-colour-input'
 
 const sports = [
 	{ title: 'Football / soccer', value: 'football' },
@@ -19,6 +20,7 @@ export default defineType({
 	icon: UsersIcon,
 	groups: [
 		{ name: 'identity', default: true },
+		{ name: 'brand' },
 		{ name: 'operations' },
 		{ name: 'publishing' },
 	],
@@ -50,17 +52,6 @@ export default defineType({
 			group: 'identity',
 		}),
 		defineField({
-			name: 'season',
-			type: 'string',
-			group: 'operations',
-		}),
-		defineField({
-			name: 'ageGroup',
-			type: 'string',
-			description: 'Use a broad squad band; do not store dates of birth here.',
-			group: 'operations',
-		}),
-		defineField({
 			name: 'community',
 			type: 'string',
 			description:
@@ -71,6 +62,51 @@ export default defineType({
 			name: 'province',
 			type: 'string',
 			group: 'identity',
+		}),
+		defineField({
+			name: 'logo',
+			type: 'image',
+			options: { hotspot: false, metadata: ['lqip'] },
+			fields: [{ name: 'alt', type: 'string', title: 'Alternative text' }],
+			group: 'brand',
+			description: 'Team badge or crest. Upload first — colours can be suggested from this image.',
+		}),
+		defineField({
+			name: 'brandPrimary',
+			title: 'Primary colour',
+			type: 'string',
+			group: 'brand',
+			components: { input: BrandColourInput },
+			description: 'Hex value e.g. #f3b942. Leave blank to use platform default.',
+			validation: (Rule) =>
+				Rule.custom((value) => {
+					if (!value) return true
+					return /^#[0-9a-fA-F]{6}$/.test(value) ? true : 'Must be a valid 6-digit hex colour e.g. #f3b942'
+				}),
+		}),
+		defineField({
+			name: 'brandSecondary',
+			title: 'Secondary colour',
+			type: 'string',
+			group: 'brand',
+			components: { input: BrandColourInput },
+			description: 'Hex value e.g. #173426. Leave blank to use platform default.',
+			validation: (Rule) =>
+				Rule.custom((value) => {
+					if (!value) return true
+					return /^#[0-9a-fA-F]{6}$/.test(value) ? true : 'Must be a valid 6-digit hex colour e.g. #173426'
+				}),
+		}),
+		defineField({
+			name: 'season',
+			type: 'string',
+			group: 'operations',
+		}),
+		defineField({
+			name: 'ageGroup',
+			type: 'string',
+			description: 'Use a broad squad band; do not store dates of birth here.',
+			group: 'operations',
 		}),
 		defineField({
 			name: 'operationalOwner',

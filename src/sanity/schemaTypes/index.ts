@@ -30,6 +30,7 @@ import videoEmbed from '@/modules/video.embed/schema'
 import sportsFixturesModule from '@/modules/sports.fixtures/schema'
 import sportsPlayersModule from '@/modules/sports.players/schema'
 import sportsEventsModule from '@/modules/sports.events/schema'
+import sportsSponsorsModule from '@/modules/sports.sponsors/schema'
 // documents
 import announcement from './documents/announcement'
 import blogCategory from './documents/blog.category'
@@ -45,6 +46,7 @@ import redirect from './documents/redirect'
 import site from './documents/site'
 import skill from './documents/skill'
 import sportsCommercial from './documents/sports.commercial'
+import sportsConsent from './documents/sports.consent'
 import sportsCompetition from './documents/sports.competition'
 import sportsCustomization from './documents/sports.customization'
 import sportsEvent from './documents/sports.event'
@@ -91,6 +93,7 @@ export const schema: SchemaPluginOptions = {
 		sportsEvent,
 		sportsResource,
 		sportsCommercial,
+		sportsConsent,
 		sportsTalent,
 		// references
 		announcement,
@@ -141,6 +144,7 @@ export const schema: SchemaPluginOptions = {
 		sportsFixturesModule,
 		sportsPlayersModule,
 		sportsEventsModule,
+		sportsSponsorsModule,
 	],
 
 	templates: (templates) =>

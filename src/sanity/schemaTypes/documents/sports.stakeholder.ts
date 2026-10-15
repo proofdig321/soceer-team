@@ -15,6 +15,20 @@ export default defineType({
 			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
+			name: 'donorType',
+			title: 'Donor type',
+			type: 'string',
+			options: {
+				list: [
+					{ title: 'Individual', value: 'individual' },
+					{ title: 'Organisation', value: 'organisation' },
+				],
+				layout: 'radio',
+			},
+			initialValue: 'organisation',
+			group: 'relationship',
+		}),
+		defineField({
 			name: 'organizationType',
 			type: 'string',
 			options: {
@@ -28,6 +42,14 @@ export default defineType({
 					{ title: 'Other', value: 'other' },
 				],
 			},
+			group: 'relationship',
+			hidden: ({ parent }) => parent?.donorType === 'individual',
+		}),
+		defineField({
+			name: 'donationPurpose',
+			title: 'Donation purpose',
+			type: 'string',
+			description: 'e.g. Competition registration fees, kit, transport',
 			group: 'relationship',
 		}),
 		defineField({
@@ -63,6 +85,30 @@ export default defineType({
 			name: 'website',
 			type: 'url',
 			group: 'relationship',
+			hidden: ({ parent }) => parent?.donorType === 'individual',
+		}),
+		defineField({
+			name: 'isPrivate',
+			title: 'Keep identity private',
+			type: 'boolean',
+			initialValue: false,
+			group: 'recognition',
+			description:
+				'For individual donors who wish to remain anonymous. Their name will never appear publicly.',
+		}),
+		defineField({
+			name: 'acknowledgementLabel',
+			title: 'Public acknowledgement label',
+			type: 'string',
+			group: 'recognition',
+			description: 'Shown publicly instead of the name when private. e.g. "A community supporter"',
+			hidden: ({ parent }) => !parent?.isPrivate,
+			validation: (Rule) =>
+				Rule.custom((value, ctx: any) => {
+					if (ctx.document?.isPrivate && ctx.document?.publicAcknowledgement && !value)
+						return 'Required when identity is private and public acknowledgement is on.'
+					return true
+				}),
 		}),
 		defineField({
 			name: 'publicAcknowledgement',
@@ -71,7 +117,7 @@ export default defineType({
 			initialValue: false,
 			group: 'recognition',
 			description:
-				'Obtain written approval before publishing an organization name, logo, or endorsement.',
+				'Obtain written approval before publishing. For private donors, only the label above will appear.',
 		}),
 		defineField({
 			name: 'publicAcknowledgementText',
@@ -81,10 +127,10 @@ export default defineType({
 		}),
 	],
 	preview: {
-		select: { title: 'organization', type: 'organizationType' },
-		prepare: ({ title, type }) => ({
+		select: { title: 'organization', type: 'organizationType', donorType: 'donorType' },
+		prepare: ({ title, type, donorType }) => ({
 			title,
-			subtitle: type ? type.replaceAll('-', ' ') : undefined,
+			subtitle: donorType === 'individual' ? 'Individual donor' : (type ? type.replaceAll('-', ' ') : undefined),
 		}),
 	},
 })

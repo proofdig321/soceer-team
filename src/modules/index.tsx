@@ -30,6 +30,7 @@ import VideoEmbed from '@/modules/video.embed'
 import SportsFixtures from '@/modules/sports.fixtures'
 import SportsPlayers from '@/modules/sports.players'
 import SportsEvents from '@/modules/sports.events'
+import SportsSponsors from '@/modules/sports.sponsors'
 import type { DynamicFetchOptions } from '@/sanity/lib/live'
 import type {
 	BLOG_POST_QUERY_RESULT,
@@ -68,6 +69,7 @@ const MODULES_MAP = {
 	'sports.fixtures': SportsFixtures,
 	'sports.players': SportsPlayers,
 	'sports.events': SportsEvents,
+	'sports.sponsors': SportsSponsors,
 } as const
 
 export default function ({

@@ -27,6 +27,7 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 			{ type: 'sports.fixtures' },
 			{ type: 'sports.players' },
 			{ type: 'sports.events' },
+			{ type: 'sports.sponsors' },
 			...of,
 		],
 		options: {
@@ -65,7 +66,7 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 					},
 					{
 						name: 'sports',
-						of: ['sports.fixtures', 'sports.players', 'sports.events'],
+						of: ['sports.fixtures', 'sports.players', 'sports.events', 'sports.sponsors'],
 					},
 					{
 						name: 'blog',
